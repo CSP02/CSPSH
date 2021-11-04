@@ -1,0 +1,23 @@
+body{
+    background-color: black;
+}
+
+#SyHy{
+    color: rgb(255, 255, 255);
+}
+
+.sh-keyword{
+    color: rgb(0, 140, 255);
+}
+
+.sh-token{
+    color: rgb(212, 0, 255);
+}
+
+.sh-variable{
+    color: orange;
+}
+
+.sh-class{
+    color: rgb(0, 187, 0);
+}
