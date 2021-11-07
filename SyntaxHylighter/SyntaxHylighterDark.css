@@ -4,6 +4,7 @@ body{
 
 #SyHy{
     color: rgb(255, 255, 255);
+    font-size: 32px;
 }
 
 .sh-keyword{
@@ -20,4 +21,8 @@ body{
 
 .sh-class{
     color: rgb(0, 187, 0);
+}
+
+.sh-operator{
+    color: rgb(167, 167, 167);
 }
