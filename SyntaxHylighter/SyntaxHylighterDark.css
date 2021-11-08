@@ -20,9 +20,17 @@ body{
 }
 
 .sh-class{
-    color: rgb(0, 187, 0);
+    color: rgb(0, 139, 0);
 }
 
 .sh-operator{
     color: rgb(167, 167, 167);
+}
+
+.sh-string{
+    color: red;
+}
+
+.sh-numerals{
+    color: rgb(136, 255, 0);
 }
