@@ -1,9 +1,9 @@
 window.onload = function () {
     let code = document.getElementById('SyHy');
     if (code.className.includes('Dark'))
-        document.head.innerHTML += `<link rel="stylesheet" href="./SyntaxHylighter/SyntaxHylighterDark.css">`
+        document.head.innerHTML += `<link rel="stylesheet" href="/SyntaxHylighter/SyntaxHylighterDark.css">`
     else
-        document.head.innerHTML += `<link rel="stylesheet" href="./SyntaxHylighter/SyntaxHylighterLight.css">`
+        document.head.innerHTML += `<link rel="stylesheet" href="/SyntaxHylighter/SyntaxHylighterLight.css">`
 
     const jsTokens = [
         'new',

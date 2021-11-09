@@ -1,36 +1,47 @@
-body{
+body {
     background-color: black;
 }
 
-#SyHy{
+#SyHy {
+    background-color: rgba(59, 59, 59, 0.8);
+    overflow: hidden;
     color: rgb(255, 255, 255);
-    font-size: 32px;
+    font-size: 24px;
+    font-family: 'Roboto Slab', serif;
+    border-radius: 6px;
+    padding: 1%;
+    float: left;
+    height: 50px;
+    width: 70%;
+    margin: 1%;
+    text-justify: left;
+    text-align: left;
 }
 
-.sh-keyword{
+.sh-keyword {
     color: rgb(0, 140, 255);
 }
 
-.sh-token{
+.sh-token {
     color: rgb(212, 0, 255);
 }
 
-.sh-variable{
+.sh-variable {
     color: orange;
 }
 
-.sh-class{
+.sh-class {
     color: rgb(0, 139, 0);
 }
 
-.sh-operator{
+.sh-operator {
     color: rgb(167, 167, 167);
 }
 
-.sh-string{
+.sh-string {
     color: red;
 }
 
-.sh-numerals{
+.sh-numerals {
     color: rgb(136, 255, 0);
 }
