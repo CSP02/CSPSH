@@ -1,0 +1,127 @@
+body {
+    background-color: black;
+}
+
+#SyHy {
+    background-color: rgba(59, 59, 59, 0.8);
+    overflow: hidden;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-family: 'Roboto Slab', serif;
+    border-radius: 6px;
+    padding: 1%;
+    float: left;
+    height: 30%;
+    width: auto;
+    margin: 1%;
+    text-justify: left;
+    text-align: left;
+}
+
+#copyHolder{
+    height: 50px;
+    border-radius: 6px;
+    width:575px;
+    align-items: right;
+    background-color: rgba(59, 59, 59, 0.692);
+    backdrop-filter: blur(12px);
+    position: absolute;
+}
+
+#copyVector {
+    z-index: 5;
+    height: 50px;
+    width: 50px;
+    background-color: rgb(59, 59, 59);
+    border: none;
+    display: grid;
+    float: right;
+    border-radius: 6px;
+}
+
+#copyVector:hover, #copyVector:hover > #copy-cube2 {
+    cursor: pointer;
+    background-color: rgb(75, 75, 75);
+}
+
+#copy-cube, #copy-cube2 {
+    height: 30px;
+    width: 30px;
+    padding: 3%;
+    margin: 3%;
+    border-radius: 6px;
+    border: 1px solid rgb(107, 107, 107);
+}
+
+#copy-cube{
+    margin-top: 10%;
+}
+
+.hr-copy-cube{
+    margin-top: 30%;
+    border: 0.3px solid grey;
+    width: 50%;
+}
+
+#copy-cube2 {
+    margin-left: 15%;
+    margin-top: -90%;
+    background-color: rgb(59, 59, 59);
+}
+
+::-webkit-scrollbar {
+    background-color: rgba(59, 59, 59, 0.8);
+    border-radius: 0px 6px 6px 0px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-button{
+    visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: white;
+    width: 1px;
+    border-radius: 6px 6px 6px 6px;
+}
+
+::-webkit-scrollbar-button {
+    width: 3px;
+    color: white;
+}
+
+#SyHy:hover {
+    overflow-y: scroll;
+}
+
+#SyHy:hover>#copyVector {
+    visibility: visible;
+}
+
+.sh-keyword {
+    color: rgb(0, 140, 255);
+}
+
+.sh-token {
+    color: rgb(212, 0, 255);
+}
+
+.sh-variable {
+    color: orange;
+}
+
+.sh-class {
+    color: rgb(0, 139, 0);
+}
+
+.sh-operator {
+    color: rgb(167, 167, 167);
+}
+
+.sh-string {
+    color: red;
+}
+
+.sh-numerals {
+    color: rgb(136, 255, 0);
+}

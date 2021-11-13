@@ -1,5 +1,6 @@
 window.onload = function () {
     let code = document.getElementById('SyHy');
+    let clipboardText = code.innerText
     if (code.className.includes('Dark'))
         document.head.innerHTML += `<link rel="stylesheet" href="/SyntaxHylighter/SyntaxHylighterDark.css">`
     else
@@ -82,56 +83,57 @@ window.onload = function () {
 
     //main fucntion that highlightes the js code
     function JSSyntaxHighlight(tokens) {
+        code.innerHTML += `<div id="copyHolder"><button id="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br>`
         for (i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
             if (token == undefined || token == '') {
                 continue
-            }else
-            switch (token) {
-                case jsKeywords[jsKeywords.indexOf(token)]:
-                    code.innerHTML += `<span class="sh-keyword">${token} </span>`
-                    break
-                case jsTokens[jsTokens.indexOf(token)]:
-                    code.innerHTML += `<span class="sh-token">${token} </span>`
-                    break
-                case jsTernaryOperators[jsTernaryOperators.indexOf(token)]:
-                    code.innerHTML += `<span class="sh-operator">${token}</span>`
-                    break
-                case jsUnaryOperators[jsUnaryOperators.indexOf(token)]:
-                    code.innerHTML += `<span class="sh-operator">${token}</span>`
-                    break
-                case jsEOL[jsEOL.indexOf(token)]:
-                    code.innerHTML += `<span class="sh-operator">${token}</span><br>`
-                    break
-                default:
-                    if (!isNaN(token))
-                        code.innerHTML += `<span class="sh-numerals">${token}</span>`
-                    else if (token.includes('"') || token.includes("'") || token.includes('`')) {
-                        code.innerHTML += `<span class="sh-string">${token} </span>`
-                        if (jsString.includes(token.charAt(0)) && jsString.includes(token.charAt(token.length - 1))) { }
-                        else
-                        for (i; i < tokens.length; i++) {
-                            let toke = tokens[i + 1]
-                            if (toke == undefined) { }
+            } else
+                switch (token) {
+                    case jsKeywords[jsKeywords.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-keyword">${token} </span>`
+                        break
+                    case jsTokens[jsTokens.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-token">${token} </span>`
+                        break
+                    case jsTernaryOperators[jsTernaryOperators.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-operator">${token}</span>`
+                        break
+                    case jsUnaryOperators[jsUnaryOperators.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-operator">${token}</span>`
+                        break
+                    case jsEOL[jsEOL.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-operator">${token}</span><br>`
+                        break
+                    default:
+                        if (!isNaN(token))
+                            code.innerHTML += `<span class="sh-numerals">${token}</span>`
+                        else if (token.includes('"') || token.includes("'") || token.includes('`')) {
+                            code.innerHTML += `<span class="sh-string"> ${token}</span>`
+                            if (jsString.includes(token.charAt(0)) && jsString.includes(token.charAt(token.length - 1))) { }
                             else
-                            if (toke.includes('"') || toke.includes("'") || toke.includes('`')) {
-                                code.innerHTML += `<span class="sh-string">${toke} </span>`
-                                i++
-                                break
-                            } else {
-                                code.innerHTML += `<span class="sh-string">${toke} </span>`
-                                continue
-                            }
+                                for (i; i < tokens.length; i++) {
+                                    let toke = tokens[i + 1]
+                                    if (toke == undefined) { }
+                                    else
+                                        if (toke.includes('"') || toke.includes("'") || toke.includes('`')) {
+                                            code.innerHTML += `<span class="sh-string"> ${toke}</span>`
+                                            i++
+                                            break
+                                        } else {
+                                            code.innerHTML += `<span class="sh-string"> ${toke}</span>`
+                                            continue
+                                        }
+                                }
                         }
-                    }
-                    else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
-                        code.innerHTML += `<span class="sh-class">${token} </span>`
-                    else if (!/[a-z]/.test(token) && !/[A-Z]/.test(token))
-                        code.innerHTML += `<span class="sh-operator">${token} </span>`
-                    else
-                        code.innerHTML += `<span class="sh-variable">${token} </span>`
-                    break
-            }
+                        else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
+                            code.innerHTML += `<span class="sh-class">${token} </span>`
+                        else if (!/[a-z]/.test(token) && !/[A-Z]/.test(token))
+                            code.innerHTML += `<span class="sh-operator">${token}</span>`
+                        else
+                            code.innerHTML += `<span class="sh-variable">${token}</span>`
+                        break
+                }
         }
     } // end of the main js highlighting function
 
@@ -192,4 +194,16 @@ window.onload = function () {
     function PushToken(token) {
         trimmedToken.push(token)
     }
+
+    document.getElementById('copyVector').addEventListener('click', function(){        
+        var inp = document.createElement("input")
+        document.body.appendChild(inp)
+        inp.value = clipboardText
+        var inpValue = inp.value
+        console.log(inpValue)
+        inp.select()
+        document.execCommand("Copy");
+        document.body.removeChild(inp)
+        document.getElementById("copyHolder").innerHTML += 'Copied'
+    })
 }
