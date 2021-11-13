@@ -10,25 +10,23 @@
     <span>
         <!--defining the attributes to say that the content in this div element should get highlighted.-->
         <!--Remember not to use the html comments inside this div because it can identify those tokens and results in some weird highlighting.-->
-        <p style="color: white;">perfectly valid code</p>
+        <p style="color: white;">perfectly valid code</p><br>
         <div class="CSPSH Dark" lang = 'js'>
             const toggler = new Toggler;
             toggler.toggleClass ('myId' , 'fromClass' , 'toClass');
-        </div>
+        </div><br>
         <!--This will highlight the code perfectly.-->
         <!--Code inside this tag is with invalid string notaion.-->
-        <p style="color: white;">with invalid string notaion</p>
+        <p style="color: white;">with invalid string notaion</p><br>
         <div class="CSPSH Dark" lang='js'>
-            const toggler = new Toggler;
-            toggler.toggleClass (' myId ' , ' fromClass ' , ' toClass ');
-        </div>
+            well
+        </div><br>
         <!--This won't highlight the code perfectly-->
         <!--This is the code without spaces between symbols.-->
-        <p style="color: white;">code without spaces between symbols</p>
+        <p style="color: white;">code without spaces between symbols</p><br>
         <div class="CSPSH Dark" lang='js'>
-            const toggler=new Toggler;
-            toggler.toggleClass('myId','fromClass','toClass');
-        </div>
+            content
+        </div><br>
         <!--This won't highlight the code perfectly either.-->
     </span>
 </body>

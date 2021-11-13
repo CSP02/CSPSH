@@ -12,7 +12,7 @@ body {
     padding: 1%;
     float: left;
     height: 30%;
-    width: auto;
+    width: 95%;
     margin: 1%;
     text-justify: left;
     text-align: left;
@@ -28,7 +28,7 @@ body {
     position: absolute;
 }
 
-#copyVector {
+.copyVector {
     z-index: 5;
     height: 50px;
     width: 50px;
@@ -39,7 +39,7 @@ body {
     border-radius: 6px;
 }
 
-#copyVector:hover, #copyVector:hover > #copy-cube2 {
+.copyVector:hover, .copyVector:hover > #copy-cube2 {
     cursor: pointer;
     background-color: rgb(75, 75, 75);
 }
@@ -94,7 +94,7 @@ body {
     overflow-y: scroll;
 }
 
-.CSPSH:hover>#copyVector {
+.CSPSH:hover>.copyVector {
     visibility: visible;
 }
 

@@ -6,23 +6,31 @@ let isOperator;
 window.onload = function () {
     let codes = document.getElementsByClassName('CSPSH');
 
-    for (let i = 0; i < codes.length; i++){
+    for (let i = 0; i < codes.length; i++) {
         let code = codes[i]
         clipboardText = code.innerText
         HighLight(code)
     }
 
-    document.getElementById('copyVector').addEventListener('click', function () {
-        var inp = document.createElement("input")
-        document.body.appendChild(inp)
-        inp.value = clipboardText
-        var inpValue = inp.value
-        console.log(inpValue)
-        inp.select()
-        document.execCommand("Copy");
-        document.body.removeChild(inp)
-        document.getElementById("copyHolder").innerHTML += 'Copied'
-    })
+    for (let k = 0; k < codes.length; k++) {
+        const buttons = document.getElementsByClassName('copyVector')
+        for (let j = 0; j < buttons.length; j++) {
+            const button = buttons[j];
+            let code = codes[j]
+            button.addEventListener('click', function () {
+                var inp = document.createElement("input")
+                document.body.appendChild(inp)
+                inp.value = clipboardText
+                var inpValue = code.innerText
+                console.log(inpValue)
+                inp.select()
+                document.execCommand("Copy");
+                document.body.removeChild(inp)
+                document.getElementById("copyHolder").innerHTML += 'Copied'
+            })
+            console.log(codes[j], buttons[j])
+        }
+    }
 }
 
 function HighLight(code) {
@@ -104,7 +112,7 @@ function HighLight(code) {
 
     //main fucntion that highlightes the js code
     function JSSyntaxHighlight(tokens) {
-        code.innerHTML += `<div id="copyHolder"><button id="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br>`
+        code.innerHTML += `<div id="copyHolder"><button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br>`
         for (i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
             if (token == undefined || token == '') {
