@@ -1,10 +1,10 @@
 window.onload = function () {
-    let code = document.getElementById('SyHy');
+    let code = document.getElementById('CSPSH');
     let clipboardText = code.innerText
     if (code.className.includes('Dark'))
-        document.head.innerHTML += `<link rel="stylesheet" href="/SyntaxHylighter/SyntaxHylighterDark.css">`
+        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
     else
-        document.head.innerHTML += `<link rel="stylesheet" href="/SyntaxHylighter/SyntaxHylighterLight.css">`
+        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHLight.css">`
 
     const jsTokens = [
         'new',

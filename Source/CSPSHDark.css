@@ -2,7 +2,7 @@ body {
     background-color: black;
 }
 
-#SyHy {
+#CSPSH {
     background-color: rgba(59, 59, 59, 0.8);
     overflow: hidden;
     color: rgb(255, 255, 255);
@@ -90,11 +90,11 @@ body {
     color: white;
 }
 
-#SyHy:hover {
+#CSPSH:hover {
     overflow-y: scroll;
 }
 
-#SyHy:hover>#copyVector {
+#CSPSH:hover>#copyVector {
     visibility: visible;
 }
 
