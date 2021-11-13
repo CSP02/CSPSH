@@ -1,6 +1,31 @@
+let clipboardText
+let trimmedToken = []
+let trimmedTokens = []
+let operators = []
+let isOperator;
 window.onload = function () {
-    let code = document.getElementById('CSPSH');
-    let clipboardText = code.innerText
+    let codes = document.getElementsByClassName('CSPSH');
+
+    for (let i = 0; i < codes.length; i++){
+        let code = codes[i]
+        clipboardText = code.innerText
+        HighLight(code)
+    }
+
+    document.getElementById('copyVector').addEventListener('click', function () {
+        var inp = document.createElement("input")
+        document.body.appendChild(inp)
+        inp.value = clipboardText
+        var inpValue = inp.value
+        console.log(inpValue)
+        inp.select()
+        document.execCommand("Copy");
+        document.body.removeChild(inp)
+        document.getElementById("copyHolder").innerHTML += 'Copied'
+    })
+}
+
+function HighLight(code) {
     if (code.className.includes('Dark'))
         document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
     else
@@ -56,10 +81,6 @@ window.onload = function () {
         else { }
     })
 
-    let trimmedToken = []
-    let trimmedTokens = []
-    let operators = []
-    let isOperator;
 
     code.innerHTML = ''
 
@@ -190,20 +211,7 @@ window.onload = function () {
         }
         isOperator = false
     }
-
     function PushToken(token) {
         trimmedToken.push(token)
     }
-
-    document.getElementById('copyVector').addEventListener('click', function(){        
-        var inp = document.createElement("input")
-        document.body.appendChild(inp)
-        inp.value = clipboardText
-        var inpValue = inp.value
-        console.log(inpValue)
-        inp.select()
-        document.execCommand("Copy");
-        document.body.removeChild(inp)
-        document.getElementById("copyHolder").innerHTML += 'Copied'
-    })
 }

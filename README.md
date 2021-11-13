@@ -36,5 +36,5 @@ Notation | valid/invalid
 ' string '| invalid
 
 - These are the main instructions you have to follow to make it work(I will make it ez without any seperations in future updates because I have already completed the whole project but it was deleted so I coded it again. But in previous which is deleted I used if else ladders to recognize the tokens but now I am using switch case statements so it will be faster and better).
-
+**Within this all limitation CSPSH has a addition feature of styling the code area and a inbuilt copy to clipboard fucntionality(not fully functional either). Open the file index.html so you will understand how it actually looks and works.**
 **NOTE: As I said this is the pre release of this package so everything is not perfect but it can detect only if the spaces are provided. I hope you can understand and use it as mentioned above**

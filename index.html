@@ -8,10 +8,25 @@
 </head>
 <body>
     <span>
-        <div id="CSPSH" class="Dark" lang = 'js'>
+        <!--defining the attributes to say that the content in this div element should get highlighted.-->
+        <!--Remember not to use the html comments inside this div because it can identify those tokens and results in some weird highlighting.-->
+        <div class="CSPSH Dark" lang = 'js'>
             const toggler = new Toggler;
-            toggler.toggleClass ('myId' , 'fromClass' , 'toClass')
+            toggler.toggleClass ('myId' , 'fromClass' , 'toClass');
         </div>
+        <!--This will highlight the code perfectly.-->
+        <!--Code inside this tag is with invalid string notaion.-->
+        <div class="CSPSH Dark" lang='js'>
+            const toggler = new Toggler;
+            toggler.toggleClass (' myId ' , ' fromClass ' , ' toClass ');
+        </div>
+        <!--This won't highlight the code perfectly-->
+        <!--This is the code without spaces between symbols.-->
+        <div class="CSPSH Dark" lang='js'>
+            const toggler=new Toggler;
+            toggler.toggleClass('myId','fromClass','toClass');
+        </div>
+        <!--This won't highlight the code perfectly either.-->
     </span>
 </body>
 </html>
