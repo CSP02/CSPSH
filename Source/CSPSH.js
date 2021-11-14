@@ -1,89 +1,52 @@
 let clipboardText
-let trimmedToken = []
-let trimmedTokens = []
-let operators = []
-let isOperator;
+let content = []
+const jsTokens = ['new', 'undefined', 'null', 'if', 'for', 'continue', 'break', 'switch', 'case', 'else']
+const jsOperators = ['=', '+', '-', '*', '/', '.',]
+
+const jsEOL = [';', '\n']
+const jsUnaryOperators = ['==', '++', '--']
+const jsTernaryOperators = ['!=', '<=', '>=', '<', '>']
+const jsKeywords = ['var', 'const', 'let']
+
+const jsFunc = ['(', ')']
+const jsString = ['"', "'", '`']
 window.onload = function () {
     let codes = document.getElementsByClassName('CSPSH');
 
     for (let i = 0; i < codes.length; i++) {
         let code = codes[i]
-        clipboardText = code.innerText
-        HighLight(code)
+        content.push(code.innerText)
+        if (code.className.includes('dark'))
+            document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
+        else
+            document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHLight.css">`
+        let codeContent = code.innerHTML
+        HighLight(code, codeContent)
     }
+    const buttons = document.getElementsByClassName('copyVector')
+    for (let j = 0; j < buttons.length; j++) {
+        const button = buttons[j];
+        button.addEventListener('click', function () {
+            console.log(content[j], buttons[j])
+            clipboardText = content[j]
+            var inp = document.createElement("input")
+            document.body.appendChild(inp)
+            inp.value = clipboardText
+            inp.select()
+            document.execCommand("Copy");
+            document.body.removeChild(inp)
+        })
 
-    for (let k = 0; k < codes.length; k++) {
-        const buttons = document.getElementsByClassName('copyVector')
-        for (let j = 0; j < buttons.length; j++) {
-            const button = buttons[j];
-            let code = codes[j]
-            button.addEventListener('click', function () {
-                var inp = document.createElement("input")
-                document.body.appendChild(inp)
-                inp.value = clipboardText
-                var inpValue = code.innerText
-                console.log(inpValue)
-                inp.select()
-                document.execCommand("Copy");
-                document.body.removeChild(inp)
-                document.getElementById("copyHolder").innerHTML += 'Copied'
-            })
-            console.log(codes[j], buttons[j])
-        }
     }
 }
 
-function HighLight(code) {
-    if (code.className.includes('Dark'))
-        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
-    else
-        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHLight.css">`
-
-    const jsTokens = [
-        'new',
-        'undefined',
-        'null',
-        'if',
-        'for',
-        'continue',
-        'break',
-        'switch',
-        'case',
-        'else'
-    ]
-    const jsOperators = [
-        '=',
-        '+',
-        '-',
-        '*',
-        '/',
-        '.',
-    ]
-
-    const jsEOL = [';', '\n']
-    const jsUnaryOperators = [
-        '==',
-        '++',
-        '--'
-    ]
-    const jsTernaryOperators = [
-        '!=',
-        '<=',
-        '>=',
-        '<',
-        '>'
-    ]
-    const jsKeywords = [
-        'var',
-        'const',
-        'let'
-    ]
-
-    const jsFunc = ['(', ')']
-    const jsString = ['"', "'", '`']
-
+function HighLight(code, codeContent) {
     let tokens = []
-    code.innerHTML.split(' ').forEach(token => {
+    let trimmedToken = []
+    let trimmedTokens = []
+    let operators = []
+    let isOperator;
+    codeContent.split(' ').forEach(token => {
         if (token != '')
             tokens.push(token)
         else { }
@@ -93,7 +56,6 @@ function HighLight(code) {
     code.innerHTML = ''
 
     TrimTokens(tokens)
-    console.log(trimmedToken)
 
     trimmedToken.forEach(trimmedTok => {
         if (!Array.isArray(trimmedTok)) {
@@ -112,7 +74,7 @@ function HighLight(code) {
 
     //main fucntion that highlightes the js code
     function JSSyntaxHighlight(tokens) {
-        code.innerHTML += `<div id="copyHolder"><button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br>`
+        code.innerHTML += `<div id="copyHolder">File Name: ${code.getAttribute('name')}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br>`
         for (i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
             if (token == undefined || token == '') {

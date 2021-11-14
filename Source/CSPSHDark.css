@@ -1,9 +1,10 @@
-body {
-    background-color: black;
+*{
+    margin: 0px;
+    padding: 0px;
 }
 
 .CSPSH {
-    background-color: rgba(59, 59, 59, 0.8);
+    background-color: rgb(59, 59, 59);
     overflow: hidden;
     color: rgb(255, 255, 255);
     font-size: 24px;
@@ -12,19 +13,23 @@ body {
     padding: 1%;
     float: left;
     height: 30%;
-    width: 95%;
+    width: 70%;
     margin: 1%;
     text-justify: left;
     text-align: left;
 }
 
 #copyHolder{
+    padding: 1%;
+    margin: -1%;
     height: 50px;
     border-radius: 6px;
-    width:575px;
+    width:inherit;
     align-items: right;
     background-color: rgba(59, 59, 59, 0.692);
     backdrop-filter: blur(12px);
+    text-align: center;
+    text-justify: center;
     position: absolute;
 }
 

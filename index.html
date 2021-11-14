@@ -5,28 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYHy</title>
     <script src="./Source/CSPSH.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <span>
         <!--defining the attributes to say that the content in this div element should get highlighted.-->
         <!--Remember not to use the html comments inside this div because it can identify those tokens and results in some weird highlighting.-->
-        <p style="color: white;">perfectly valid code</p><br>
-        <div class="CSPSH Dark" lang = 'js'>
-            const toggler = new Toggler;
-            toggler.toggleClass ('myId' , 'fromClass' , 'toClass');
-        </div><br>
+        <p style="color: white;">perfectly valid code</p>
+        <div class="CSPSH dark" lang = 'js' name="ValidCode">
+            const toggler = new Toggler
+            toggler.toggleClass ('myId' , 'fromClass' , 'toClass')
+        </div>
         <!--This will highlight the code perfectly.-->
         <!--Code inside this tag is with invalid string notaion.-->
-        <p style="color: white;">with invalid string notaion</p><br>
-        <div class="CSPSH Dark" lang='js'>
-            well
-        </div><br>
+        <p style="color: white;">with invalid string notaion</p>
+        <div class="CSPSH dark" lang='js' name="InvalidStringNotation">
+            const toggler = new Toggler
+            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
+            const toggler = new Toggler
+            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
+            const toggler = new Toggler
+            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
+            const toggler = new Toggler
+            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
+            const toggler = new Toggler
+            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
+        </div>
         <!--This won't highlight the code perfectly-->
         <!--This is the code without spaces between symbols.-->
-        <p style="color: white;">code without spaces between symbols</p><br>
-        <div class="CSPSH Dark" lang='js'>
-            content
-        </div><br>
+        <p style="color: white;">code without spaces between symbols</p>
+        <div class="CSPSH dark" lang='js' name="InvalidWithoutSpaces">
+            const toggler=new Toggler
+            toggler.toggleClass('myId','fromClass','toClass')
+        </div>
         <!--This won't highlight the code perfectly either.-->
     </span>
 </body>

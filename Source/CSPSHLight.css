@@ -1,21 +1,102 @@
-body {
-    background-color: white;
-}
-
-#SyHy {
-    background-color: rgba(211, 211, 211, 0.8);
+.CSPSH {
+    background-color: rgba(190, 190, 190, 0.8);
     overflow: hidden;
-    color: rgb(255, 255, 255);
+    color: rgb(58, 58, 58);
     font-size: 24px;
     font-family: 'Roboto Slab', serif;
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 50px;
+    height: 30%;
     width: 70%;
     margin: 1%;
     text-justify: left;
     text-align: left;
+}
+
+#copyHolder {
+    padding: 1%;
+    margin: -1%;
+    height: 50px;
+    border-radius: 6px;
+    width: inherit;
+    align-items: right;
+    background-color: rgba(124, 124, 124, 0.692);
+    backdrop-filter: blur(12px);
+    text-align: center;
+    text-justify: center;
+    position: absolute;
+}
+
+.copyVector {
+    z-index: 5;
+    height: 50px;
+    width: 50px;
+    background-color: rgb(139, 139, 139);
+    border: none;
+    display: grid;
+    float: right;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.copyVector:hover, .copyVector:hover>#copy-cube2 {
+    cursor: pointer;
+    background-color: rgb(182, 182, 182);
+}
+
+#copy-cube, #copy-cube2 {
+    height: 30px;
+    width: 30px;
+    padding: 3%;
+    margin: 3%;
+    border-radius: 6px;
+    border: 1px solid rgb(107, 107, 107);
+}
+
+#copy-cube {
+    margin-top: 10%;
+}
+
+.hr-copy-cube {
+    margin-top: 30%;
+    border: 0.3px solid grey;
+    width: 50%;
+}
+
+#copy-cube2 {
+    margin-left: 15%;
+    margin-top: -90%;
+    background-color: rgb(139, 139, 139);
+}
+
+::-webkit-scrollbar {
+    background-color: rgba(187, 187, 187, 0.8);
+    border-radius: 0px 6px 6px 0px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-button {
+    visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(58, 58, 58);
+    width: 1px;
+    border-radius: 6px 6px 6px 6px;
+}
+
+::-webkit-scrollbar-button {
+    width: 3px;
+    color: rgb(68, 68, 68);
+}
+
+.CSPSH:hover {
+    overflow-y: scroll;
+}
+
+.CSPSH:hover>.copyVector {
+    visibility: visible;
 }
 
 .sh-keyword {
@@ -27,7 +108,7 @@ body {
 }
 
 .sh-variable {
-    color: orange;
+    color: rgba(206, 123, 0, 0.801);
 }
 
 .sh-class {
@@ -35,11 +116,11 @@ body {
 }
 
 .sh-operator {
-    color: rgb(167, 167, 167);
+    color: rgb(13, 11, 43);
 }
 
 .sh-string {
-    color: red;
+    color: rgb(189, 4, 4);
 }
 
 .sh-numerals {
