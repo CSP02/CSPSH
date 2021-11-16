@@ -3,7 +3,7 @@
     overflow: hidden;
     color: rgb(58, 58, 58);
     font-size: 24px;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Space Mono', monospace;
     border-radius: 6px;
     padding: 1%;
     float: left;
@@ -15,6 +15,7 @@
 }
 
 #copyHolder {
+    font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
     height: 50px;
@@ -32,7 +33,7 @@
     z-index: 5;
     height: 50px;
     width: 50px;
-    background-color: rgb(139, 139, 139);
+    background-color: rgba(124, 124, 124, 0.692);
     border: none;
     display: grid;
     float: right;
@@ -42,7 +43,7 @@
 
 .copyVector:hover, .copyVector:hover>#copy-cube2 {
     cursor: pointer;
-    background-color: rgb(182, 182, 182);
+    background-color: rgba(124, 124, 124);
 }
 
 #copy-cube, #copy-cube2 {
@@ -51,7 +52,7 @@
     padding: 3%;
     margin: 3%;
     border-radius: 6px;
-    border: 1px solid rgb(107, 107, 107);
+    border: 1px solid rgb(83, 83, 83);
 }
 
 #copy-cube {
@@ -60,7 +61,7 @@
 
 .hr-copy-cube {
     margin-top: 30%;
-    border: 0.3px solid grey;
+    border: 0.3px solid rgb(70, 70, 70);
     width: 50%;
 }
 
@@ -100,15 +101,15 @@
 }
 
 .sh-keyword {
-    color: rgb(0, 140, 255);
+    color: rgb(119, 193, 253);
 }
 
 .sh-token {
-    color: rgb(212, 0, 255);
+    color: rgb(143, 0, 172);
 }
 
 .sh-variable {
-    color: rgba(206, 123, 0, 0.801);
+    color: rgb(255, 186, 83);
 }
 
 .sh-class {
@@ -116,11 +117,11 @@
 }
 
 .sh-operator {
-    color: rgb(13, 11, 43);
+    color: rgb(105, 105, 105);
 }
 
 .sh-string {
-    color: rgb(189, 4, 4);
+    color: rgb(165, 0, 0);
 }
 
 .sh-numerals {

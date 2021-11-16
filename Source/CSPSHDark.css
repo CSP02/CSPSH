@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
 }
@@ -8,7 +8,7 @@
     overflow: hidden;
     color: rgb(255, 255, 255);
     font-size: 24px;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Space Mono', monospace;
     border-radius: 6px;
     padding: 1%;
     float: left;
@@ -19,12 +19,13 @@
     text-align: left;
 }
 
-#copyHolder{
+#copyHolder {
+    font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
     height: 50px;
     border-radius: 6px;
-    width:inherit;
+    width: inherit;
     align-items: right;
     background-color: rgba(59, 59, 59, 0.692);
     backdrop-filter: blur(12px);
@@ -37,14 +38,14 @@
     z-index: 5;
     height: 50px;
     width: 50px;
-    background-color: rgb(59, 59, 59);
+    background-color: rgb(59, 59, 59, 0.3);
     border: none;
     display: grid;
     float: right;
     border-radius: 6px;
 }
 
-.copyVector:hover, .copyVector:hover > #copy-cube2 {
+.copyVector:hover, .copyVector:hover>#copy-cube2 {
     cursor: pointer;
     background-color: rgb(75, 75, 75);
 }
@@ -58,11 +59,11 @@
     border: 1px solid rgb(107, 107, 107);
 }
 
-#copy-cube{
+#copy-cube {
     margin-top: 10%;
 }
 
-.hr-copy-cube{
+.hr-copy-cube {
     margin-top: 30%;
     border: 0.3px solid grey;
     width: 50%;
@@ -80,7 +81,7 @@
     width: 8px;
 }
 
-::-webkit-scrollbar-button{
+::-webkit-scrollbar-button {
     visibility: hidden;
 }
 
@@ -108,7 +109,7 @@
 }
 
 .sh-token {
-    color: rgb(212, 0, 255);
+    color: rgb(235, 132, 255);
 }
 
 .sh-variable {
@@ -116,7 +117,7 @@
 }
 
 .sh-class {
-    color: rgb(0, 139, 0);
+    color: rgb(42, 185, 42);
 }
 
 .sh-operator {
@@ -124,9 +125,13 @@
 }
 
 .sh-string {
-    color: red;
+    color: rgb(241, 97, 72);
 }
 
 .sh-numerals {
     color: rgb(136, 255, 0);
+}
+
+.sh-Func {
+    color: #FBF46D;
 }

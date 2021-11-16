@@ -46,6 +46,37 @@ Notation | valid/invalid
 
 - These are the main instructions you have to follow to make it work(I will make it ez without any seperations in future updates because I have already completed the whole project but it was deleted so I coded it again. But in previous which is deleted I used if else ladders to recognize the tokens but now I am using switch case statements so it will be faster and better).
 
+# Version info:
+- Added formatting fucntionality to the code,
+- Improved collor palette,
+- Better copy to clipboard functionality
+- Added an attribute ``name`` which is displayed as the file name.
+
+# Limitation yet to overcome
+- Still you have to seperate symbols with spaces,
+- Won't work for for loops(because it contains ; and CSPSH reads it as a EOL character will avoid it in the next release)
+- For better understanding see the file index.html. Here is the small example of the code
+
+```html
+<div class="CSPSH dark" lang = 'js' name="ValidCode">
+    const toggler = new Toggler
+    toggler.toggleClass ('myId' , 'fromClass' , 'toClass')
+    var a = 1
+    var b = 2
+    console.log ( biggest(a , b) )
+    function biggest (a , b) {
+        if ( a < b) {
+            return b
+        } else {
+            return a
+        }
+    }
+</div>
+```
+**Output:**
+![output](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/Output.png)
+
+**NOTE: The output is taken by alongating the the element for better view of output. The default height is 30% and in the picture it is 70% you can always change it if you want to.**
 
 **Within this all limitation CSPSH has a addition feature of styling the code area and a inbuilt copy to clipboard fucntionality(not fully functional either). Open the file index.html so you will understand how it actually looks and works.**
 

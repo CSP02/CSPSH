@@ -11,29 +11,28 @@
     <span>
         <!--defining the attributes to say that the content in this div element should get highlighted.-->
         <!--Remember not to use the html comments inside this div because it can identify those tokens and results in some weird highlighting.-->
-        <p style="color: white;">perfectly valid code</p>
         <div class="CSPSH dark" lang = 'js' name="ValidCode">
             const toggler = new Toggler
             toggler.toggleClass ('myId' , 'fromClass' , 'toClass')
+            var a = 1
+            var b = 2
+            console.log ( biggest(a , b) )
+            function biggest (a , b) {
+                if ( a < b) {
+                    return b
+                } else {
+                    return a
+                }
+            }
         </div>
         <!--This will highlight the code perfectly.-->
         <!--Code inside this tag is with invalid string notaion.-->
-        <p style="color: white;">with invalid string notaion</p>
         <div class="CSPSH dark" lang='js' name="InvalidStringNotation">
-            const toggler = new Toggler
-            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
-            const toggler = new Toggler
-            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
-            const toggler = new Toggler
-            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
-            const toggler = new Toggler
-            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
             const toggler = new Toggler
             toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
         </div>
         <!--This won't highlight the code perfectly-->
         <!--This is the code without spaces between symbols.-->
-        <p style="color: white;">code without spaces between symbols</p>
         <div class="CSPSH dark" lang='js' name="InvalidWithoutSpaces">
             const toggler=new Toggler
             toggler.toggleClass('myId','fromClass','toClass')
