@@ -78,7 +78,7 @@ Notation | valid/invalid
 
 **NOTE: The output is taken by alongating the the element for better view of output. The default height is 30% and in the picture it is 70% you can always change it if you want to.**
 
-**Within this all limitation CSPSH has a addition feature of styling the code area and a inbuilt copy to clipboard fucntionality(not fully functional either). Open the file index.html so you will understand how it actually looks and works.**
+**Within this all limitation CSPSH has a addition feature of styling the code area and a inbuilt copy to clipboard fucntionality(fully functional). Open the file index.html so you will understand how it actually looks and works.**
 
 
 **NOTE: As I said this is the pre release of this package so everything is not perfect but it can detect only if the spaces are provided. I hope you can understand and use it as mentioned above**
