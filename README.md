@@ -22,14 +22,14 @@ Note that CSPSH is a pre release and this package is not fully functional. So I 
 - In HTML define a class name with ``CSPSH`` inorder to make CSPSH.js realise the code that is written in that element(I personally prefer div tag for that) and class to either ``dark`` or ``light`` to choose the theme scheme and lang is the language of the code that is written inside the tag(Only js language is available at this moment will release for all the languages soon). see the example below for better understanding.
 
 ```html
-<div id="CSPSH" class="Dark" lang = 'js'></div>
+<div class="CSPSH dark" lang = 'js' name="fileName"></div><!--Filename is optional and it will be undefined if the field is empty-->
 ```
 
 - Start typing your code inside this tag with spaces between each word and symbol(right now this package can only detect basic syntax that is the main reason of requesting to seperate every word and symbol with a space except for strings. See the below example for better understanding).
 
 ```html
 <!--Example-1 as you can see every character and words are seperated with spaces except the strings-->
-<div id="CSPSH" class="Dark" lang = 'js'>
+<div class="CSPSH dark" lang = 'js' name="fileName">
     const toggler = new Toggler;
     toggler.toggleClass ('myId' , 'fromClass' , 'toClass');
 </div>
@@ -59,6 +59,8 @@ Notation | valid/invalid
 
 ```html
 <div class="CSPSH dark" lang = 'js' name="ValidCode">
+```
+```js
     const toggler = new Toggler
     toggler.toggleClass ('myId' , 'fromClass' , 'toClass')
     var a = 1
@@ -71,6 +73,8 @@ Notation | valid/invalid
             return a
         }
     }
+```
+```html
 </div>
 ```
 **Output:**
