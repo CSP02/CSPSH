@@ -60,7 +60,6 @@ Notation | valid/invalid
 ```html
 <div class="CSPSH dark" lang = 'js' name="ValidCode">
 ```
-```js
     const toggler = new Toggler
     toggler.toggleClass ('myId' , 'fromClass' , 'toClass')
     var a = 1
@@ -74,7 +73,6 @@ Notation | valid/invalid
         }
     }
 ```
-```html
 </div>
 ```
 **Output:**
