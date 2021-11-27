@@ -1,9 +1,10 @@
 let clipboardText
 let content = []
 let openBraceCount = 0
+let fileName
 const jsTokens = ['new', 'undefined', 'null', 'if', 'for', 'continue', 'break', 'switch', 'case', 'else', 'return',
-'do', 'while']
-const jsOperators = ['=', '+', '-', '*', '/', '.']
+    'do', 'while']
+const jsOperators = ['=', '+', '-', '*', '/', '.', ',']
 
 const jsEOL = [';', '\n']
 const jsUnaryOperators = ['==', '++', '--']
@@ -11,12 +12,17 @@ const jsTernaryOperators = ['!=', '<=', '>=', '<', '>']
 const jsKeywords = ['var', 'const', 'let', 'function']
 
 const jsFunc = ['(', ')']
+const jsIndex = ['[', ']']
 const jsString = ['"', "'", '`']
 window.onload = function () {
     let codes = document.getElementsByClassName('CSPSH');
 
     for (let i = 0; i < codes.length; i++) {
         let code = codes[i]
+        fileName = code.getAttribute('name')
+        if (!fileName) {
+            fileName = `file`
+        }
         content.push(code.innerText)
         if (code.className.includes('dark'))
             document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
@@ -29,7 +35,6 @@ window.onload = function () {
     for (let j = 0; j < buttons.length; j++) {
         const button = buttons[j];
         button.addEventListener('click', function () {
-            console.log(content[j], buttons[j])
             clipboardText = content[j]
             var inp = document.createElement("input")
             document.body.appendChild(inp)
@@ -63,10 +68,10 @@ function HighLight(code, codeContent) {
         if (!Array.isArray(trimmedTok)) {
             trimmedTokens.push(trimmedTok)
         } else if (Array.isArray(trimmedTok)) {
-            console.log("working")
             TrimTokens(trimmedTok)
         }
     })
+
 
     switch (code.lang) {
         case 'js':
@@ -76,7 +81,7 @@ function HighLight(code, codeContent) {
 
     //main fucntion that highlightes the js code
     function JSSyntaxHighlight(tokens) {
-        code.innerHTML += `<div id="copyHolder">File Name: ${code.getAttribute('name')}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br><br>`
+        code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br><br>`
         for (i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
             if (token == undefined || token == '') {
@@ -96,6 +101,9 @@ function HighLight(code, codeContent) {
                         code.innerHTML += `<span class="sh-operator">${token}</span>`
                         break
                     case jsEOL[jsEOL.indexOf(token)]:
+                        if (tokens[i+1] != undefined && tokens[i + 1].includes('\n')) {
+                            i++;
+                        }
                         code.innerHTML += `<span class="sh-operator">${token}</span><br>`
                         if (tokens[i + 2]) {
                             if (openBraceCount >= 0 && tokens[i + 2].includes('}')) {
@@ -131,7 +139,7 @@ function HighLight(code, codeContent) {
                         }
                         else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
                             if (tokens[i - 1] == 'new')
-                                code.innerHTML += `<span class="sh-class">${token} </span>`
+                                code.innerHTML += `<span class="sh-class">${token}</span>`
                             else
                                 code.innerHTML += `<span class="sh-Func">${token}</span>`
                         else if (token.includes('{') || token.includes('}')) {
@@ -165,18 +173,21 @@ function HighLight(code, codeContent) {
 
     //fucntion that trims the tokens furthur to detect the other operators like arthematic operators etc.
     function TrimTokens(tokens) {
-        for (k = 0; k <= tokens.length; k++) {
+        for (k = 1; k <= tokens.length; k++) {
             let token = tokens[k]
             let tok
             if (token == undefined || token == '')
                 return
-            token = token.replace('&lt', ' <').replace(';', '')
+            if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
+            token = token.replace('&lt', ' <').replace('&gt', ' >').replace(';', '')
             if (token.length > 1) {
                 if (jsTernaryOperators.includes(token.trim())) {
+                
                     PushToken(token)
                     continue
                 }
                 else if (jsUnaryOperators.includes(token.trim())) {
+                
                     PushToken(token)
                     continue
                 } else
@@ -193,6 +204,7 @@ function HighLight(code, codeContent) {
                                 operators.push(tok)
                                 break
                             } else if (jsEOL.includes(token[n])) {
+                            
                                 tok = token[n]
                                 isOperator = true
                                 operators.push(tok)
@@ -205,27 +217,58 @@ function HighLight(code, codeContent) {
                 if (isOperator)
                     IdentiyTokens(token, tok)
                 else
-                    PushToken(token)
+                    trimmedToken.push(token)
             }
             else
-                PushToken(token)
+                trimmedToken.push(token)
         }
     }
 
     function IdentiyTokens(token, symbol) {
         let splitted = token.split(symbol)
-        for (m = 0; m < splitted.length + 1; m++) {
-            if (m == 0)
-                trimmedToken.push(splitted[0])
-            else if (m % 2 == 0) {
-                trimmedToken.push(splitted[m - 1])
-            } else if (m % 2 != 0) {
-                trimmedToken.push(symbol)
+        for (let m = 0; m < (splitted.length + 1); m++) {
+            if (splitted.length <= 2) {
+                if (m == 0) {
+                    PushToken(splitted[0])
+                    continue
+                }
+                else if (m % 2 == 0) {
+                    PushToken(splitted[m - 1])
+                    continue
+                } else if (m % 2 != 0) {
+                    trimmedToken.push(symbol)
+                    continue
+                }
+            } else {
+                PushToken(splitted[m - 1])
+                if (m != splitted.length && m != 0) {
+                    trimmedToken.push(symbol)
+                }
             }
         }
-        isOperator = false
     }
     function PushToken(token) {
-        trimmedToken.push(token)
+        if (token == undefined) { return }
+        for (let n = 0; n <= token.length; n++) {
+            if (token[n] != undefined && token.length > 1) {
+                if (jsOperators.includes(token[n])) {
+                    tok = token[n]
+                    IdentiyTokens(token, tok)
+                    return
+                } else if (jsFunc.includes(token[n])) {
+                    tok = token[n]
+                    IdentiyTokens(token, tok)
+                    return
+                } else if (jsEOL.includes(token[n])) {
+                    tok = token[n]
+                    IdentiyTokens(token, tok)
+                    return
+                } else {
+                }
+            } else {
+                trimmedToken.push(token)
+                return
+            }
+        }
     }
 }

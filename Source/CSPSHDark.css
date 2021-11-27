@@ -2,7 +2,6 @@
     margin: 0px;
     padding: 0px;
 }
-
 .CSPSH {
     background-color: rgb(59, 59, 59);
     overflow: hidden;
@@ -13,7 +12,7 @@
     padding: 1%;
     float: left;
     height: 30%;
-    width: 70%;
+    width: 90%;
     margin: 1%;
     text-justify: left;
     text-align: left;
