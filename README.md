@@ -49,12 +49,8 @@ Notation | valid/invalid
 - These are the main instructions you have to follow to make it work.
 
 # Version info:
-- Added formatting fucntionality to the code,
-- Improved collor palette,
-- Better copy to clipboard functionality
-- Added an attribute ``name`` which is displayed as the file name.
-- No need to use the spaces anymore
-
+- No need to use the spaces anymore,
+- Works for for loops.
 # Limitation yet to overcome
 - The main thing I noticed is that you cannot place any word between two symbols. Like
 
@@ -65,7 +61,6 @@ Notation | valid/invalid
 ``` 
 this will make the else as a operator I am still working on it so will fix it soon.
 - And the widths of these elements are bit messed up but you can edit them by accessing ``.CSPSH`` and ``#copyHolder`` in your own css. But I will try to fix that soon too and this thing is only occuring at different screen resolutions so will make it a responsive thing so it wont happen again.
-- Won't work for for loops(because it contains ; and CSPSH reads it as a EOL character will avoid it in the later release)
 - For better understanding see the file index.html. Here is the small example of the code
 
 ```html
