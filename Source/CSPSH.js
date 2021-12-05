@@ -2,13 +2,15 @@ let clipboardText
 let content = []
 let openBraceCount = 0
 let fileName
+let isEOLINFOR
+let forCount
 const jsTokens = ['new', 'undefined', 'null', 'if', 'for', 'continue', 'break', 'switch', 'case', 'else', 'return',
     'do', 'while']
-const jsOperators = ['=', '+', '-', '*', '/', '.', ',']
+const jsOperators = ['=', '+', '-', '*', '/', '.', ',', '<', '>']
 
 const jsEOL = [';', '\n']
-const jsUnaryOperators = ['==', '++', '--']
-const jsTernaryOperators = ['!=', '<=', '>=', '<', '>']
+const jsUnaryOperators = []
+const jsTernaryOperators = ['!=', '<=', '>=', '==', '++', '--']
 const jsKeywords = ['var', 'const', 'let', 'function']
 
 const jsFunc = ['(', ')']
@@ -87,6 +89,11 @@ function HighLight(code, codeContent) {
             if (token == undefined || token == '') {
                 continue
             } else {
+                console.log(token)
+                if (token == 'for') {
+                    forCount++
+                    isEOLINFOR = true
+                }
                 switch (token) {
                     case jsKeywords[jsKeywords.indexOf(token)]:
                         code.innerHTML += `<span class="sh-keyword">${token} </span>`
@@ -101,10 +108,15 @@ function HighLight(code, codeContent) {
                         code.innerHTML += `<span class="sh-operator">${token}</span>`
                         break
                     case jsEOL[jsEOL.indexOf(token)]:
-                        if (tokens[i+1] != undefined && tokens[i + 1].includes('\n')) {
+                        if (tokens[i + 1] != undefined && tokens[i + 1].includes('\n')) {
                             i++;
                         }
-                        code.innerHTML += `<span class="sh-operator">${token}</span><br>`
+                        if (!isEOLINFOR || forCount == 0)
+                            code.innerHTML += `<span class="sh-operator">${token}</span><br>`
+                        else {
+                            code.innerHTML += `<span class="sh-operator">${token} </span>`
+                            continue
+                        }
                         if (tokens[i + 2]) {
                             if (openBraceCount >= 0 && tokens[i + 2].includes('}')) {
                                 openBraceCount--
@@ -146,6 +158,7 @@ function HighLight(code, codeContent) {
                             if (token.includes('{')) {
                                 let l = 0
                                 openBraceCount++
+                                forCount = 0
                                 code.innerHTML += `<span class="sh-operator">${token}</span>`
                             } else if (token.includes('}')) {
                                 code.innerHTML += `<span class="sh-operator">${token}</span>`
@@ -157,8 +170,12 @@ function HighLight(code, codeContent) {
                                     code.innerHTML += `<span class="sh-operator">${token}</span>`
                                 else
                                     code.innerHTML += `<span class="sh-operator">${token} </span>`
-                            else
-                                code.innerHTML += `<span class="sh-operator"> ${token} </span>`
+                            else {
+                                if (!isEOLINFOR)
+                                    code.innerHTML += `<span class="sh-operator"> ${token} </span>`
+                                else
+                                    code.innerHTML += `<span class="sh-operator">${token}</span>`
+                            }
                         else {
                             if (token.includes('(') || tokens[i + 1] == '(' || tokens[i + 1].includes('(') || tokens[i + 2] == '(' || tokens[i + 2].includes('('))
                                 code.innerHTML += `<span class="sh-Func">${token}</span>`
@@ -178,42 +195,43 @@ function HighLight(code, codeContent) {
             let tok
             if (token == undefined || token == '')
                 return
-            if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
-            token = token.replace('&lt', ' <').replace('&gt', ' >').replace(';', '')
-            if (token.length > 1) {
-                if (jsTernaryOperators.includes(token.trim())) {
+            if (token.includes('for')) {
                 
+            }
+            if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
+                token = token.replace('&lt', '<').replace('&gt', ' >').replace(';', '')
+            if (token.length > 1) {
+                if (jsTernaryOperators.includes(token)) {
                     PushToken(token)
                     continue
                 }
-                else if (jsUnaryOperators.includes(token.trim())) {
-                
-                    PushToken(token)
-                    continue
-                } else
-                    for (n = 0; n <= token.length; n++) {
-                        if (token[n] != undefined) {
-                            if (jsOperators.includes(token[n])) {
-                                tok = token[n]
-                                isOperator = true
-                                operators.push(tok)
-                                break
-                            } else if (jsFunc.includes(token[n])) {
-                                tok = token[n]
-                                isOperator = true
-                                operators.push(tok)
-                                break
-                            } else if (jsEOL.includes(token[n])) {
-                            
-                                tok = token[n]
-                                isOperator = true
-                                operators.push(tok)
-                                break
-                            } else {
-                                isOperator = false
-                            }
+                for (n = 0; n <= token.length; n++) {
+                    if (token[n] != undefined) {
+                        if (jsOperators.includes(token[n])) {
+                            tok = token[n]
+                            isOperator = true
+                            operators.push(tok)
+                            break
+                        } else if (jsFunc.includes(token[n])) {
+                            tok = token[n]
+                            isOperator = true
+                            operators.push(tok)
+                            break
+                        } else if (jsIndex.includes(token[n])) {
+                            tok = token[n]
+                            isOperator = true
+                            operators.push(tok)
+                            break
+                        } else if (jsEOL.includes(token[n])) {
+                            tok = token[n]
+                            isOperator = true
+                            operators.push(tok)
+                            break
+                        } else {
+                            isOperator = false
                         }
                     }
+                }
                 if (isOperator)
                     IdentiyTokens(token, tok)
                 else
@@ -249,6 +267,12 @@ function HighLight(code, codeContent) {
     }
     function PushToken(token) {
         if (token == undefined) { return }
+        if (jsTernaryOperators.includes(token)) {
+            trimmedToken.push(token)
+            return
+        } else if (jsUnaryOperators.includes(token)) {
+            console.log(token)
+        }
         for (let n = 0; n <= token.length; n++) {
             if (token[n] != undefined && token.length > 1) {
                 if (jsOperators.includes(token[n])) {
