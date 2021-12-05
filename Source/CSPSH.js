@@ -25,7 +25,7 @@ window.onload = function () {
         if (!fileName) {
             fileName = `file`
         }
-        content.push(code.innerText)
+        content.push(code.innerHTML)
         if (code.className.includes('dark'))
             document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
         else
@@ -38,14 +38,15 @@ window.onload = function () {
         const button = buttons[j];
         button.addEventListener('click', function () {
             clipboardText = content[j]
-            var inp = document.createElement("input")
+            var inp = document.createElement("textarea")
             document.body.appendChild(inp)
-            inp.value = clipboardText
+            inp.value = clipboardText.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
             inp.select()
             document.execCommand("Copy");
             document.body.removeChild(inp)
+            document.getElementById('copy-cube').style.backgroundColor = 'rgba(0, 100, 0, 0.6)'
+            document.getElementById('copy-cube2').style.backgroundColor = 'rgb(0, 100, 0)'
         })
-
     }
 }
 
@@ -83,13 +84,12 @@ function HighLight(code, codeContent) {
 
     //main fucntion that highlightes the js code
     function JSSyntaxHighlight(tokens) {
-        code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"><hr class="hr-copy-cube"><hr class="hr-copy-cube"></div></button></div><br><br>`
+        code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"></div></button></div><br><br><br>`
         for (i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
             if (token == undefined || token == '') {
                 continue
             } else {
-                console.log(token)
                 if (token == 'for') {
                     forCount++
                     isEOLINFOR = true
@@ -196,7 +196,7 @@ function HighLight(code, codeContent) {
             if (token == undefined || token == '')
                 return
             if (token.includes('for')) {
-                
+
             }
             if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
                 token = token.replace('&lt', '<').replace('&gt', ' >').replace(';', '')

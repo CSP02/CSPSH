@@ -48,9 +48,15 @@ Notation | valid/invalid
 
 - These are the main instructions you have to follow to make it work.
 
+# Hotfix info:
+
+- Better copy to clipboard functionality.
+
 # Version info:
+
 - No need to use the spaces anymore,
 - Works for for loops.
+
 # Limitation yet to overcome
 - The main thing I noticed is that you cannot place any word between two symbols. Like
 
