@@ -131,24 +131,30 @@ function HighLight(code, codeContent) {
                     default:
                         if (!isNaN(token))
                             code.innerHTML += `<span class="sh-numerals">${token}</span>`
+                        //starting of string highlighting stuff
                         else if (token.includes('"') || token.includes("'") || token.includes('`')) {
-                            code.innerHTML += `<span class="sh-string">${token}</span>`
-                            if (jsString.includes(token.charAt(0)) && jsString.includes(token.charAt(token.length - 1))) { }
-                            else
-                                for (i; i < tokens.length; i++) {
-                                    let toke = tokens[i + 1]
-                                    if (toke == undefined) { }
-                                    else
-                                        if (toke.includes('"') || toke.includes("'") || toke.includes('`')) {
-                                            code.innerHTML += `<span class="sh-string">${toke}</span>`
-                                            i++
-                                            break
-                                        } else {
-                                            code.innerHTML += `<span class="sh-string">${toke}</span>`
-                                            continue
-                                        }
-                                }
+                            if (jsString.includes(token.charAt(0)) && jsString.includes(token.charAt(token.length - 1)) && token.length != 1) {
+                                code.innerHTML += `<span class="sh-string">${token}</span>`
+                                break
+                            }
+                            code.innerHTML += `<span class="sh-string"> ${token} </span>`
+                            for (i; i < tokens.length; i++) {
+                                let toke = tokens[i + 1]
+                                if (toke == undefined || toke == '') { code.innerHTML += ' ' }
+                                else
+                                    if (jsString.includes(toke.charAt(toke.length - 1)) || jsString.includes(toke)) {
+                                        console.log(token)
+                                        code.innerHTML += `<span class="sh-string"> ${toke} </span>`
+                                        i++
+                                        break
+                                    } else {
+                                        console.log(token)
+                                        code.innerHTML += `<span class="sh-string"> ${toke} </span>`
+                                        continue
+                                    }
+                            }
                         }
+                        //Ending of String highlighting stuf
                         else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
                             if (tokens[i - 1] == 'new')
                                 code.innerHTML += `<span class="sh-class">${token}</span>`

@@ -3,11 +3,7 @@
 ![CSPSH-SyntaxHighlighter](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/CSPSH.png)
  A syantax highlighting library (or) package for highlight your codes in webpages.
 
-# Remainder:
-
-Note that CSPSH is not a perfect syntax highlighting package and this package is not fully functional(should work in some limitations stated below). So I request you to follow the below steps.
-
-# Steps:
+# Steps to use:
 
 - Download the package and include the script using script tag as shown in below
 
@@ -27,7 +23,8 @@ Note that CSPSH is not a perfect syntax highlighting package and this package is
 
 - Start typing your code inside this tag.
 - In the previous version you have to seperate each word by spaces which is no longer required.
-- It has basic formatting too.
+- Another impovement the strings. Yes now it can detect any kind of strings with spaces wothout spaces it just highlights(if you found any issue you can create a issue).
+- It has basic formatting too(just realised it isn't fully fucntioning but will update it).
 
 ```html
 <!--Example-1-->
@@ -37,25 +34,15 @@ Note that CSPSH is not a perfect syntax highlighting package and this package is
 </div>
 ```
 
-**NOTE: Detailed string notation have to follow**
-**NOTE: Mostly the package doesnt work properly only in strings. Other than that it can detect tokens and highlight the code.**
-
-Notation | valid/invalid
--------- | -------------
-'string' | valid
-'string hello world' | valid
-' string '| invalid
-
-- These are the main instructions you have to follow to make it work.
-
 # Hotfix info:
 
 - Better copy to clipboard functionality.
 
 # Version info:
 
+- No need to worry about string formatting as said in the previous version. Run index.html for more info
 - No need to use the spaces anymore,
-- Works for for loops.
+- Works for for loops and strings.
 
 # Limitation yet to overcome
 - The main thing I noticed is that you cannot place any word between two symbols. Like
@@ -85,8 +72,11 @@ this will make the else as a operator I am still working on it so will fix it so
     }
 </div>
 ```
-**Output:**
+**Normal Output:**
 ![output](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/Output.png)
+
+**Output with different string notations:**
+![StringOutput](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/StringOutputs.png)
 
 **NOTE: The output is taken by alongating the the element for better view of output. The default height is 30% and in the picture it is 70% you can always change it if you want to.**
 

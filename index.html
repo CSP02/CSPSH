@@ -11,33 +11,24 @@
 
 <body>
     <span>
-        <!--defining the attributes to say that the content in this div element should get highlighted.-->
-        <!--Remember not to use the html comments inside this div because it can identify those tokens and results in some weird highlighting.-->
         <div class="CSPSH dark" lang='js' name="ValidCode">
-            const toggler = new Toggler
-            toggler.toggleClass ('myId', 'fromClass', 'toClass')
-            var a = 1
-            var b = 2
-            for(i = 0; i <= 10; i++){
-            for(j = 0; j <= 10; j++){
-            let j = 0
-            }
-            let l = 0
-            }
+            const toggler = new Toggler;
+            toggler.toggleClass('myId', 'fromClass', 'toClass')
+            let a = 1
+            let b = 2
             console.log(biggest(a, b))
-            function biggest(a, b) {
-            if(a < b){ 
-                return b
-            } else { 
-                return a
-            } 
-        }
+            function biggest(a, b){
+                if(a < b){
+                    return b
+                } else {
+                    return a
+                }
+            }
         </div><br>
-        <!--This will highlight the code perfectly.-->
-        <!--Code inside this tag is with invalid string notaion.-->
-        <div class="CSPSH dark" lang='js' name="InvalidStringNotation">
-            const toggler = new Toggler
-            toggler.toggleClass ( ' myId ' , ' fromClass ' , ' toClass ' )
+        <div class="CSPSH dark" lang='js' name="DiffStrings">
+            const withoutSpaces = 'hello world uwu'
+            const withSpaces = ' hello world uwu '
+            const withSpacesAtDiffLocations = ' hell', ' world '
         </div>
     </span>
 </body>
