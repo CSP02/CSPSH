@@ -2,16 +2,17 @@
     margin: 0px;
     padding: 0px;
 }
+
 .CSPSH {
     background-color: rgb(59, 59, 59);
     overflow: hidden;
     color: rgb(255, 255, 255);
     font-size: 24px;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Ubuntu Mono', monospace;
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 30%;
+    height: 90%;
     width: 90%;
     margin: 1%;
     text-justify: left;
@@ -103,6 +104,13 @@
     visibility: visible;
 }
 
+#copiedPop{
+    background-color: grey;
+    border-radius: 6px;
+    padding: 1%;
+    color: rgb(174, 255, 52);
+}
+
 .sh-keyword {
     color: rgb(0, 140, 255);
 }
@@ -133,4 +141,9 @@
 
 .sh-Func {
     color: #FBF46D;
+}
+
+.sh-comments {
+    color: grey;
+    font-style: italic;
 }

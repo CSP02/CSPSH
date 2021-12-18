@@ -1,3 +1,4 @@
+//Initializing all the required variables and constants.
 let clipboardText
 let content = []
 let openBraceCount = 0
@@ -10,20 +11,23 @@ const jsOperators = ['=', '+', '-', '*', '/', '.', ',', '<', '>']
 
 const jsEOL = [';', '\n']
 const jsUnaryOperators = []
-const jsTernaryOperators = ['!=', '<=', '>=', '==', '++', '--']
+const jsTernaryOperators = ['!=', '<=', '>=', '==', '++', '--', '===']
 const jsKeywords = ['var', 'const', 'let', 'function']
 
 const jsFunc = ['(', ')']
 const jsIndex = ['[', ']']
+const jsCurlyBraces = ['{', '}']
 const jsString = ['"', "'", '`']
+//Runs right after the page is loaded
 window.onload = function () {
     let codes = document.getElementsByClassName('CSPSH');
 
+    //Reads the required attributes and links the required stylesheets based on selected theme
     for (let i = 0; i < codes.length; i++) {
         let code = codes[i]
         fileName = code.getAttribute('name')
         if (!fileName) {
-            fileName = `file`
+            fileName = `file`//sets default file name to file
         }
         content.push(code.innerHTML)
         if (code.className.includes('dark'))
@@ -33,6 +37,7 @@ window.onload = function () {
         let codeContent = code.innerHTML
         HighLight(code, codeContent)
     }
+    //Copy to clipboard functionlity inside the HighLight() method
     const buttons = document.getElementsByClassName('copyVector')
     for (let j = 0; j < buttons.length; j++) {
         const button = buttons[j];
@@ -46,36 +51,44 @@ window.onload = function () {
             document.body.removeChild(inp)
             document.getElementById('copy-cube').style.backgroundColor = 'rgba(0, 100, 0, 0.6)'
             document.getElementById('copy-cube2').style.backgroundColor = 'rgb(0, 100, 0)'
+            document.getElementById('copiedPop').style.visibility = 'visible'
+            setTimeout(function () { document.getElementById('copiedPop').style.visibility = 'hidden' }, 2000)
         })
     }
 }
 
+
+//main method which is splitted into sub methods with different fucntions or tasks
 function HighLight(code, codeContent) {
     let tokens = []
     let trimmedToken = []
     let trimmedTokens = []
     let operators = []
     let isOperator;
+    //splitting the content to seperate each word and symbol
     codeContent.split(' ').forEach(token => {
         if (token != '')
             tokens.push(token)
         else { }
     })
 
-
+    //resetting the content inside the element with class .CSPSH
     code.innerHTML = ''
 
-    TrimTokens(tokens)
+    //Identifies the tokens by detecting the type of the token
+    IdentifyTokens(tokens)
 
+
+    //another main instruction which will check if there are further tokens or symbols etc and seperates them
     trimmedToken.forEach(trimmedTok => {
         if (!Array.isArray(trimmedTok)) {
             trimmedTokens.push(trimmedTok)
         } else if (Array.isArray(trimmedTok)) {
-            TrimTokens(trimmedTok)
+            IdentifyTokens(trimmedTok)
         }
     })
 
-
+    //A switch statement which highlightes the code based on the lang attribues right now it is confined to js will release for all lands soon
     switch (code.lang) {
         case 'js':
             JSSyntaxHighlight(trimmedTokens);
@@ -84,16 +97,43 @@ function HighLight(code, codeContent) {
 
     //main fucntion that highlightes the js code
     function JSSyntaxHighlight(tokens) {
-        code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"></div></button></div><br><br><br>`
+        //Creating the TopBar section where we can see the file name, copy to clipboard etc
+        code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"></div></button><div id = "copiedPop" style="color:white;position:fixed;margin-left:90%;margin-top:3%;visibility:hidden;">copied</div></div><br><br><br>`
+        let isComment = false
+        //looping through each token for highlighting
         for (i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
-            if (token == undefined || token == '') {
+            if (token == undefined || token == '') {//ignoring the null and undefined characters
                 continue
             } else {
+                //checking if its a for loop because ';' should be ignored in for looops other wise it will read as the default EOL token and adds a new line
                 if (token == 'for') {
                     forCount++
                     isEOLINFOR = true
                 }
+                //identifying the comments single line and multiline
+                if (token.includes('/*') || isComment) {
+                    code.innerHTML += `<span class="sh-comments">${token} </span>`
+                    isComment = true
+                    if (token.includes('\n')) {
+                        code.innerHTML += `<br>`
+                    }
+                    if (token.includes('*/')) {
+                        isComment = false
+                    }
+                    continue
+                }
+                if (token.includes('//') || isComment) {
+                    code.innerHTML += `<span class="sh-comments">${token} </span>`
+                    isComment = true
+                    if (token.includes('\n')) {
+                        code.innerHTML += `<br>`
+                        isComment = false
+                    }
+                    continue
+                }
+                //ending of comments section
+                //Highlighting starts here based on the splitted token
                 switch (token) {
                     case jsKeywords[jsKeywords.indexOf(token)]:
                         code.innerHTML += `<span class="sh-keyword">${token} </span>`
@@ -102,10 +142,10 @@ function HighLight(code, codeContent) {
                         code.innerHTML += `<span class="sh-token">${token} </span>`
                         break
                     case jsTernaryOperators[jsTernaryOperators.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-operator">${token}</span>`
+                        code.innerHTML += `<span class="sh-operator"> ${token}</span>`
                         break
                     case jsUnaryOperators[jsUnaryOperators.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-operator">${token}</span>`
+                        code.innerHTML += `<span class="sh-operator"> ${token}</span>`
                         break
                     case jsEOL[jsEOL.indexOf(token)]:
                         if (tokens[i + 1] != undefined && tokens[i + 1].includes('\n')) {
@@ -143,12 +183,10 @@ function HighLight(code, codeContent) {
                                 if (toke == undefined || toke == '') { code.innerHTML += ' ' }
                                 else
                                     if (jsString.includes(toke.charAt(toke.length - 1)) || jsString.includes(toke)) {
-                                        console.log(token)
                                         code.innerHTML += `<span class="sh-string"> ${toke} </span>`
                                         i++
                                         break
                                     } else {
-                                        console.log(token)
                                         code.innerHTML += `<span class="sh-string"> ${toke} </span>`
                                         continue
                                     }
@@ -162,7 +200,6 @@ function HighLight(code, codeContent) {
                                 code.innerHTML += `<span class="sh-Func">${token}</span>`
                         else if (token.includes('{') || token.includes('}')) {
                             if (token.includes('{')) {
-                                let l = 0
                                 openBraceCount++
                                 forCount = 0
                                 code.innerHTML += `<span class="sh-operator">${token}</span>`
@@ -194,8 +231,8 @@ function HighLight(code, codeContent) {
         }
     } // end of the main js highlighting function
 
-    //fucntion that trims the tokens furthur to detect the other operators like arthematic operators etc.
-    function TrimTokens(tokens) {
+    //fucntion that identifies the tokens furthur to detect the other operators like arthematic operators etc.
+    function IdentifyTokens(tokens) {
         for (k = 1; k <= tokens.length; k++) {
             let token = tokens[k]
             let tok
@@ -207,6 +244,14 @@ function HighLight(code, codeContent) {
             if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
                 token = token.replace('&lt', '<').replace('&gt', ' >').replace(';', '')
             if (token.length > 1) {
+                if (token.includes('//')) {
+                    trimmedToken.push(token)
+                    continue
+                }
+                if (token.includes('/*') || token.includes('*/')) {
+                    trimmedToken.push(token)
+                    continue
+                }
                 if (jsTernaryOperators.includes(token)) {
                     PushToken(token)
                     continue
@@ -233,13 +278,19 @@ function HighLight(code, codeContent) {
                             isOperator = true
                             operators.push(tok)
                             break
-                        } else {
+                        } else if (jsCurlyBraces.includes(token[n])) {
+                            tok = token[n]
+                            isOperator = true
+                            operators.push(tok)
+                            break
+                        }
+                        else {
                             isOperator = false
                         }
                     }
                 }
                 if (isOperator)
-                    IdentiyTokens(token, tok)
+                    TrimTokens(token, tok)
                 else
                     trimmedToken.push(token)
             }
@@ -248,7 +299,7 @@ function HighLight(code, codeContent) {
         }
     }
 
-    function IdentiyTokens(token, symbol) {
+    function TrimTokens(token, symbol) {
         let splitted = token.split(symbol)
         for (let m = 0; m < (splitted.length + 1); m++) {
             if (splitted.length <= 2) {
@@ -271,27 +322,33 @@ function HighLight(code, codeContent) {
             }
         }
     }
+    
     function PushToken(token) {
         if (token == undefined) { return }
         if (jsTernaryOperators.includes(token)) {
             trimmedToken.push(token)
             return
         } else if (jsUnaryOperators.includes(token)) {
-            console.log(token)
+            trimmedToken.push(token)
+            return
         }
         for (let n = 0; n <= token.length; n++) {
             if (token[n] != undefined && token.length > 1) {
                 if (jsOperators.includes(token[n])) {
                     tok = token[n]
-                    IdentiyTokens(token, tok)
+                    TrimTokens(token, tok)
                     return
                 } else if (jsFunc.includes(token[n])) {
                     tok = token[n]
-                    IdentiyTokens(token, tok)
+                    TrimTokens(token, tok)
                     return
                 } else if (jsEOL.includes(token[n])) {
                     tok = token[n]
-                    IdentiyTokens(token, tok)
+                    TrimTokens(token, tok)
+                    return
+                } else if (jsCurlyBraces.includes(token[n])) {
+                    tok = token[n]
+                    TrimTokens(token, tok)
                     return
                 } else {
                 }

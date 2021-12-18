@@ -36,28 +36,30 @@
 
 # Hotfix info:
 
-- Better copy to clipboard functionality.
+- Fixed a bug where a token is highlighted as a operator when it is placed between two operators(``}else{`` for example).
 
 # Version info:
 
-- No need to worry about string formatting as said in the previous version. Run index.html for more info
+- No need to worry about string formatting as said in the previous version. Run index.html for more info,
+- No more weird highlighting when there is something between two operators as stated in previous version(``}else{`` thingy),  
+- CSPSH can highlight comments now,
 - No need to use the spaces anymore,
 - Works for for loops and strings.
 
-# Limitation yet to overcome
-- The main thing I noticed is that you cannot place any word between two symbols. Like
 
-```js
-    ...
-    }else{
-    ...
-``` 
-this will make the else as a operator I am still working on it so will fix it soon.
-- And the widths of these elements are bit messed up but you can edit them by accessing ``.CSPSH`` and ``#copyHolder`` in your own css. But I will try to fix that soon too and this thing is only occuring at different screen resolutions so will make it a responsive thing so it wont happen again.
-- For better understanding see the file index.html. Here is the small example of the code
+**Other imrovements**
+
+- Neat code and removed unnecessary code.
+- Added comments for better readability.
+
+**Example**
 
 ```html
 <div class="CSPSH dark" lang = 'js' name="ValidCode">
+    //single line comments
+    /*multi
+    line
+    comments*/
     const toggler = new Toggler
     toggler.toggleClass ('myId', 'fromClass', 'toClass')
     var a = 1
@@ -78,9 +80,9 @@ this will make the else as a operator I am still working on it so will fix it so
 **Output with different string notations:**
 ![StringOutput](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/StringOutputs.png)
 
+**Comments output:**
+![commentsOutput](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/commentsOutput.png)
+
 **NOTE: The output is taken by alongating the the element for better view of output. The default height is 30% and in the picture it is 70% you can always change it if you want to.**
-
-**Within this all limitation CSPSH has a addition feature of styling the code area and a inbuilt copy to clipboard fucntionality(fully functional). Open the file index.html so you will understand how it actually looks and works.**
-
 
 **NOTE: It is recommended that not to format the code in your html with the tab spaces its not necessary. But you must use new line(enter or a semicolon) to make it identify the new lines.**

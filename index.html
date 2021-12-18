@@ -12,20 +12,25 @@
 <body>
     <span>
         <div class="CSPSH dark" lang='js' name="ValidCode">
+            //single line comments
+            /*multi
+            line
+            comments*/
             const toggler = new Toggler;
             toggler.toggleClass('myId', 'fromClass', 'toClass')
             let a = 1
             let b = 2
             console.log(biggest(a, b))
             function biggest(a, b){
-                if(a < b){
-                    return b
-                } else {
-                    return a
-                }
+            if(a < b){
+                return b
+            } else{
+                return a
+            } 
             }
         </div><br>
         <div class="CSPSH dark" lang='js' name="DiffStrings">
+            /*help*/
             const withoutSpaces = 'hello world uwu'
             const withSpaces = ' hello world uwu '
             const withSpacesAtDiffLocations = ' hell', ' world '
