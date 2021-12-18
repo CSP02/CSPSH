@@ -99,39 +99,41 @@ function HighLight(code, codeContent) {
     function JSSyntaxHighlight(tokens) {
         //Creating the TopBar section where we can see the file name, copy to clipboard etc
         code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"></div></button><div id = "copiedPop" style="color:white;position:fixed;margin-left:90%;margin-top:3%;visibility:hidden;">copied</div></div><br><br><br>`
-        let isComment = false
+        let isMultiLnComment = false
+        let isSingleLnComment = false
         //looping through each token for highlighting
         for (i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
-            if (token == undefined || token == '') {//ignoring the null and undefined characters
+            if (token == undefined || token == '') {
+                //ignoring the null and undefined characters
                 continue
             } else {
                 //checking if its a for loop because ';' should be ignored in for looops other wise it will read as the default EOL token and adds a new line
                 if (token == 'for') {
                     forCount++
                     isEOLINFOR = true
+                } if (token.includes('//') || isSingleLnComment) {
+                    code.innerHTML += `<span class="sh-comments">${token} </span>`
+                    isSingleLnComment = true
+                    if (token.includes('\n')) {
+                        code.innerHTML += `<br>`
+                        isSingleLnComment = false
+                    }
+                    continue
                 }
                 //identifying the comments single line and multiline
-                if (token.includes('/*') || isComment) {
+                if (token.includes('/*') || isMultiLnComment) {
                     code.innerHTML += `<span class="sh-comments">${token} </span>`
-                    isComment = true
+                    isMultiLnComment = true
                     if (token.includes('\n')) {
                         code.innerHTML += `<br>`
                     }
                     if (token.includes('*/')) {
-                        isComment = false
+                        isMultiLnComment = false
                     }
                     continue
                 }
-                if (token.includes('//') || isComment) {
-                    code.innerHTML += `<span class="sh-comments">${token} </span>`
-                    isComment = true
-                    if (token.includes('\n')) {
-                        code.innerHTML += `<br>`
-                        isComment = false
-                    }
-                    continue
-                }
+                
                 //ending of comments section
                 //Highlighting starts here based on the splitted token
                 switch (token) {
@@ -322,7 +324,7 @@ function HighLight(code, codeContent) {
             }
         }
     }
-    
+
     function PushToken(token) {
         if (token == undefined) { return }
         if (jsTernaryOperators.includes(token)) {

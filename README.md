@@ -35,7 +35,7 @@
 ```
 
 # Hotfix info:
-
+- Fixed the bug where it highlighting everything as comment when using single line comments.
 - Fixed a bug where a token is highlighted as a operator when it is placed between two operators(``}else{`` for example).
 
 # Version info:
