@@ -1,3 +1,8 @@
+import { JSTOKENS } from './LangTokens/CSPSHJS.js'
+import { CPPTOKENS } from './LangTokens/CSPSHCPP.js'
+import { CTOKENS } from './LangTokens/CSPSHC.js'
+import { PYTOKENS } from './LangTokens/CSPSHPY.js'
+
 //Initializing all the required variables and constants.
 let clipboardText
 let content = []
@@ -5,19 +10,8 @@ let openBraceCount = 0
 let fileName
 let isEOLINFOR
 let forCount
-const jsTokens = ['new', 'undefined', 'null', 'if', 'for', 'continue', 'break', 'switch', 'case', 'else', 'return',
-    'do', 'while']
-const jsOperators = ['=', '+', '-', '*', '/', '.', ',', '<', '>']
+let lang
 
-const jsEOL = [';', '\n']
-const jsUnaryOperators = []
-const jsTernaryOperators = ['!=', '<=', '>=', '==', '++', '--', '===']
-const jsKeywords = ['var', 'const', 'let', 'function']
-
-const jsFunc = ['(', ')']
-const jsIndex = ['[', ']']
-const jsCurlyBraces = ['{', '}']
-const jsString = ['"', "'", '`']
 //Runs right after the page is loaded
 window.onload = function () {
     let codes = document.getElementsByClassName('CSPSH');
@@ -29,13 +23,34 @@ window.onload = function () {
         if (!fileName) {
             fileName = `file`//sets default file name to file
         }
-        content.push(code.innerHTML)
+        // content.push(code.innerHTML)
         if (code.className.includes('dark'))
             document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
         else
             document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHLight.css">`
         let codeContent = code.innerHTML
-        HighLight(code, codeContent)
+        switch (code.lang) {
+            case 'js':
+                lang = new JSTOKENS()
+                HighLight(code, codeContent, lang)
+                lang = null
+                break
+            case 'cpp':
+                lang = new CPPTOKENS()
+                HighLight(code, codeContent, lang)
+                lang = null
+                break
+            case 'c':
+                lang = new CTOKENS()
+                HighLight(code, codeContent, lang)
+                lang = null
+                break
+            case 'py':
+                lang = new PYTOKENS()
+                HighLight(code, codeContent, lang)
+                lang = null
+                break
+        }
     }
     //Copy to clipboard functionlity inside the HighLight() method
     const buttons = document.getElementsByClassName('copyVector')
@@ -59,12 +74,25 @@ window.onload = function () {
 
 
 //main method which is splitted into sub methods with different fucntions or tasks
-function HighLight(code, codeContent) {
+function HighLight(code, codeContent, lang) {
     let tokens = []
     let trimmedToken = []
     let trimmedTokens = []
     let operators = []
     let isOperator;
+
+    const TOKENS = lang.tokens
+    const OPERATORS = lang.operators
+
+    const EOL = lang.EOL
+    const UNARYOPERATORS = []
+    const TERNARYOPERATORS = lang.ternaryOperators
+    const KEYWORDS = lang.keywords
+
+    const FUNCTIONS = lang.func
+    const INDEX = lang.index
+    const CURLYBRACES = lang.curlyBraces
+    const STRINGS = lang.string
     //splitting the content to seperate each word and symbol
     codeContent.split(' ').forEach(token => {
         if (token != '')
@@ -87,22 +115,16 @@ function HighLight(code, codeContent) {
             IdentifyTokens(trimmedTok)
         }
     })
-
-    //A switch statement which highlightes the code based on the lang attribues right now it is confined to js will release for all lands soon
-    switch (code.lang) {
-        case 'js':
-            JSSyntaxHighlight(trimmedTokens);
-            break
-    }
+    SyntaxHighlight(trimmedTokens);
 
     //main fucntion that highlightes the js code
-    function JSSyntaxHighlight(tokens) {
+    function SyntaxHighlight(tokens) {
         //Creating the TopBar section where we can see the file name, copy to clipboard etc
         code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"></div></button><div id = "copiedPop" style="color:white;position:fixed;margin-left:90%;margin-top:3%;visibility:hidden;">copied</div></div><br><br><br>`
         let isMultiLnComment = false
         let isSingleLnComment = false
         //looping through each token for highlighting
-        for (i = 0; i <= tokens.length; i++) {
+        for (let i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
             if (token == undefined || token == '') {
                 //ignoring the null and undefined characters
@@ -113,7 +135,7 @@ function HighLight(code, codeContent) {
                     forCount++
                     isEOLINFOR = true
                 } if (token.includes('//') || isSingleLnComment) {
-                    code.innerHTML += `<span class="sh-comments">${token} </span>`
+                    code.innerHTML += `<span class="sh-${code.lang}-comments">${token} </span>`
                     isSingleLnComment = true
                     if (token.includes('\n')) {
                         code.innerHTML += `<br>`
@@ -123,7 +145,7 @@ function HighLight(code, codeContent) {
                 }
                 //identifying the comments single line and multiline
                 if (token.includes('/*') || isMultiLnComment) {
-                    code.innerHTML += `<span class="sh-comments">${token} </span>`
+                    code.innerHTML += `<span class="sh-${code.lang}-comments">${token} </span>`
                     isMultiLnComment = true
                     if (token.includes('\n')) {
                         code.innerHTML += `<br>`
@@ -137,26 +159,26 @@ function HighLight(code, codeContent) {
                 //ending of comments section
                 //Highlighting starts here based on the splitted token
                 switch (token) {
-                    case jsKeywords[jsKeywords.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-keyword">${token} </span>`
+                    case KEYWORDS[KEYWORDS.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-${code.lang}-keyword">${token} </span>`
                         break
-                    case jsTokens[jsTokens.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-token">${token} </span>`
+                    case TOKENS[TOKENS.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-${code.lang}-token">${token} </span>`
                         break
-                    case jsTernaryOperators[jsTernaryOperators.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-operator"> ${token}</span>`
+                    case TERNARYOPERATORS[TERNARYOPERATORS.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token}</span>`
                         break
-                    case jsUnaryOperators[jsUnaryOperators.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-operator"> ${token}</span>`
+                    case UNARYOPERATORS[UNARYOPERATORS.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token}</span>`
                         break
-                    case jsEOL[jsEOL.indexOf(token)]:
+                    case EOL[EOL.indexOf(token)]:
                         if (tokens[i + 1] != undefined && tokens[i + 1].includes('\n')) {
                             i++;
                         }
                         if (!isEOLINFOR || forCount == 0)
-                            code.innerHTML += `<span class="sh-operator">${token}</span><br>`
+                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span><br>`
                         else {
-                            code.innerHTML += `<span class="sh-operator">${token} </span>`
+                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
                             continue
                         }
                         if (tokens[i + 2]) {
@@ -172,60 +194,60 @@ function HighLight(code, codeContent) {
                         break
                     default:
                         if (!isNaN(token))
-                            code.innerHTML += `<span class="sh-numerals">${token}</span>`
+                            code.innerHTML += `<span class="sh-${code.lang}-numerals">${token}</span>`
                         //starting of string highlighting stuff
                         else if (token.includes('"') || token.includes("'") || token.includes('`')) {
-                            if (jsString.includes(token.charAt(0)) && jsString.includes(token.charAt(token.length - 1)) && token.length != 1) {
-                                code.innerHTML += `<span class="sh-string">${token}</span>`
+                            if (STRINGS.includes(token.charAt(0)) && STRINGS.includes(token.charAt(token.length - 1)) && token.length != 1) {
+                                code.innerHTML += `<span class="sh-${code.lang}-string">${token}</span>`
                                 break
                             }
-                            code.innerHTML += `<span class="sh-string"> ${token} </span>`
+                            code.innerHTML += `<span class="sh-${code.lang}-string"> ${token} </span>`
                             for (i; i < tokens.length; i++) {
                                 let toke = tokens[i + 1]
                                 if (toke == undefined || toke == '') { code.innerHTML += ' ' }
                                 else
-                                    if (jsString.includes(toke.charAt(toke.length - 1)) || jsString.includes(toke)) {
-                                        code.innerHTML += `<span class="sh-string"> ${toke} </span>`
+                                    if (STRINGS.includes(toke.charAt(toke.length - 1)) || STRINGS.includes(toke)) {
+                                        code.innerHTML += `<span class="sh-${code.lang}-string"> ${toke} </span>`
                                         i++
                                         break
                                     } else {
-                                        code.innerHTML += `<span class="sh-string"> ${toke} </span>`
+                                        code.innerHTML += `<span class="sh-${code.lang}-string"> ${toke} </span>`
                                         continue
                                     }
                             }
                         }
                         //Ending of String highlighting stuf
                         else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
-                            if (tokens[i - 1] == 'new')
-                                code.innerHTML += `<span class="sh-class">${token}</span>`
+                            if (tokens[i - 1] == 'new' || tokens[i - 1] == 'class')
+                                code.innerHTML += `<span class="sh-${code.lang}-class">${token}</span>`
                             else
-                                code.innerHTML += `<span class="sh-Func">${token}</span>`
+                                code.innerHTML += `<span class="sh-${code.lang}-Func">${token}</span>`
                         else if (token.includes('{') || token.includes('}')) {
                             if (token.includes('{')) {
                                 openBraceCount++
                                 forCount = 0
-                                code.innerHTML += `<span class="sh-operator">${token}</span>`
+                                code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
                             } else if (token.includes('}')) {
-                                code.innerHTML += `<span class="sh-operator">${token}</span>`
+                                code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
                             }
                         }
                         else if (!/[a-z]/.test(token) && !/[A-Z]/.test(token))
                             if (token.includes('(') || token.includes(')') || token.includes('.') || token.includes(','))
                                 if (!token.includes(','))
-                                    code.innerHTML += `<span class="sh-operator">${token}</span>`
+                                    code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
                                 else
-                                    code.innerHTML += `<span class="sh-operator">${token} </span>`
+                                    code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
                             else {
                                 if (!isEOLINFOR)
-                                    code.innerHTML += `<span class="sh-operator"> ${token} </span>`
+                                    code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>`
                                 else
-                                    code.innerHTML += `<span class="sh-operator">${token}</span>`
+                                    code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
                             }
                         else {
                             if (token.includes('(') || tokens[i + 1] == '(' || tokens[i + 1].includes('(') || tokens[i + 2] == '(' || tokens[i + 2].includes('('))
-                                code.innerHTML += `<span class="sh-Func">${token}</span>`
+                                code.innerHTML += `<span class="sh-${code.lang}-Func">${token}</span>`
                             else
-                                code.innerHTML += `<span class="sh-variable">${token}</span>`
+                                code.innerHTML += `<span class="sh-${code.lang}-variable">${token}</span>`
                         }
                         break
                 }
@@ -235,7 +257,7 @@ function HighLight(code, codeContent) {
 
     //fucntion that identifies the tokens furthur to detect the other operators like arthematic operators etc.
     function IdentifyTokens(tokens) {
-        for (k = 1; k <= tokens.length; k++) {
+        for (let k = 1; k <= tokens.length; k++) {
             let token = tokens[k]
             let tok
             if (token == undefined || token == '')
@@ -244,7 +266,7 @@ function HighLight(code, codeContent) {
 
             }
             if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
-                token = token.replace('&lt', '<').replace('&gt', ' >').replace(';', '')
+                token = token.replaceAll('&lt', '<').replaceAll('&gt', ' >').replaceAll(';', '')
             if (token.length > 1) {
                 if (token.includes('//')) {
                     trimmedToken.push(token)
@@ -254,33 +276,33 @@ function HighLight(code, codeContent) {
                     trimmedToken.push(token)
                     continue
                 }
-                if (jsTernaryOperators.includes(token)) {
+                if (TERNARYOPERATORS.includes(token)) {
                     PushToken(token)
                     continue
                 }
-                for (n = 0; n <= token.length; n++) {
+                for (let n = 0; n <= token.length; n++) {
                     if (token[n] != undefined) {
-                        if (jsOperators.includes(token[n])) {
+                        if (OPERATORS.includes(token[n])) {
                             tok = token[n]
                             isOperator = true
                             operators.push(tok)
                             break
-                        } else if (jsFunc.includes(token[n])) {
+                        } else if (FUNCTIONS.includes(token[n])) {
                             tok = token[n]
                             isOperator = true
                             operators.push(tok)
                             break
-                        } else if (jsIndex.includes(token[n])) {
+                        } else if (INDEX.includes(token[n])) {
                             tok = token[n]
                             isOperator = true
                             operators.push(tok)
                             break
-                        } else if (jsEOL.includes(token[n])) {
+                        } else if (EOL.includes(token[n])) {
                             tok = token[n]
                             isOperator = true
                             operators.push(tok)
                             break
-                        } else if (jsCurlyBraces.includes(token[n])) {
+                        } else if (CURLYBRACES.includes(token[n])) {
                             tok = token[n]
                             isOperator = true
                             operators.push(tok)
@@ -326,29 +348,30 @@ function HighLight(code, codeContent) {
     }
 
     function PushToken(token) {
+        let tok
         if (token == undefined) { return }
-        if (jsTernaryOperators.includes(token)) {
+        if (TERNARYOPERATORS.includes(token)) {
             trimmedToken.push(token)
             return
-        } else if (jsUnaryOperators.includes(token)) {
+        } else if (UNARYOPERATORS.includes(token)) {
             trimmedToken.push(token)
             return
         }
         for (let n = 0; n <= token.length; n++) {
             if (token[n] != undefined && token.length > 1) {
-                if (jsOperators.includes(token[n])) {
+                if (OPERATORS.includes(token[n])) {
                     tok = token[n]
                     TrimTokens(token, tok)
                     return
-                } else if (jsFunc.includes(token[n])) {
+                } else if (FUNCTIONS.includes(token[n])) {
                     tok = token[n]
                     TrimTokens(token, tok)
                     return
-                } else if (jsEOL.includes(token[n])) {
+                } else if (EOL.includes(token[n])) {
                     tok = token[n]
                     TrimTokens(token, tok)
                     return
-                } else if (jsCurlyBraces.includes(token[n])) {
+                } else if (CURLYBRACES.includes(token[n])) {
                     tok = token[n]
                     TrimTokens(token, tok)
                     return

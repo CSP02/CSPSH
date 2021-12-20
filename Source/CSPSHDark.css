@@ -1,8 +1,10 @@
+/*Setting everything to 0*/
 * {
     margin: 0px;
     padding: 0px;
 }
 
+/*CSPSH class the whole code block*/
 .CSPSH {
     background-color: rgb(59, 59, 59);
     overflow: hidden;
@@ -12,13 +14,14 @@
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 30%;
+    height: 90%;
     width: 90%;
     margin: 1%;
     text-justify: left;
     text-align: left;
 }
 
+/*Styling the topBar*/
 #copyHolder {
     font-family: 'Roboto', sans-serif;
     padding: 1%;
@@ -104,46 +107,127 @@
     visibility: visible;
 }
 
-#copiedPop{
+#copiedPop {
     background-color: grey;
     border-radius: 6px;
     padding: 1%;
     color: rgb(174, 255, 52);
 }
 
-.sh-keyword {
+/*End of the top bar css*/
+/*Start of the JS syntax css*/
+.sh-js-keyword {
     color: rgb(0, 140, 255);
 }
 
-.sh-token {
+.sh-js-token {
     color: rgb(235, 132, 255);
 }
 
-.sh-variable {
+.sh-js-variable {
     color: orange;
 }
 
-.sh-class {
+.sh-js-class {
     color: rgb(42, 185, 42);
 }
 
-.sh-operator {
+.sh-js-operator {
     color: rgb(167, 167, 167);
 }
 
-.sh-string {
+.sh-js-string {
     color: rgb(241, 97, 72);
 }
 
-.sh-numerals {
+.sh-js-numerals {
     color: rgb(136, 255, 0);
 }
 
-.sh-Func {
+.sh-js-Func {
     color: #FBF46D;
 }
 
-.sh-comments {
+.sh-js-comments {
     color: grey;
     font-style: italic;
 }
+
+/*End of JS syntax css*/
+/*Start of cpp syntax css*/
+.sh-cpp-keyword {
+    color: rgb(0, 140, 255);
+}
+
+.sh-cpp-token {
+    color: rgb(235, 132, 255);
+}
+
+.sh-cpp-variable {
+    color: orange;
+}
+
+.sh-cpp-class {
+    color: rgb(42, 185, 42);
+}
+
+.sh-cpp-operator {
+    color: rgb(167, 167, 167);
+}
+
+.sh-cpp-string {
+    color: rgb(241, 97, 72);
+}
+
+.sh-cpp-numerals {
+    color: rgb(136, 255, 0);
+}
+
+.sh-cpp-Func {
+    color: #FBF46D;
+}
+
+.sh-cpp-comments {
+    color: grey;
+    font-style: italic;
+}
+
+/*End of cpp syntax css*/
+/*Start of python syntax css*/
+.sh-py-keyword {
+    color: rgb(0, 140, 255);
+}
+
+.sh-py-token {
+    color: rgb(235, 132, 255);
+}
+
+.sh-py-variable {
+    color: orange;
+}
+
+.sh-py-class {
+    color: rgb(42, 185, 42);
+}
+
+.sh-py-operator {
+    color: rgb(167, 167, 167);
+}
+
+.sh-py-string {
+    color: rgb(241, 97, 72);
+}
+
+.sh-py-numerals {
+    color: rgb(136, 255, 0);
+}
+
+.sh-py-Func {
+    color: #FBF46D;
+}
+
+.sh-py-comments {
+    color: grey;
+    font-style: italic;
+}
+/*End of python syntax css*/

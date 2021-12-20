@@ -5,37 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYHy</title>
-    <script src="./Source/CSPSH.js"></script>
+    <script src="./Source/CSPSH.js" type="module"></script>
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <span>
-        <div class="CSPSH dark" lang='js' name="variables">
-            const integerVar = 12
-            const floatVar = 12.12
-            const str = "string"
-            const str2 = 'string2'
-            const str3 = `string3`
-            cont class = new Class
-        </div><br>
-        <div class="CSPSH dark" lang='js' name="methods">
-            add(a, b)
-            subtract(a, b)
-            console.log(add(a, b), subtract(a, b))
-            function add(a, b){
-                return a + b;
-            }
-            function subtract(a, b){
-                return a - b;
-            }
-        </div><br>
-        <div class="CSPSH dark" lang='js' name="comments">
-            //single line comments
-            /*multi line comments 
-            yes this is just for
-            test*/ 
-        </div><br>
+    <span><div class="CSPSH dark" lang='py' name="example">        
+        num1 = 1.5
+        num2 = 6.3
+        sum = num1 + num2
+        print('The sum of {0} and {1} is {2}'.format(num1, num2, sum))
+    </div><br>
     </span>
 </body>
 
