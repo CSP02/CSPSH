@@ -1,13 +1,13 @@
 class JSTOKENS {
     constructor() {
-        this.tokens = ['new', 'undefined', 'null', 'if', 'for', 'continue', 'break', 'switch', 'case', 'else', 'return',
-            'do', 'while']
+        this.keywords = ['new', 'undefined', 'null', 'if', 'for', 'continue', 'break', 'switch', 'case', 'else', 'return',
+            'do', 'while', 'void', 'export', 'import']
         this.operators = ['=', '+', '-', '*', '/', '.', ',', '<', '>']
 
         this.EOL = [';', '\n']
         this.unaryOperators = []
         this.ternaryOperators = ['!=', '<=', '>=', '==', '++', '--', '===']
-        this.keywords = ['var', 'const', 'let', 'function']
+        this.types = ['var', 'const', 'let', 'function', 'class', 'this', 'constructor']
         this.func = ['(', ')']
         this.index = ['[', ']']
         this.curlyBraces = ['{', '}']

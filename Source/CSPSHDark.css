@@ -8,7 +8,7 @@
 .CSPSH {
     background-color: rgb(59, 59, 59);
     overflow: hidden;
-    color: rgb(255, 255, 255);
+    color: rgb(95, 95, 95);
     font-size: 24px;
     font-family: 'Ubuntu Mono', monospace;
     border-radius: 6px;
@@ -23,6 +23,7 @@
 
 /*Styling the topBar*/
 #copyHolder {
+    color: rgb(202, 202, 202);
     font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
@@ -114,18 +115,22 @@
     color: rgb(174, 255, 52);
 }
 
+.cspsh-indentationGuidelines {
+    border-left: 1px solid grey;
+}
+
 /*End of the top bar css*/
 /*Start of the JS syntax css*/
-.sh-js-keyword {
+.sh-js-types {
     color: rgb(0, 140, 255);
 }
 
-.sh-js-token {
+.sh-js-keyword {
     color: rgb(235, 132, 255);
 }
 
 .sh-js-variable {
-    color: orange;
+    color: rgb(255, 193, 77);
 }
 
 .sh-js-class {
@@ -155,16 +160,16 @@
 
 /*End of JS syntax css*/
 /*Start of cpp syntax css*/
-.sh-cpp-keyword {
+.sh-cpp-types {
     color: rgb(0, 140, 255);
 }
 
-.sh-cpp-token {
+.sh-cpp-keyword {
     color: rgb(235, 132, 255);
 }
 
 .sh-cpp-variable {
-    color: orange;
+    color: rgb(255, 193, 77);
 }
 
 .sh-cpp-class {
@@ -192,18 +197,23 @@
     font-style: italic;
 }
 
+.sh-cpp-preprocess {
+    color: rgb(170, 170, 170);
+    background-color: rgb(85, 85, 85);
+}
+
 /*End of cpp syntax css*/
 /*Start of python syntax css*/
-.sh-py-keyword {
+.sh-py-types {
     color: rgb(0, 140, 255);
 }
 
-.sh-py-token {
+.sh-py-keyword {
     color: rgb(235, 132, 255);
 }
 
 .sh-py-variable {
-    color: orange;
+    color: rgb(255, 193, 77);
 }
 
 .sh-py-class {
@@ -230,4 +240,86 @@
     color: grey;
     font-style: italic;
 }
+
 /*End of python syntax css*/
+/*start of c syntax css*/
+.sh-c-types {
+    color: rgb(0, 140, 255);
+}
+
+.sh-c-keyword {
+    color: rgb(235, 132, 255);
+}
+
+.sh-c-variable {
+    color: rgb(255, 201, 100);
+}
+
+.sh-c-class {
+    color: rgb(42, 185, 42);
+}
+
+.sh-c-operator {
+    color: rgb(167, 167, 167);
+}
+
+.sh-c-string {
+    color: rgb(241, 97, 72);
+}
+
+.sh-c-numerals {
+    color: rgb(136, 255, 0);
+}
+
+.sh-c-Func {
+    color: #fff200;
+}
+
+.sh-c-comments {
+    color: grey;
+    font-style: italic;
+}
+
+.sh-c-preprocess {
+    color: rgb(170, 170, 170);
+    background-color: rgb(85, 85, 85);
+}
+
+/*End of c syntax highlighting*/
+/*start of java syntax highlighting*/
+.sh-java-types {
+    color: rgb(0, 140, 255);
+}
+
+.sh-java-keyword {
+    color: rgb(235, 132, 255);
+}
+
+.sh-java-variable {
+    color: rgb(255, 201, 100);
+}
+
+.sh-java-class {
+    color: rgb(42, 185, 42);
+}
+
+.sh-java-operator {
+    color: rgb(167, 167, 167);
+}
+
+.sh-java-string {
+    color: rgb(241, 97, 72);
+}
+
+.sh-java-numerals {
+    color: rgb(136, 255, 0);
+}
+
+.sh-java-Func {
+    color: #fff200;
+}
+
+.sh-java-comments {
+    color: grey;
+    font-style: italic;
+}
