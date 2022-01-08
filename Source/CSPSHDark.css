@@ -158,6 +158,10 @@
     font-style: italic;
 }
 
+.sh-js-inBuilt {
+    color: rgb(55, 135, 255);
+}
+
 /*End of JS syntax css*/
 /*Start of cpp syntax css*/
 .sh-cpp-types {
@@ -323,3 +327,47 @@
     color: grey;
     font-style: italic;
 }
+
+/*end of java highlighting*/
+/*start of story script highlighting*/
+
+.sh-ss-types {
+    color: rgb(0, 140, 255);
+}
+
+.sh-ss-keyword {
+    color: rgb(235, 132, 255);
+}
+
+.sh-ss-variable {
+    color: rgb(255, 193, 77);
+}
+
+.sh-ss-class {
+    color: rgb(42, 185, 42);
+}
+
+.sh-ss-operator {
+    color: rgb(167, 167, 167);
+}
+
+.sh-ss-string {
+    color: rgb(241, 97, 72);
+}
+
+.sh-ss-numerals {
+    color: rgb(136, 255, 0);
+}
+
+.sh-ss-Func {
+    color: #FBF46D;
+}
+
+.sh-ss-comments {
+    color: grey;
+    font-style: italic;
+}
+.sh-ss-inBuilt{
+    color: rgb(107, 107, 255);
+}
+/*end of story script highlighting*/

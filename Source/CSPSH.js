@@ -3,6 +3,7 @@ import { JSTOKENS } from './LangTokens/CSPSHJS.js'
 import { CPPTOKENS } from './LangTokens/CSPSHCPP.js'
 import { CTOKENS } from './LangTokens/CSPSHC.js'
 import { JAVATOKENS } from './LangTokens/CSPSHJAVA.js'
+import { SSTOKENS } from './LangTokens/CSPSHSS.js'
 // import { PYTOKENS } from './LangTokens/CSPSHPY.js'
 
 //Initializing all the required variables and constants.
@@ -49,6 +50,11 @@ window.onload = function () {
                 break
             case 'java':
                 lang = new JAVATOKENS()
+                HighLight(code, codeContent, lang)
+                lang = null
+                break
+            case 'ss':
+                lang = new SSTOKENS()
                 HighLight(code, codeContent, lang)
                 lang = null
                 break
@@ -106,11 +112,9 @@ function HighLight(code, codeContent, lang) {
     //resetting the content inside the element with class .CSPSH
     code.innerHTML = ''
 
-    console.log(tokens)
     //Identifies the tokens by detecting the type of the token
     IdentifyTokens(tokens)
-
-
+    console.log(trimmedToken)
     //another main instruction which will check if there are further tokens or symbols etc and seperates them
     trimmedToken.forEach(trimmedTok => {
         if (!Array.isArray(trimmedTok)) {
@@ -187,6 +191,9 @@ function HighLight(code, codeContent, lang) {
                     case UNARYOPERATORS[UNARYOPERATORS.indexOf(token)]:
                         code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token}</span>`
                         break
+                    case INBUILT[INBUILT.indexOf(token)]:
+                        code.innerHTML += `<span class="sh-${code.lang}-inBuilt"> ${token}</span>`
+                        break
                     case EOL[EOL.indexOf(token)]:
                         if (tokens[i + 1] != undefined && tokens[i + 1].includes('\n')) {
                             i++;
@@ -232,9 +239,9 @@ function HighLight(code, codeContent, lang) {
                                     }
                             }
                         }
-                        //Ending of String highlighting stuf
+                        //Ending of String highlighting stuff
                         else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
-                            if (tokens[i - 1] == 'new' || tokens[i - 1] == 'class' || INBUILT)
+                            if (tokens[i - 1] == 'new' || tokens[i - 1] == 'class')
                                 code.innerHTML += `<span class="sh-${code.lang}-class">${token}</span>`
                             else
                                 code.innerHTML += `<span class="sh-${code.lang}-Func">${token}</span>`
@@ -282,7 +289,11 @@ function HighLight(code, codeContent, lang) {
 
             }
             if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
-                token = token.replaceAll('&lt', '<').replaceAll('&gt', ' >').replaceAll(';', '')
+                token = token.replaceAll('&lt', '<').replaceAll('&gt', '>').replaceAll(';', '')
+            if (token == '=>') {
+                trimmedToken.push('=>')
+                continue
+            }
             if (token.length > 1) {
                 if (token.includes('//')) {
                     trimmedToken.push(token)
@@ -290,10 +301,6 @@ function HighLight(code, codeContent, lang) {
                 }
                 if (token.includes('/*') || token.includes('*/')) {
                     trimmedToken.push(token)
-                    continue
-                }
-                if (TERNARYOPERATORS.includes(token)) {
-                    PushToken(token)
                     continue
                 }
                 if (token.includes('#')) {
