@@ -3,6 +3,8 @@
 ![CSPSH-SyntaxHighlighter](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/CSPSH.png)
  A syantax highlighting library (or) package for highlight your codes in webpages.
 
+ ![issues](https://img.shields.io/github/issues/Chandra-sekhar-pilla/CSPSH)
+
 # Steps to use:
 
 - Download the package and include the script using script tag as shown in below
