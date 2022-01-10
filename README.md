@@ -4,9 +4,10 @@
  A syantax highlighting library (or) package for highlight your codes in webpages.
 
  ![issues](https://img.shields.io/github/issues/Chandra-sekhar-pilla/CSPSH)
- ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)    
+ ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
- ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)    
+ ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
+ ![version](https://img.shields.io/badge/Version-2.1.0--alpha-green)
 
 # Steps to use:
 
