@@ -14,6 +14,15 @@ let fileName
 let isEOLINFOR
 let forCount
 let lang
+let floatVal = ''
+const CopySvg = `
+<svg width="55" height="60" xmlns="http://www.w3.org/2000/svg" id="CSPSHsvg">
+    <polyline points="20 15, 5 15, 5 56, 40 56, 40 43, 20 43, 20 15" fill ="black" 
+        stroke="black" stroke-linecap="round" stroke-width="5" 
+        stroke-linejoin="round" id="blackLine"/>
+    <polyline points="30 5, 15 5, 15 46, 50 46, 50 5, 30 5" fill="grey" stroke="grey" stroke-linecap="round"
+        stroke-width="5" stroke-linejoin="round" id="greyLine"/>
+</svg>`
 
 //Runs right after the page is loaded
 window.onload = function () {
@@ -26,7 +35,7 @@ window.onload = function () {
         if (!fileName) {
             fileName = `file`//sets default file name to file
         }
-        // content.push(code.innerHTML)
+        content.push(code.innerHTML)
         if (code.className.includes('dark'))
             document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
         else
@@ -53,7 +62,7 @@ window.onload = function () {
                 HighLight(code, codeContent, lang)
                 lang = null
                 break
-            case 'ss':
+            case 'sts':
                 lang = new SSTOKENS()
                 HighLight(code, codeContent, lang)
                 lang = null
@@ -72,10 +81,11 @@ window.onload = function () {
             inp.select()
             document.execCommand("Copy");
             document.body.removeChild(inp)
-            document.getElementById('copy-cube').style.backgroundColor = 'rgba(0, 100, 0, 0.6)'
-            document.getElementById('copy-cube2').style.backgroundColor = 'rgb(0, 100, 0)'
-            document.getElementById('copiedPop').style.visibility = 'visible'
-            setTimeout(function () { document.getElementById('copiedPop').style.visibility = 'hidden' }, 2000)
+            document.getElementById('CSPSHsvg').innerHTML = `<polyline points="22 27, 27 35, 45 20" fill="transparent" stroke="green" stroke-linecap="round"
+            stroke-width="3" stroke-linejoin="round"/>`
+            setTimeout(function () {
+                document.getElementById('CSPSHsvg').innerHTML = CopySvg
+            }, 2000)
         })
     }
 }
@@ -114,7 +124,6 @@ function HighLight(code, codeContent, lang) {
 
     //Identifies the tokens by detecting the type of the token
     IdentifyTokens(tokens)
-    console.log(trimmedToken)
     //another main instruction which will check if there are further tokens or symbols etc and seperates them
     trimmedToken.forEach(trimmedTok => {
         if (!Array.isArray(trimmedTok)) {
@@ -127,9 +136,12 @@ function HighLight(code, codeContent, lang) {
 
     //main fucntion that highlightes the js code
     function SyntaxHighlight(tokens) {
-        console.log(tokens)
         //Creating the TopBar section where we can see the file name, copy to clipboard etc
-        code.innerHTML += `<div id="copyHolder">File Name: ${fileName}.${code.lang}<button class="copyVector"><div id="copy-cube"></div><div id="copy-cube2"></div></button><div id = "copiedPop" style="color:white;position:fixed;margin-left:90%;margin-top:3%;visibility:hidden;">copied</div></div><br><br><br>`
+        code.innerHTML += `
+        <div id="copyHolder">
+        File Name: ${fileName}.${code.lang}
+        <button class="copyVector">${CopySvg}</button>
+        </div><br><br><br>`
         let isMultiLnComment = false
         let isSingleLnComment = false
         //looping through each token for highlighting
@@ -143,7 +155,7 @@ function HighLight(code, codeContent, lang) {
                 if (token == 'for') {
                     forCount++
                     isEOLINFOR = true
-                } if (token.includes('#') && code.lang == 'c' || code.lang == 'c++' || code.lang == 'cpp') {
+                } if (token.includes('#') && (code.lang == 'c' || code.lang == 'cpp')) {
                     for (i; i <= tokens.length; i++) {
                         token = tokens[i]
                         code.innerHTML += `<span class="sh-${code.lang}-preprocess">${token}</span>`
@@ -180,25 +192,29 @@ function HighLight(code, codeContent, lang) {
                 //Highlighting starts here based on the splitted token
                 switch (token) {
                     case TYPES[TYPES.indexOf(token)]:
+                        //adding the copy to clipboard button and svg 
                         code.innerHTML += `<span class="sh-${code.lang}-types">${token} </span>`
                         break
                     case KEYWORDS[KEYWORDS.indexOf(token)]:
                         code.innerHTML += `<span class="sh-${code.lang}-keyword">${token} </span>`
                         break
                     case TERNARYOPERATORS[TERNARYOPERATORS.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token}</span>`
+                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>`
                         break
                     case UNARYOPERATORS[UNARYOPERATORS.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token}</span>`
+                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>`
                         break
                     case INBUILT[INBUILT.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-${code.lang}-inBuilt"> ${token}</span>`
+                        if (!(/[a-zA-Z]/).test(tokens[i+1].charAt(0)))
+                            code.innerHTML += `<span class="sh-${code.lang}-inBuilt">${token}</span>`
+                        else
+                            code.innerHTML += `<span class="sh-${code.lang}-inBuilt">${token} </span>`
                         break
                     case EOL[EOL.indexOf(token)]:
                         if (tokens[i + 1] != undefined && tokens[i + 1].includes('\n')) {
                             i++;
                         }
-                        if (!isEOLINFOR || forCount == 0)
+                        if (!isEOLINFOR || forCount == 0)//checking if the EOL is in a for loop if yes we don't make a new line or else we use <br> to make a new line
                             code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span><br>`
                         else {
                             code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
@@ -209,6 +225,7 @@ function HighLight(code, codeContent, lang) {
                                 openBraceCount--
                                 if (openBraceCount <= 0)
                                     openBraceCount = 0
+                                //adding indentation guidelines the one you can see in many editors.
                                 code.innerHTML += ('<i class="cspsh-indentationGuidelines" style="">&emsp;&emsp;&emsp;</i>').repeat(openBraceCount)
                             } else if (openBraceCount >= 0 && !tokens[i + 1].includes('}')) {
                                 code.innerHTML += ('<i class="cspsh-indentationGuidelines" style="">&emsp;&emsp;&emsp;</i>').repeat(openBraceCount)
@@ -216,7 +233,7 @@ function HighLight(code, codeContent, lang) {
                         }
                         break
                     default:
-                        if (!isNaN(token))
+                        if (!isNaN(token))//checking if the token is a number
                             code.innerHTML += `<span class="sh-${code.lang}-numerals">${token}</span>`
                         //starting of string highlighting stuff
                         else if (token.includes('"') || token.includes("'") || token.includes('`')) {
@@ -224,27 +241,28 @@ function HighLight(code, codeContent, lang) {
                                 code.innerHTML += `<span class="sh-${code.lang}-string">${token}</span>`
                                 break
                             }
-                            code.innerHTML += `<span class="sh-${code.lang}-string"> ${token} </span>`
+                            code.innerHTML += `<span class="sh-${code.lang}-string">${token}</span>`
                             for (i; i < tokens.length; i++) {
                                 let toke = tokens[i + 1]
                                 if (toke == undefined || toke == '') { code.innerHTML += ' ' }
                                 else
+                                    code.innerHTML += `<span class="sh-${code.lang}-string"> ${toke} </span>`
                                     if (STRINGS.includes(toke.charAt(toke.length - 1)) || STRINGS.includes(toke)) {
-                                        code.innerHTML += `<span class="sh-${code.lang}-string"> ${toke} </span>`
                                         i++
                                         break
                                     } else {
-                                        code.innerHTML += `<span class="sh-${code.lang}-string"> ${toke} </span>`
                                         continue
                                     }
                             }
                         }
                         //Ending of String highlighting stuff
                         else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
-                            if (tokens[i - 1] == 'new' || tokens[i - 1] == 'class')
+                            if (tokens[i - 1] == 'new' || tokens[i - 1] == 'class' || INBUILT[INBUILT.indexOf(token)])
                                 code.innerHTML += `<span class="sh-${code.lang}-class">${token}</span>`
-                            else
+                            else if (token.charAt(tokens[i + 1]) == '(')
                                 code.innerHTML += `<span class="sh-${code.lang}-Func">${token}</span>`
+                            else
+                                code.innerHTML += `<span class="sh-${code.lang}-Variable">${token}</span>`
                         else if (token.includes('{') || token.includes('}')) {
                             if (token.includes('{')) {
                                 openBraceCount++
@@ -262,11 +280,18 @@ function HighLight(code, codeContent, lang) {
                                     code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
                             else {
                                 if (!isEOLINFOR)
-                                    code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>`
+                                    if (INDEX[INDEX.indexOf(token)]) {
+                                        if (token != ']' || !(/[a-zA-Z]/).test(tokens[i + 1].charAt(0)))
+                                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
+                                        else
+                                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
+                                    }
+                                    else { code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>` }
                                 else
                                     code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
                             }
                         else {
+
                             if (token.includes('(') || tokens[i + 1] == '(' || tokens[i + 1].includes('(') || tokens[i + 2] == '(' || tokens[i + 2].includes('('))
                                 code.innerHTML += `<span class="sh-${code.lang}-Func">${token}</span>`
                             else
@@ -283,15 +308,23 @@ function HighLight(code, codeContent, lang) {
         for (let k = 1; k <= tokens.length; k++) {
             let token = tokens[k]
             let tok
-            if (token == undefined || token == '')
+            if (token == undefined || token == '' || token.startsWith('</'))
                 return
             if (token.includes('for')) {
 
             }
             if (token.includes('&lt') || token.includes('&gt') && token.includes(';'))
-                token = token.replaceAll('&lt', '<').replaceAll('&gt', '>').replaceAll(';', '')
+                token = token.replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll(';', '')
             if (token == '=>') {
                 trimmedToken.push('=>')
+                continue
+            }
+            if (TERNARYOPERATORS.includes(token)) {
+                trimmedToken.push(token)
+                continue
+            }
+            if (UNARYOPERATORS.includes(token)) {
+                trimmedToken.push(token)
                 continue
             }
             if (token.length > 1) {
@@ -306,20 +339,25 @@ function HighLight(code, codeContent, lang) {
                 if (token.includes('#')) {
                     for (k; k <= tokens.length; k++) {
                         token = tokens[k]
-                        trimmedToken.push(token)
+                        trimmedToken.push(token.replaceAll('<', '&lt;'))
                         if (token.includes('\n')) {
                             break
                         }
                     }
                     continue
                 }
+
                 for (let n = 0; n <= token.length; n++) {
                     if (token[n] != undefined) {
                         if (OPERATORS.includes(token[n])) {
-                            tok = token[n]
-                            isOperator = true
-                            operators.push(tok)
-                            break
+                            if (token[n] == '.' && !isNaN(token[n - 1]) && !isNaN(token[n + 1])) {
+                                continue
+                            } else {
+                                tok = token[n]
+                                isOperator = true
+                                operators.push(tok)
+                                break
+                            }
                         } else if (FUNCTIONS.includes(token[n])) {
                             tok = token[n]
                             isOperator = true
@@ -393,10 +431,18 @@ function HighLight(code, codeContent, lang) {
         for (let n = 0; n <= token.length; n++) {
             if (token[n] != undefined && token.length > 1) {
                 if (OPERATORS.includes(token[n])) {
+                    if (token[n] == '.' && !isNaN(token[n - 1]) && !isNaN(token[n + 1])) {
+                        continue
+                    } else {
+                        tok = token[n]
+                        TrimTokens(token, tok)
+                        return
+                    }
+                } else if (FUNCTIONS.includes(token[n])) {
                     tok = token[n]
                     TrimTokens(token, tok)
                     return
-                } else if (FUNCTIONS.includes(token[n])) {
+                } else if (INDEX.includes(token[n])) {
                     tok = token[n]
                     TrimTokens(token, tok)
                     return

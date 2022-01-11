@@ -12,6 +12,7 @@ class JSTOKENS {
         this.index = ['[', ']']
         this.curlyBraces = ['{', '}']
         this.string = ['"', "'", '`']
+        this.inBuilt = []
     }
 }
 export { JSTOKENS }

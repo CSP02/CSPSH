@@ -49,34 +49,22 @@
     border-radius: 6px;
 }
 
-.copyVector:hover, .copyVector:hover>#copy-cube2 {
+#blackLine, #greyLine {
+    transition: 0.4s;
+}
+
+#CSPSHsvg:hover>#blackLine {
     cursor: pointer;
-    background-color: rgb(75, 75, 75);
+    fill: rgb(49, 49, 49);
+    stroke: rgb(49, 49, 49);
+    transition: 0.4s;
 }
 
-#copy-cube, #copy-cube2 {
-    height: 30px;
-    width: 30px;
-    padding: 3%;
-    margin: 3%;
-    border-radius: 6px;
-    border: 1px solid rgb(107, 107, 107);
-}
-
-#copy-cube {
-    margin-top: 10%;
-}
-
-.hr-copy-cube {
-    margin-top: 30%;
-    border: 0.3px solid grey;
-    width: 50%;
-}
-
-#copy-cube2 {
-    margin-left: 15%;
-    margin-top: -90%;
-    background-color: rgb(59, 59, 59);
+#CSPSHsvg:hover>#greyLine {
+    cursor: pointer;
+    fill: rgb(167, 167, 167);
+    stroke: rgb(167, 167, 167);
+    transition: 0.4s;
 }
 
 ::-webkit-scrollbar {
@@ -108,266 +96,65 @@
     visibility: visible;
 }
 
-#copiedPop {
-    background-color: grey;
-    border-radius: 6px;
-    padding: 1%;
-    color: rgb(174, 255, 52);
-}
-
 .cspsh-indentationGuidelines {
     border-left: 1px solid grey;
 }
 
 /*End of the top bar css*/
-/*Start of the JS syntax css*/
-.sh-js-types {
+/* css for types */
+.sh-js-types, .sh-c-types, .sh-cpp-types, .sh-java-types, .sh-py-types, .sh-sts-types {
     color: rgb(0, 140, 255);
 }
 
-.sh-js-keyword {
+/* css for keywords */
+.sh-js-keyword, .sh-c-keyword, .sh-cpp-keyword, .sh-py-keyword, .sh-java-keyword, .sh-sts-keyword {
     color: rgb(235, 132, 255);
 }
 
-.sh-js-variable {
+/* css for variables */
+.sh-js-variable, .sh-c-variable, .sh-cpp-variable, .sh-py-variable, .sh-java-variable, .sh-sts-variable {
     color: rgb(255, 193, 77);
 }
 
-.sh-js-class {
+/* css for class */
+.sh-js-class, .sh-c-class, .sh-cpp-class, .sh-java-class, .sh-py-class, .sh-sts-class {
     color: rgb(42, 185, 42);
 }
 
-.sh-js-operator {
+/* css for operators */
+.sh-js-operator, .sh-c-operator, .sh-cpp-operator, .sh-java-operator, .sh-py-operator, .sh-sts-operator {
     color: rgb(167, 167, 167);
 }
 
-.sh-js-string {
+/* css for strings and characters */
+.sh-js-string, .sh-c-string, .sh-cpp-string, .sh-java-string, .sh-py-string, .sh-sts-string {
     color: rgb(241, 97, 72);
 }
 
-.sh-js-numerals {
+/* css for numerals */
+.sh-js-numerals, .sh-c-numerals, .sh-cpp-numerals, .sh-java-numerals, .sh-py-numerals, .sh-sts-numerals {
     color: rgb(136, 255, 0);
 }
 
-.sh-js-Func {
+/* css for functions */
+.sh-js-Func, .sh-c-Func, .sh-cpp-Func, .sh-java-Func, .sh-py-Func, .sh-sts-Func {
     color: #FBF46D;
 }
 
-.sh-js-comments {
+/* css for comments */
+.sh-js-comments, .sh-c-comments, .sh-cpp-comments, .sh-java-comments, .sh-py-comments, .sh-sts-comments {
     color: grey;
     font-style: italic;
 }
 
-.sh-js-inBuilt {
-    color: rgb(55, 135, 255);
-}
-
-/*End of JS syntax css*/
-/*Start of cpp syntax css*/
-.sh-cpp-types {
-    color: rgb(0, 140, 255);
-}
-
-.sh-cpp-keyword {
-    color: rgb(235, 132, 255);
-}
-
-.sh-cpp-variable {
-    color: rgb(255, 193, 77);
-}
-
-.sh-cpp-class {
-    color: rgb(42, 185, 42);
-}
-
-.sh-cpp-operator {
-    color: rgb(167, 167, 167);
-}
-
-.sh-cpp-string {
-    color: rgb(241, 97, 72);
-}
-
-.sh-cpp-numerals {
-    color: rgb(136, 255, 0);
-}
-
-.sh-cpp-Func {
-    color: #FBF46D;
-}
-
-.sh-cpp-comments {
-    color: grey;
+/* css for inbuilt fucntions */
+.sh-js-inBuilt, .sh-c-inBuilt, .sh-cpp-inBuilt, .sh-java-inBuilt, .sh-py-inBuilt, .sh-sts-inBuilt {
+    color: rgb(46, 199, 46);
     font-style: italic;
 }
 
-.sh-cpp-preprocess {
-    color: rgb(170, 170, 170);
-    background-color: rgb(85, 85, 85);
+.sh-c-preprocess, .sh-cpp-preprocess {
+    color: rgb(184, 184, 184);
+    background-color: rgb(83, 83, 83);
+    padding: 2px;
 }
-
-/*End of cpp syntax css*/
-/*Start of python syntax css*/
-.sh-py-types {
-    color: rgb(0, 140, 255);
-}
-
-.sh-py-keyword {
-    color: rgb(235, 132, 255);
-}
-
-.sh-py-variable {
-    color: rgb(255, 193, 77);
-}
-
-.sh-py-class {
-    color: rgb(42, 185, 42);
-}
-
-.sh-py-operator {
-    color: rgb(167, 167, 167);
-}
-
-.sh-py-string {
-    color: rgb(241, 97, 72);
-}
-
-.sh-py-numerals {
-    color: rgb(136, 255, 0);
-}
-
-.sh-py-Func {
-    color: #FBF46D;
-}
-
-.sh-py-comments {
-    color: grey;
-    font-style: italic;
-}
-
-/*End of python syntax css*/
-/*start of c syntax css*/
-.sh-c-types {
-    color: rgb(0, 140, 255);
-}
-
-.sh-c-keyword {
-    color: rgb(235, 132, 255);
-}
-
-.sh-c-variable {
-    color: rgb(255, 201, 100);
-}
-
-.sh-c-class {
-    color: rgb(42, 185, 42);
-}
-
-.sh-c-operator {
-    color: rgb(167, 167, 167);
-}
-
-.sh-c-string {
-    color: rgb(241, 97, 72);
-}
-
-.sh-c-numerals {
-    color: rgb(136, 255, 0);
-}
-
-.sh-c-Func {
-    color: #fff200;
-}
-
-.sh-c-comments {
-    color: grey;
-    font-style: italic;
-}
-
-.sh-c-preprocess {
-    color: rgb(170, 170, 170);
-    background-color: rgb(85, 85, 85);
-}
-
-/*End of c syntax highlighting*/
-/*start of java syntax highlighting*/
-.sh-java-types {
-    color: rgb(0, 140, 255);
-}
-
-.sh-java-keyword {
-    color: rgb(235, 132, 255);
-}
-
-.sh-java-variable {
-    color: rgb(255, 201, 100);
-}
-
-.sh-java-class {
-    color: rgb(42, 185, 42);
-}
-
-.sh-java-operator {
-    color: rgb(167, 167, 167);
-}
-
-.sh-java-string {
-    color: rgb(241, 97, 72);
-}
-
-.sh-java-numerals {
-    color: rgb(136, 255, 0);
-}
-
-.sh-java-Func {
-    color: #fff200;
-}
-
-.sh-java-comments {
-    color: grey;
-    font-style: italic;
-}
-
-/*end of java highlighting*/
-/*start of story script highlighting*/
-
-.sh-ss-types {
-    color: rgb(0, 140, 255);
-}
-
-.sh-ss-keyword {
-    color: rgb(235, 132, 255);
-}
-
-.sh-ss-variable {
-    color: rgb(255, 193, 77);
-}
-
-.sh-ss-class {
-    color: rgb(42, 185, 42);
-}
-
-.sh-ss-operator {
-    color: rgb(167, 167, 167);
-}
-
-.sh-ss-string {
-    color: rgb(241, 97, 72);
-}
-
-.sh-ss-numerals {
-    color: rgb(136, 255, 0);
-}
-
-.sh-ss-Func {
-    color: #FBF46D;
-}
-
-.sh-ss-comments {
-    color: grey;
-    font-style: italic;
-}
-.sh-ss-inBuilt{
-    color: rgb(107, 107, 255);
-}
-/*end of story script highlighting*/

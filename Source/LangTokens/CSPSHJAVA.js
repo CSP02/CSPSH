@@ -22,7 +22,7 @@ class JAVATOKENS {
         this.index = ['[', ']']
         this.curlyBraces = ['{', '}']
         this.string = ['"', "'"]
-        this.inBuilt = ['System']
+        this.inBuilt = ['System', 'String']
     }
 }
 export { JAVATOKENS }

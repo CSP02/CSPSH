@@ -12,6 +12,7 @@ class SSTOKENS {
         this.index = ['[', ']']
         this.curlyBraces = ['{', '}']
         this.string = ['"', "'"]
+        this.inBuilt = []
     }
 }
 

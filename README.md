@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-2.1.0--alpha-green)
+ ![version](https://img.shields.io/badge/Version-2.1.0-green)
 
 # Steps to use:
 
@@ -30,7 +30,7 @@
 - Start typing your code inside this tag.
 - In the previous version you have to seperate each word by spaces which is no longer required.
 - Another impovement the strings. Yes now it can detect any kind of strings with spaces wothout spaces it just highlights(if you found any issue you can create a issue).
-- It has basic formatting too(just realised it isn't fully fucntioning but will update it).
+- It has basic formatting too.
 
 ```html
 <!--Example-1-->
@@ -41,22 +41,28 @@
 ```
 
 # Hotfix info:
-- Fixed the bug where it highlighting everything as comment when using single line comments.
-- Fixed a bug where a token is highlighted as a operator when it is placed between two operators(``}else{`` for example).
+- Fixed the bug where copy to clipboard isn't working.
+- Fixed a bug where CSPSH is adding spaces for some operators like ``<=``, ``>=``,.. etc.
+- Fixed a bug where the ``.`` in a float value is being considered as an operator. Now it will be considered as a number.
 
 # Version info:
 
-- No need to worry about string formatting as said in the previous version. Run index.html for more info,
-- No more weird highlighting when there is something between two operators as stated in previous version(``}else{`` thingy),  
-- CSPSH can highlight comments now,
-- No need to use the spaces anymore,
-- Works for for loops and strings.
+- Added language suppport as said these are the language that were added but there are some keywords, types, etc I didn't add. Because I don't know all those things. And you are welcomed to help me in adding those things.
+    1. JavaScript
+    2. Java
+    3. C language
+    4. C++
+    5. StoryScript
+- Optimized css. Previously there is a seperate css for every lang but I combined the styles(colors) for same colors (ex: types for all langs use same color). 
+- Added light theme.
+- This update covers all the previous beta and alpha update so consider this update as the latest stable update.
 
 
 **Other imrovements**
 
 - Neat code and removed unnecessary code.
 - Added comments for better readability.
+- Changed the style of copy-to-clipboard button(Previously I used 2 div elements now it's svg)
 
 **Example**
 
@@ -80,14 +86,9 @@
     }
 </div>
 ```
-**Normal Output:**
-![output](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/Output.png)
 
-**Output with different string notations:**
-![StringOutput](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/StringOutputs.png)
-
-**Comments output:**
-![commentsOutput](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/commentsOutput.png)
+**Link for story script(extention is sts)**
+- StoryScript is created and developed by @lines-of-codes using python. [Learn more](https://github.com/StoryScriptorg/StoryScript/tree/main/storyscript).
 
 **NOTE: The output is taken by alongating the the element for better view of output. The default height is 30% and in the picture it is 70% you can always change it if you want to.**
 

@@ -1,20 +1,29 @@
+/*Setting everything to 0*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*CSPSH class the whole code block*/
 .CSPSH {
-    background-color: rgba(190, 190, 190, 0.8);
+    background-color: rgb(172, 172, 172);
     overflow: hidden;
-    color: rgb(58, 58, 58);
+    color: rgb(204, 204, 204);
     font-size: 24px;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Ubuntu Mono', monospace;
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 30%;
-    width: 70%;
+    height: 90%;
+    width: 90%;
     margin: 1%;
     text-justify: left;
     text-align: left;
 }
 
+/*Styling the topBar*/
 #copyHolder {
+    color: rgb(92, 92, 92);
     font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
@@ -22,8 +31,7 @@
     border-radius: 6px;
     width: inherit;
     align-items: right;
-    background-color: rgba(124, 124, 124, 0.692);
-    backdrop-filter: blur(12px);
+    background-color: rgb(172, 172, 172);
     text-align: center;
     text-justify: center;
     position: absolute;
@@ -33,46 +41,32 @@
     z-index: 5;
     height: 50px;
     width: 50px;
-    background-color: rgba(124, 124, 124, 0.692);
+    background-color: rgb(172, 172, 172);
     border: none;
     display: grid;
     float: right;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-.copyVector:hover, .copyVector:hover>#copy-cube2 {
-    cursor: pointer;
-    background-color: rgba(124, 124, 124);
-}
-
-#copy-cube, #copy-cube2 {
-    height: 30px;
-    width: 30px;
-    padding: 3%;
-    margin: 3%;
     border-radius: 6px;
-    border: 1px solid rgb(83, 83, 83);
+}
+#blackLine, #greyLine {
+    transition: 0.4s;
 }
 
-#copy-cube {
-    margin-top: 10%;
+#CSPSHsvg:hover>#blackLine {
+    cursor: pointer;
+    fill: rgb(49, 49, 49);
+    stroke: rgb(49, 49, 49);
+    transition: 0.4s;
 }
 
-.hr-copy-cube {
-    margin-top: 30%;
-    border: 0.3px solid rgb(70, 70, 70);
-    width: 50%;
-}
-
-#copy-cube2 {
-    margin-left: 15%;
-    margin-top: -90%;
-    background-color: rgb(139, 139, 139);
+#CSPSHsvg:hover>#greyLine {
+    cursor: pointer;
+    fill: rgb(141, 141, 141);
+    stroke: rgb(141, 141, 141);
+    transition: 0.4s;
 }
 
 ::-webkit-scrollbar {
-    background-color: rgba(187, 187, 187, 0.8);
+    background-color: rgba(168, 168, 168, 0.8);
     border-radius: 0px 6px 6px 0px;
     width: 8px;
 }
@@ -82,14 +76,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(58, 58, 58);
+    background-color: rgb(0, 0, 0);
     width: 1px;
     border-radius: 6px 6px 6px 6px;
 }
 
 ::-webkit-scrollbar-button {
     width: 3px;
-    color: rgb(68, 68, 68);
+    color: rgb(0, 0, 0);
 }
 
 .CSPSH:hover {
@@ -100,30 +94,59 @@
     visibility: visible;
 }
 
-.sh-keyword {
-    color: rgb(119, 193, 253);
+.cspsh-indentationGuidelines {
+    border-left: 1px solid rgb(114, 114, 114);
 }
 
-.sh-token {
-    color: rgb(143, 0, 172);
+/*End of the top bar css*/
+/* css for types */
+.sh-js-types, .sh-c-types, .sh-cpp-types, .sh-java-types, .sh-py-types, .sh-sts-types {
+    color: rgb(0, 94, 170);
 }
 
-.sh-variable {
-    color: rgb(255, 186, 83);
+/* css for keywords */
+.sh-js-keyword, .sh-c-keyword, .sh-cpp-keyword, .sh-py-keyword, .sh-java-keyword, .sh-sts-keyword {
+    color: rgb(135, 0, 189);
 }
 
-.sh-class {
-    color: rgb(0, 139, 0);
+/* css for variables */
+.sh-js-variable, .sh-c-variable, .sh-cpp-variable, .sh-py-variable, .sh-java-variable, .sh-sts-variable {
+    color: rgb(167, 108, 0);
 }
 
-.sh-operator {
-    color: rgb(105, 105, 105);
+/* css for class */
+.sh-js-class, .sh-c-class, .sh-cpp-class, .sh-java-class, .sh-py-class, .sh-sts-class {
+    color: rgb(0, 155, 0);
 }
 
-.sh-string {
-    color: rgb(165, 0, 0);
+/* css for operators */
+.sh-js-operator, .sh-c-operator, .sh-cpp-operator, .sh-java-operator, .sh-py-operator, .sh-sts-operator {
+    color: rgb(99, 99, 99);
 }
 
-.sh-numerals {
-    color: rgb(136, 255, 0);
+/* css for strings and characters */
+.sh-js-string, .sh-c-string, .sh-cpp-string, .sh-java-string, .sh-py-string, .sh-sts-string {
+    color: rgb(179, 27, 0);
+}
+
+/* css for numerals */
+.sh-js-numerals, .sh-c-numerals, .sh-cpp-numerals, .sh-java-numerals, .sh-py-numerals, .sh-sts-numerals {
+    color: rgb(192, 0, 134);
+}
+
+/* css for functions */
+.sh-js-Func, .sh-c-Func, .sh-cpp-Func, .sh-java-Func, .sh-py-Func, .sh-sts-Func {
+    color: #7f8d00;
+}
+
+/* css for comments */
+.sh-js-comments, .sh-c-comments, .sh-cpp-comments, .sh-java-comments, .sh-py-comments, .sh-sts-comments {
+    color: grey;
+    font-style: italic;
+}
+
+/* css for inbuilt fucntions */
+.sh-js-inBuilt, .sh-c-inBuilt, .sh-cpp-inBuilt, .sh-java-inBuilt, .sh-py-inBuilt, .sh-sts-inBuilt {
+    color: rgb(0, 150, 187);
+    font-style: italic;
 }

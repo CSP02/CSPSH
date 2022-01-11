@@ -25,6 +25,14 @@ class CTOKENS {
         this.index = ['[', ']']
         this.curlyBraces = ['{', '}']
         this.string = ['"', "'"]
+        this.inBuilt = [
+            'printf', 'scanf', 'abort', 'abs',
+            'acos', 'asctime', 'asctime_r', 'asin', 'assert',
+            'atan2', 'atexit', 'atof', 'atoi', 'atan', 'atol',
+            'bsearch', 'btowc', 'calloc', 'catclose', 'gets', 'puts',
+            'getchar', 'getc', 'fopen', 'fclose', 'strcat', 'strchr',
+            'strcmp', 'sscanf', 'strcpy', 'strlen'
+        ]
     }
 }
 export { CTOKENS }
