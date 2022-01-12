@@ -14,13 +14,19 @@ let fileName
 let isEOLINFOR
 let forCount
 let lang
-let floatVal = ''
+let mode = 'dark'
+let copySvg
+let links = [...document.head.getElementsByTagName('link')]
+for(let h = 0; h < links.length; h++){
+    let link = links[h]
+    link.parentElement.removeChild(link)
+}
 const CopySvg = `
-<svg width="55" height="60" xmlns="http://www.w3.org/2000/svg" id="CSPSHsvg">
-    <polyline points="20 15, 5 15, 5 56, 40 56, 40 43, 20 43, 20 15" fill ="black" 
+<svg width="27.5" height="30" xmlns="http://www.w3.org/2000/svg" class="CSPSHsvg">
+    <polyline points="10 7.5, 2.5 7.5, 2.5 28, 20 28, 20 26.5, 10 26.5, 10 7.5" fill ="black" 
         stroke="black" stroke-linecap="round" stroke-width="5" 
         stroke-linejoin="round" id="blackLine"/>
-    <polyline points="30 5, 15 5, 15 46, 50 46, 50 5, 30 5" fill="grey" stroke="grey" stroke-linecap="round"
+    <polyline points="15 2.5, 7.5 2.5, 7.5 23, 25 23, 25 2.5, 15 2.5" fill="grey" stroke="grey" stroke-linecap="round"
         stroke-width="5" stroke-linejoin="round" id="greyLine"/>
 </svg>`
 
@@ -32,14 +38,13 @@ window.onload = function () {
     for (let i = 0; i < codes.length; i++) {
         let code = codes[i]
         fileName = code.getAttribute('name')
+        if (code.getAttribute('mode'))
+            mode = code.getAttribute('mode')
+
         if (!fileName) {
             fileName = `file`//sets default file name to file
         }
         content.push(code.innerHTML)
-        if (code.className.includes('dark'))
-            document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
-        else
-            document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHLight.css">`
         let codeContent = code.innerHTML
         switch (code.lang) {
             case 'js':
@@ -69,22 +74,31 @@ window.onload = function () {
                 break
         }
     }
+    if (mode == 'dark')
+        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
+    else
+        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHLight.css">`
+    links.forEach(link => {
+        document.head.appendChild(link)
+    })
     //Copy to clipboard functionlity inside the HighLight() method
     const buttons = document.getElementsByClassName('copyVector')
+    const CSPSHsvgs = document.getElementsByClassName('CSPSHsvg')
     for (let j = 0; j < buttons.length; j++) {
         const button = buttons[j];
         button.addEventListener('click', function () {
             clipboardText = content[j]
+            copySvg = CSPSHsvgs[j]
             var inp = document.createElement("textarea")
             document.body.appendChild(inp)
             inp.value = clipboardText.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
             inp.select()
             document.execCommand("Copy");
             document.body.removeChild(inp)
-            document.getElementById('CSPSHsvg').innerHTML = `<polyline points="22 27, 27 35, 45 20" fill="transparent" stroke="green" stroke-linecap="round"
+            copySvg.innerHTML = `<polyline points="11 13.5, 13.5 17.5, 22.5 10" fill="transparent" stroke="green" stroke-linecap="round"
             stroke-width="3" stroke-linejoin="round"/>`
             setTimeout(function () {
-                document.getElementById('CSPSHsvg').innerHTML = CopySvg
+                copySvg.innerHTML = CopySvg
             }, 2000)
         })
     }
@@ -140,13 +154,13 @@ function HighLight(code, codeContent, lang) {
         code.innerHTML += `
         <div id="copyHolder">
         File Name: ${fileName}.${code.lang}
-        <button class="copyVector">${CopySvg}</button>
-        </div><br><br><br>`
+        </div><button class="copyVector">${CopySvg}</button><br><br><br>`
         let isMultiLnComment = false
         let isSingleLnComment = false
         //looping through each token for highlighting
         for (let i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
+
             if (token == undefined || token == '') {
                 //ignoring the null and undefined characters
                 continue
@@ -205,7 +219,7 @@ function HighLight(code, codeContent, lang) {
                         code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>`
                         break
                     case INBUILT[INBUILT.indexOf(token)]:
-                        if (!(/[a-zA-Z]/).test(tokens[i+1].charAt(0)))
+                        if (!(/[a-zA-Z]/).test(tokens[i + 1].charAt(0)))
                             code.innerHTML += `<span class="sh-${code.lang}-inBuilt">${token}</span>`
                         else
                             code.innerHTML += `<span class="sh-${code.lang}-inBuilt">${token} </span>`
@@ -247,12 +261,12 @@ function HighLight(code, codeContent, lang) {
                                 if (toke == undefined || toke == '') { code.innerHTML += ' ' }
                                 else
                                     code.innerHTML += `<span class="sh-${code.lang}-string"> ${toke} </span>`
-                                    if (STRINGS.includes(toke.charAt(toke.length - 1)) || STRINGS.includes(toke)) {
-                                        i++
-                                        break
-                                    } else {
-                                        continue
-                                    }
+                                if (STRINGS.includes(toke.charAt(toke.length - 1)) || STRINGS.includes(toke)) {
+                                    i++
+                                    break
+                                } else {
+                                    continue
+                                }
                             }
                         }
                         //Ending of String highlighting stuff

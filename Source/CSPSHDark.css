@@ -3,19 +3,21 @@
     margin: 0px;
     padding: 0px;
 }
-
+body{
+    background-color: rgb(32, 32, 32);
+}
 /*CSPSH class the whole code block*/
 .CSPSH {
     background-color: rgb(59, 59, 59);
     overflow: hidden;
     color: rgb(95, 95, 95);
-    font-size: 24px;
+    font-size: 16px;
     font-family: 'Ubuntu Mono', monospace;
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 90%;
-    width: 90%;
+    height: 40%;
+    width: 40%;
     margin: 1%;
     text-justify: left;
     text-align: left;
@@ -24,15 +26,16 @@
 /*Styling the topBar*/
 #copyHolder {
     color: rgb(202, 202, 202);
+    background-color: rgba(59, 59, 59, 0.61);
+    backdrop-filter: blur(18px);
     font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
-    height: 50px;
-    border-radius: 6px;
+    height: 30px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
     width: inherit;
     align-items: right;
-    background-color: rgba(59, 59, 59, 0.692);
-    backdrop-filter: blur(12px);
     text-align: center;
     text-justify: center;
     position: absolute;
@@ -40,27 +43,27 @@
 
 .copyVector {
     z-index: 5;
-    height: 50px;
-    width: 50px;
+    height: auto;
+    width: auto;
+    padding: 4px;
     background-color: rgb(59, 59, 59, 0.3);
     border: none;
-    display: grid;
-    float: right;
     border-radius: 6px;
+    position: absolute;
 }
 
 #blackLine, #greyLine {
     transition: 0.4s;
 }
 
-#CSPSHsvg:hover>#blackLine {
+.CSPSHsvg:hover>#blackLine {
     cursor: pointer;
     fill: rgb(49, 49, 49);
     stroke: rgb(49, 49, 49);
     transition: 0.4s;
 }
 
-#CSPSHsvg:hover>#greyLine {
+.CSPSHsvg:hover>#greyLine {
     cursor: pointer;
     fill: rgb(167, 167, 167);
     stroke: rgb(167, 167, 167);

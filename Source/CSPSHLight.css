@@ -4,18 +4,22 @@
     padding: 0px;
 }
 
+body {
+    background-color: rgb(202, 202, 202);
+}
+
 /*CSPSH class the whole code block*/
 .CSPSH {
     background-color: rgb(172, 172, 172);
     overflow: hidden;
     color: rgb(204, 204, 204);
-    font-size: 24px;
+    font-size: 16px;
     font-family: 'Ubuntu Mono', monospace;
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 90%;
-    width: 90%;
+    height: 40%;
+    width: 40%;
     margin: 1%;
     text-justify: left;
     text-align: left;
@@ -24,14 +28,16 @@
 /*Styling the topBar*/
 #copyHolder {
     color: rgb(92, 92, 92);
+    background-color: rgba(172, 172, 172, 0.61);
+    backdrop-filter: blur(18px);
     font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
-    height: 50px;
-    border-radius: 6px;
+    height: 30px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
     width: inherit;
     align-items: right;
-    background-color: rgb(172, 172, 172);
     text-align: center;
     text-justify: center;
     position: absolute;
@@ -39,14 +45,25 @@
 
 .copyVector {
     z-index: 5;
-    height: 50px;
-    width: 50px;
+    height: auto;
+    width: auto;
+    padding: 4px;
     background-color: rgb(172, 172, 172);
     border: none;
-    display: grid;
-    float: right;
     border-radius: 6px;
+    position: absolute;
 }
+
+#blackLine {
+    fill: rgb(155, 155, 155);
+    stroke: rgb(156, 156, 156);
+}
+
+#greyLine {
+    fill: rgb(209, 209, 209);
+    stroke: rgb(209, 209, 209);
+}
+
 #blackLine, #greyLine {
     transition: 0.4s;
 }
@@ -76,7 +93,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(54, 54, 54);
     width: 1px;
     border-radius: 6px 6px 6px 6px;
 }
@@ -149,4 +166,10 @@
 .sh-js-inBuilt, .sh-c-inBuilt, .sh-cpp-inBuilt, .sh-java-inBuilt, .sh-py-inBuilt, .sh-sts-inBuilt {
     color: rgb(0, 150, 187);
     font-style: italic;
+}
+
+.sh-c-preprocess, .sh-cpp-preprocess {
+    color: rgb(97, 97, 97);
+    background-color: rgb(122, 122, 122);
+    padding: 2px;
 }
