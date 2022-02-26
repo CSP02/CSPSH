@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-2.1.1-green)
+ ![version](https://img.shields.io/badge/Version-2.1.2-green)
 
 # Steps to use:
 
@@ -41,6 +41,7 @@
 ```
 
 # Hotfix info:
+- Fixed a bug in CPP highlighting.
 - Fixed the bug where copy to clipboard isn't working.
 - Fixed a bug where CSPSH is adding spaces for some operators like ``<=``, ``>=``,.. etc.
 - Fixed a bug where the ``.`` in a float value is being considered as an operator. Now it will be considered as a number.
@@ -69,6 +70,9 @@
 - Neat code and removed unnecessary code.
 - Added comments for better readability.
 - Changed the style of copy-to-clipboard button(Previously I used 2 div elements now it's svg)
+
+**Planned improvements**
+- Add the theme attribute to select different theme(mode is different from theme).
 
 **Example**
 

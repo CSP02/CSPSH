@@ -6,7 +6,7 @@ class CPPTOKENS {
             'do', 'while', 'public', 'private', 'void', 'using', 'namespace']
         this.operators = ['=', '+', '-', '*', '/', '.', ',', '<', '>',':', '::']
 
-        this.EOL = [';']
+        this.EOL = [';', '\n']
         this.unaryOperators = []
         this.ternaryOperators = ['!=', '<=', '>=', '==', '++', '--', '>>', '<<']
         this.types = ['class', 'int', 'float', 'char', 'string']
