@@ -17,7 +17,7 @@ let lang
 let mode = 'dark'
 let copySvg
 let links = [...document.head.getElementsByTagName('link')]
-for(let h = 0; h < links.length; h++){
+for (let h = 0; h < links.length; h++) {
     let link = links[h]
     link.parentElement.removeChild(link)
 }
