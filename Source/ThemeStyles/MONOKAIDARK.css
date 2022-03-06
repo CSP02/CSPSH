@@ -1,0 +1,168 @@
+/*Setting everything to 0*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*CSPSH class the whole code block*/
+.CSPSH {
+    overflow: hidden;
+    font-size: 16px;
+    font-family: 'Ubuntu Mono', monospace;
+    border-radius: 6px;
+    padding: 1%;
+    float: left;
+    height: 40%;
+    width: 40%;
+    margin: 1%;
+    text-justify: left;
+    text-align: left;
+}
+
+.MONOKAI {
+    background-color: #272822;
+    color: #F8F8F2;
+}
+
+/*Styling the topBar*/
+.copyHolder-MONOKAI {
+    background-color: #272822;
+    color: rgb(202, 202, 202);
+    backdrop-filter: blur(18px);
+    font-family: 'Roboto', sans-serif;
+    padding: 1%;
+    margin: -1%;
+    height: 30px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    width: inherit;
+    align-items: right;
+    text-align: center;
+    text-justify: center;
+    position: absolute;
+}
+
+.copyHolder-MONOKAI {
+    background-color: #272822;
+}
+
+.copyVector {
+    z-index: 5;
+    height: auto;
+    width: auto;
+    padding: 4px;
+    background-color: rgb(59, 59, 59, 0.3);
+    border: none;
+    border-radius: 6px;
+    position: absolute;
+}
+
+#blackLine, #greyLine {
+    transition: 0.4s;
+}
+
+.CSPSHsvg:hover>#blackLine {
+    cursor: pointer;
+    fill: rgb(49, 49, 49);
+    stroke: rgb(49, 49, 49);
+    transition: 0.4s;
+}
+
+.CSPSHsvg:hover>#greyLine {
+    cursor: pointer;
+    fill: rgb(167, 167, 167);
+    stroke: rgb(167, 167, 167);
+    transition: 0.4s;
+}
+
+::-webkit-scrollbar {
+    background-color: rgba(59, 59, 59, 0.8);
+    border-radius: 0px 6px 6px 0px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-button {
+    visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: white;
+    width: 1px;
+    border-radius: 6px 6px 6px 6px;
+}
+
+::-webkit-scrollbar-button {
+    width: 3px;
+    color: white;
+}
+
+.CSPSH:hover {
+    overflow-y: scroll;
+}
+
+.CSPSH:hover>.copyVector {
+    visibility: visible;
+}
+
+.cspsh-indentationGuidelines {
+    border-left: 1px solid grey;
+}
+
+/*End of the top bar css*/
+/* css for types */
+.sh-MONOKAI-js-types, .sh-MONOKAI-c-types, .sh-MONOKAI-cpp-types, .sh-MONOKAI-java-types, .sh-MONOKAI-py-types, .sh-MONOKAI-sts-types {
+    color: #66D9EF;
+}
+
+/* css for keywords */
+.sh-MONOKAI-js-keyword, .sh-MONOKAI-c-keyword, .sh-MONOKAI-cpp-keyword, .sh-MONOKAI-py-keyword, .sh-MONOKAI-java-keyword, .sh-MONOKAI-sts-keyword {
+    color: #F92672;
+}
+
+/* css for variables */
+.sh-MONOKAI-js-variable, .sh-MONOKAI-c-variable, .sh-MONOKAI-cpp-variable, .sh-MONOKAI-py-variable, .sh-MONOKAI-java-variable, .sh-MONOKAI-sts-variable {
+    color: #FD971F;
+    font-style: italic;
+}
+
+/* css for class */
+.sh-MONOKAI-js-class, .sh-MONOKAI-c-class, .sh-MONOKAI-cpp-class, .sh-MONOKAI-java-class, .sh-MONOKAI-py-class, .sh-MONOKAI-sts-class {
+    color: #A6E22E;
+}
+
+/* css for operators */
+.sh-MONOKAI-js-operator, .sh-MONOKAI-c-operator, .sh-MONOKAI-cpp-operator, .sh-MONOKAI-java-operator, .sh-MONOKAI-py-operator, .sh-MONOKAI-sts-operator {
+    color: rgb(167, 167, 167);
+}
+
+/* css for strings and characters */
+.sh-MONOKAI-js-string, .sh-MONOKAI-c-string, .sh-MONOKAI-cpp-string, .sh-MONOKAI-java-string, .sh-MONOKAI-py-string, .sh-MONOKAI-sts-string {
+    color: #E6DB74;
+}
+
+/* css for numerals */
+.sh-MONOKAI-js-numerals, .sh-MONOKAI-c-numerals, .sh-MONOKAI-cpp-numerals, .sh-MONOKAI-java-numerals, .sh-MONOKAI-py-numerals, .sh-MONOKAI-sts-numerals {
+    color: #AE81FF;
+}
+
+/* css for functions */
+.sh-MONOKAI-js-Func, .sh-MONOKAI-c-Func, .sh-MONOKAI-cpp-Func, .sh-MONOKAI-java-Func, .sh-MONOKAI-py-Func, .sh-MONOKAI-sts-Func {
+    color: #FBF46D;
+}
+
+/* css for comments */
+.sh-MONOKAI-js-comments, .sh-MONOKAI-c-comments, .sh-MONOKAI-cpp-comments, .sh-MONOKAI-java-comments, .sh-MONOKAI-py-comments, .sh-MONOKAI-sts-comments {
+    color: #75715E;
+    font-style: italic;
+}
+
+/* css for inbuilt fucntions */
+.sh-MONOKAI-js-inBuilt, .sh-MONOKAI-c-inBuilt, .sh-MONOKAI-cpp-inBuilt, .sh-MONOKAI-java-inBuilt, .sh-MONOKAI-py-inBuilt, .sh-MONOKAI-sts-inBuilt {
+    color: #66D9EF;
+    font-style: italic;
+}
+
+.sh-MONOKAI-c-preprocess, .sh-MONOKAI-cpp-preprocess {
+    color: #F92672;
+    padding: 2px;
+}

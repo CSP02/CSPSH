@@ -15,8 +15,12 @@ let isEOLINFOR
 let forCount
 let lang
 let mode = 'dark'
+let theme = 'cspsh'
+let themesList = []
+let modesList =[]
 let copySvg
 let links = [...document.head.getElementsByTagName('link')]
+//the following block will move the user's css to the down
 for (let h = 0; h < links.length; h++) {
     let link = links[h]
     link.parentElement.removeChild(link)
@@ -38,9 +42,13 @@ window.onload = function () {
     for (let i = 0; i < codes.length; i++) {
         let code = codes[i]
         fileName = code.getAttribute('name')
-        if (code.getAttribute('mode'))
-            mode = code.getAttribute('mode')
-
+        code.className += ` ${code.getAttribute('theme').toUpperCase()}`
+        if (code.getAttribute('theme') && !themesList.includes(code.getAttribute('theme'))) {
+            theme = code.getAttribute('theme')
+            themesList.push(theme)
+            document.head.innerHTML += `<link rel="stylesheet" href="/Source/ThemeStyles/${theme.toUpperCase()}${mode.toUpperCase()}.css">`
+        } else
+            theme = code.getAttribute('theme')
         if (!fileName) {
             fileName = `file`//sets default file name to file
         }
@@ -49,35 +57,31 @@ window.onload = function () {
         switch (code.lang) {
             case 'js':
                 lang = new JSTOKENS()
-                HighLight(code, codeContent, lang)
+                HighLight(code, codeContent, lang, theme)
                 lang = null
                 break
             case 'cpp':
                 lang = new CPPTOKENS()
-                HighLight(code, codeContent, lang)
+                HighLight(code, codeContent, lang, theme)
                 lang = null
                 break
             case 'c':
                 lang = new CTOKENS()
-                HighLight(code, codeContent, lang)
+                HighLight(code, codeContent, lang, theme)
                 lang = null
                 break
             case 'java':
                 lang = new JAVATOKENS()
-                HighLight(code, codeContent, lang)
+                HighLight(code, codeContent, lang, theme)
                 lang = null
                 break
             case 'sts':
                 lang = new SSTOKENS()
-                HighLight(code, codeContent, lang)
+                HighLight(code, codeContent, lang, theme)
                 lang = null
                 break
         }
     }
-    if (mode == 'dark')
-        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHDark.css">`
-    else
-        document.head.innerHTML += `<link rel="stylesheet" href="/Source/CSPSHLight.css">`
     links.forEach(link => {
         document.head.appendChild(link)
     })
@@ -106,7 +110,7 @@ window.onload = function () {
 
 
 //main method which is splitted into sub methods with different fucntions or tasks
-function HighLight(code, codeContent, lang) {
+function HighLight(code, codeContent, lang, theme) {
     let tokens = []
     let trimmedToken = []
     let trimmedTokens = []
@@ -152,7 +156,7 @@ function HighLight(code, codeContent, lang) {
     function SyntaxHighlight(tokens) {
         //Creating the TopBar section where we can see the file name, copy to clipboard etc
         code.innerHTML += `
-        <div id="copyHolder">
+        <div class="copyHolder-${theme}">
         File Name: ${fileName}.${code.lang}
         </div><button class="copyVector">${CopySvg}</button><br><br><br>`
         let isMultiLnComment = false
@@ -172,7 +176,7 @@ function HighLight(code, codeContent, lang) {
                 } if (token.includes('#') && (code.lang == 'c' || code.lang == 'cpp')) {
                     for (i; i <= tokens.length; i++) {
                         token = tokens[i]
-                        code.innerHTML += `<span class="sh-${code.lang}-preprocess">${token}</span>`
+                        code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-preprocess">${token}</span>`
                         if (token.includes('\n')) {
                             code.innerHTML += `<br>`
                             break
@@ -181,7 +185,7 @@ function HighLight(code, codeContent, lang) {
                     continue
                 }
                 if (token.includes('//') || isSingleLnComment) {
-                    code.innerHTML += `<span class="sh-${code.lang}-comments">${token} </span>`
+                    code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-comments">${token} </span>`
                     isSingleLnComment = true
                     if (token.includes('\n')) {
                         code.innerHTML += `<br>`
@@ -191,7 +195,7 @@ function HighLight(code, codeContent, lang) {
                 }
                 //identifying the comments single line and multiline
                 if (token.includes('/*') || isMultiLnComment) {
-                    code.innerHTML += `<span class="sh-${code.lang}-comments">${token} </span>`
+                    code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-comments">${token} </span>`
                     isMultiLnComment = true
                     if (token.includes('\n')) {
                         code.innerHTML += `<br>`
@@ -207,31 +211,31 @@ function HighLight(code, codeContent, lang) {
                 switch (token) {
                     case TYPES[TYPES.indexOf(token)]:
                         //adding the copy to clipboard button and svg 
-                        code.innerHTML += `<span class="sh-${code.lang}-types">${token} </span>`
+                        code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-types">${token} </span>`
                         break
                     case KEYWORDS[KEYWORDS.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-${code.lang}-keyword">${token} </span>`
+                        code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-keyword">${token} </span>`
                         break
                     case TERNARYOPERATORS[TERNARYOPERATORS.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>`
+                        code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator"> ${token} </span>`
                         break
                     case UNARYOPERATORS[UNARYOPERATORS.indexOf(token)]:
-                        code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>`
+                        code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator"> ${token} </span>`
                         break
                     case INBUILT[INBUILT.indexOf(token)]:
                         if (!(/[a-zA-Z]/).test(tokens[i + 1].charAt(0)))
-                            code.innerHTML += `<span class="sh-${code.lang}-inBuilt">${token}</span>`
+                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-inBuilt">${token}</span>`
                         else
-                            code.innerHTML += `<span class="sh-${code.lang}-inBuilt">${token} </span>`
+                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-inBuilt">${token} </span>`
                         break
                     case EOL[EOL.indexOf(token)]:
                         if (tokens[i + 1] != undefined && tokens[i + 1].includes('\n')) {
                             i++;
                         }
                         if (!isEOLINFOR || forCount == 0)//checking if the EOL is in a for loop if yes we don't make a new line or else we use <br> to make a new line
-                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span><br>`
+                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token}</span><br>`
                         else {
-                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
+                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token} </span>`
                             continue
                         }
                         if (tokens[i + 2]) {
@@ -248,19 +252,19 @@ function HighLight(code, codeContent, lang) {
                         break
                     default:
                         if (!isNaN(token))//checking if the token is a number
-                            code.innerHTML += `<span class="sh-${code.lang}-numerals">${token}</span>`
+                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-numerals">${token}</span>`
                         //starting of string highlighting stuff
                         else if (token.includes('"') || token.includes("'") || token.includes('`')) {
                             if (STRINGS.includes(token.charAt(0)) && STRINGS.includes(token.charAt(token.length - 1)) && token.length != 1) {
-                                code.innerHTML += `<span class="sh-${code.lang}-string">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string">${token}</span>`
                                 break
                             }
-                            code.innerHTML += `<span class="sh-${code.lang}-string">${token}</span>`
+                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string">${token}</span>`
                             for (i; i < tokens.length; i++) {
                                 let toke = tokens[i + 1]
                                 if (toke == undefined || toke == '') { code.innerHTML += ' ' }
                                 else
-                                    code.innerHTML += `<span class="sh-${code.lang}-string"> ${toke} </span>`
+                                    code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string"> ${toke} </span>`
                                 if (STRINGS.includes(toke.charAt(toke.length - 1)) || STRINGS.includes(toke)) {
                                     i++
                                     break
@@ -272,44 +276,44 @@ function HighLight(code, codeContent, lang) {
                         //Ending of String highlighting stuff
                         else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
                             if (tokens[i - 1] == 'new' || tokens[i - 1] == 'class' || INBUILT[INBUILT.indexOf(token)])
-                                code.innerHTML += `<span class="sh-${code.lang}-class">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-class">${token}</span>`
                             else if (token.charAt(tokens[i + 1]) == '(')
-                                code.innerHTML += `<span class="sh-${code.lang}-Func">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-Func">${token}</span>`
                             else
-                                code.innerHTML += `<span class="sh-${code.lang}-Variable">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-Variable">${token}</span>`
                         else if (token.includes('{') || token.includes('}')) {
                             if (token.includes('{')) {
                                 openBraceCount++
                                 forCount = 0
-                                code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token}</span>`
                             } else if (token.includes('}')) {
-                                code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token}</span>`
                             }
                         }
                         else if (!/[a-z]/.test(token) && !/[A-Z]/.test(token))
                             if (token.includes('(') || token.includes(')') || token.includes('.') || token.includes(','))
                                 if (!token.includes(','))
-                                    code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
+                                    code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token}</span>`
                                 else
-                                    code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
+                                    code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token} </span>`
                             else {
                                 if (!isEOLINFOR)
                                     if (INDEX[INDEX.indexOf(token)]) {
                                         if (token != ']' || !(/[a-zA-Z]/).test(tokens[i + 1].charAt(0)))
-                                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
+                                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token}</span>`
                                         else
-                                            code.innerHTML += `<span class="sh-${code.lang}-operator">${token} </span>`
+                                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token} </span>`
                                     }
-                                    else { code.innerHTML += `<span class="sh-${code.lang}-operator"> ${token} </span>` }
+                                    else { code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator"> ${token} </span>` }
                                 else
-                                    code.innerHTML += `<span class="sh-${code.lang}-operator">${token}</span>`
+                                    code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-operator">${token}</span>`
                             }
                         else {
 
                             if (token.includes('(') || tokens[i + 1] == '(' || tokens[i + 1].includes('(') || tokens[i + 2] == '(' || tokens[i + 2].includes('('))
-                                code.innerHTML += `<span class="sh-${code.lang}-Func">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-Func">${token}</span>`
                             else
-                                code.innerHTML += `<span class="sh-${code.lang}-variable">${token}</span>`
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-variable">${token}</span>`
                         }
                         break
                 }
