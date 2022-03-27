@@ -171,11 +171,11 @@ function HighLight(code, codeContent, lang, theme) {
         //looping through each token for highlighting
         for (let i = 0; i <= tokens.length; i++) {
             let token = tokens[i]
-
             if (token == undefined || token == '') {
                 //ignoring the null and undefined characters
                 continue
             } else {
+                token = token.replaceAll('\t', '').replaceAll(' ', '')
                 //checking if its a for loop because ';' should be ignored in for looops other wise it will read as the default EOL token and adds a new line
                 if (token == 'for') {
                     forCount++
@@ -330,7 +330,7 @@ function HighLight(code, codeContent, lang, theme) {
 
     //fucntion that identifies the tokens furthur to detect the other operators like arthematic operators etc.
     function IdentifyTokens(tokens) {
-        for (let k = 1; k <= tokens.length; k++) {
+        for (let k = 0; k <= tokens.length; k++) {
             let token = tokens[k]
             let tok
             if (token == undefined || token == '' || token.startsWith('</'))
