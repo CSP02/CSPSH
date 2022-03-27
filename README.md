@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-2.2.2-green)
+ ![version](https://img.shields.io/badge/Version-2.3.2-green)
 
 # Steps to use:
 
@@ -15,7 +15,7 @@
 
 ```html
 <head>
-    <script src='./Source/CSPSH.js'></script>
+    <script src='./Source/CSPSH.js' type='module'></script>
 </head>
 ```
 
@@ -48,6 +48,7 @@
 
 # Minor Version info:
 
+- Created CSPSH class. visit [docs](https://the-atelier.ml/Pages/CSPSH/cspsh.html) for more info. 
 - Removed light mode and mode attribute so now cspsh only has dark mode(please comment if light theme is needed).
 - Themes will be applied to their respective blocks.
 - Added monokai and drakula themes. 
@@ -92,7 +93,17 @@
     }
 </div>
 ```
-
+**Note:**
+- When user uses ``window.onload`` event in their scripts they might face some problems in functionality. To avoid that problem use the code shown below in ``window.onload`` in user's script:
+> script.js
+```js
+window.onload = function(){
+    //code that user wants to perform
+    const cspsh = new CSPSH
+    cspsh.highlight()
+}
+```
+- This will automatically highlightes the code which has CSPSH as class name for more info visit [docs](https://the-atelier.ml/Pages/CSPSH/cspsh.html).
 **Link for story script(extention is sts)**
 - StoryScript is created and developed by @lines-of-codes using python. [Learn more](https://github.com/StoryScriptorg/StoryScript/tree/main/storyscript).
 

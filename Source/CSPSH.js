@@ -17,7 +17,7 @@ let lang
 let mode = 'dark'
 let theme = 'cspsh'
 let themesList = []
-let modesList =[]
+let modesList = []
 let copySvg
 let links = [...document.head.getElementsByTagName('link')]
 //the following block will move the user's css to the down
@@ -34,77 +34,84 @@ const CopySvg = `
         stroke-width="5" stroke-linejoin="round" id="greyLine"/>
 </svg>`
 
-//Runs right after the page is loaded
 window.onload = function () {
-    let codes = document.getElementsByClassName('CSPSH');
+    const cspsh = new CSPSH
+    cspsh.highlight()
+}
 
-    //Reads the required attributes and links the required stylesheets based on selected theme
-    for (let i = 0; i < codes.length; i++) {
-        let code = codes[i]
-        fileName = code.getAttribute('name')
-        code.className += ` ${code.getAttribute('theme').toUpperCase()}`
-        if (code.getAttribute('theme') && !themesList.includes(code.getAttribute('theme'))) {
-            theme = code.getAttribute('theme')
-            themesList.push(theme)
-            document.head.innerHTML += `<link rel="stylesheet" href="/Source/ThemeStyles/${theme.toUpperCase()}${mode.toUpperCase()}.css">`
-        } else
-            theme = code.getAttribute('theme')
-        if (!fileName) {
-            fileName = `file`//sets default file name to file
+export class CSPSH {
+    //Runs right after the page is loaded
+    highlight() {
+        let codes = document.getElementsByClassName('CSPSH');
+
+        //Reads the required attributes and links the required stylesheets based on selected theme
+        for (let i = 0; i < codes.length; i++) {
+            let code = codes[i]
+            fileName = code.getAttribute('name')
+            code.className += ` ${code.getAttribute('theme').toUpperCase()}`
+            if (code.getAttribute('theme') && !themesList.includes(code.getAttribute('theme'))) {
+                theme = code.getAttribute('theme')
+                themesList.push(theme)
+                document.head.innerHTML += `<link rel="stylesheet" href="/Source/ThemeStyles/${theme.toUpperCase()}${mode.toUpperCase()}.css">`
+            } else
+                theme = code.getAttribute('theme')
+            if (!fileName) {
+                fileName = `file`//sets default file name to file
+            }
+            content.push(code.innerHTML)
+            let codeContent = code.innerHTML
+            switch (code.lang) {
+                case 'js':
+                    lang = new JSTOKENS()
+                    HighLight(code, codeContent, lang, theme)
+                    lang = null
+                    break
+                case 'cpp':
+                    lang = new CPPTOKENS()
+                    HighLight(code, codeContent, lang, theme)
+                    lang = null
+                    break
+                case 'c':
+                    lang = new CTOKENS()
+                    HighLight(code, codeContent, lang, theme)
+                    lang = null
+                    break
+                case 'java':
+                    lang = new JAVATOKENS()
+                    HighLight(code, codeContent, lang, theme)
+                    lang = null
+                    break
+                case 'sts':
+                    lang = new SSTOKENS()
+                    HighLight(code, codeContent, lang, theme)
+                    lang = null
+                    break
+            }
         }
-        content.push(code.innerHTML)
-        let codeContent = code.innerHTML
-        switch (code.lang) {
-            case 'js':
-                lang = new JSTOKENS()
-                HighLight(code, codeContent, lang, theme)
-                lang = null
-                break
-            case 'cpp':
-                lang = new CPPTOKENS()
-                HighLight(code, codeContent, lang, theme)
-                lang = null
-                break
-            case 'c':
-                lang = new CTOKENS()
-                HighLight(code, codeContent, lang, theme)
-                lang = null
-                break
-            case 'java':
-                lang = new JAVATOKENS()
-                HighLight(code, codeContent, lang, theme)
-                lang = null
-                break
-            case 'sts':
-                lang = new SSTOKENS()
-                HighLight(code, codeContent, lang, theme)
-                lang = null
-                break
-        }
-    }
-    links.forEach(link => {
-        document.head.appendChild(link)
-    })
-    //Copy to clipboard functionlity inside the HighLight() method
-    const buttons = document.getElementsByClassName('copyVector')
-    const CSPSHsvgs = document.getElementsByClassName('CSPSHsvg')
-    for (let j = 0; j < buttons.length; j++) {
-        const button = buttons[j];
-        button.addEventListener('click', function () {
-            clipboardText = content[j]
-            copySvg = CSPSHsvgs[j]
-            var inp = document.createElement("textarea")
-            document.body.appendChild(inp)
-            inp.value = clipboardText.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
-            inp.select()
-            document.execCommand("Copy");
-            document.body.removeChild(inp)
-            copySvg.innerHTML = `<polyline points="11 13.5, 13.5 17.5, 22.5 10" fill="transparent" stroke="green" stroke-linecap="round"
-            stroke-width="3" stroke-linejoin="round"/>`
-            setTimeout(function () {
-                copySvg.innerHTML = CopySvg
-            }, 2000)
+        links.forEach(link => {
+            document.head.appendChild(link)
         })
+        //Copy to clipboard functionlity inside the HighLight() method
+        const buttons = document.getElementsByClassName('copyVector')
+        const CSPSHsvgs = document.getElementsByClassName('CSPSHsvg')
+        for (let j = 0; j < buttons.length; j++) {
+            const button = buttons[j];
+            button.addEventListener('click', function () {
+                clipboardText = content[j]
+                copySvg = CSPSHsvgs[j]
+                var inp = document.createElement("textarea")
+                document.body.appendChild(inp)
+                inp.value = clipboardText.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
+                inp.select()
+                document.execCommand("Copy");
+                document.body.removeChild(inp)
+                copySvg.innerHTML = `<polyline points="11 13.5, 13.5 17.5, 22.5 10" fill="transparent" stroke="green" stroke-linecap="round"
+            stroke-width="3" stroke-linejoin="round"/>`
+                setTimeout(function () {
+                    copySvg.innerHTML = CopySvg
+                }, 2000)
+            })
+        }
     }
 }
 
