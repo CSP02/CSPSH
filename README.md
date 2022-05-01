@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-2.3.3-green)
+ ![version](https://img.shields.io/badge/Version-2.3.4-green)
 
 # Steps to use:
 
@@ -42,6 +42,7 @@
 
 # Hotfix info:
 - Fixed a bug where it is not showing the 1st word in the code.
+- Fixed some css.
 
 # Minor Version info:
 
