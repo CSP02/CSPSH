@@ -17,7 +17,7 @@ let lang
 let mode = 'dark'
 let theme = 'cspsh'
 let themesList = []
-let modesList = []
+let tempStr = []
 let copySvg
 let links = [...document.head.getElementsByTagName('link')]
 //the following block will move the user's css to the down
@@ -266,12 +266,30 @@ function HighLight(code, codeContent, lang, theme) {
                                 code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string">${token}</span>`
                                 break
                             }
-                            code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string">${token}</span>`
+                            for (i; i < tokens.length; i++) {
+                                token = tokens[i]
+                                tempStr.push(token)
+                                if (tokens[i + 1].includes('"') || tokens[i + 1].includes("'") || tokens[i + 1].includes('`')) {
+                                    tempStr.push(tokens[i + 1])
+                                    break
+                                } else {
+                                    continue
+                                }
+                            }
+                            let str
+                            tempStr.forEach(tempstr => {
+                                str += ` ${tempstr}`
+                            })
+                            if (/[!@#$%^&*()_+\-=\[\]{};\\|,.<>\/?~]/.test(str)) {
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string">${str.replace('undefined', '').replaceAll(' ', '')} </span>`
+                            } else {
+                                code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string">${str.replace('undefined', '')} </span>`
+                            }
+                            str = ''
+                            tempStr = []
                             for (i; i < tokens.length; i++) {
                                 let toke = tokens[i + 1]
                                 if (toke == undefined || toke == '') { code.innerHTML += ' ' }
-                                else
-                                    code.innerHTML += `<span class="sh-${theme.toUpperCase()}-${code.lang}-string"> ${toke} </span>`
                                 if (STRINGS.includes(toke.charAt(toke.length - 1)) || STRINGS.includes(toke)) {
                                     i++
                                     break
