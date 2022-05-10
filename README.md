@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-2.3.4-green)
+ ![version](https://img.shields.io/badge/Version-2.4.4-green)
 
 # Steps to use:
 
@@ -18,7 +18,7 @@
     <script src='./Source/CSPSH.js' type='module'></script>
 </head>
 ```
-
+- It is recommended to place the script tag at the end of your ``body`` tag in html.
 **NOTE: Make sure to place the Source folder in this repo to your directory where your main html file is present (or) paste the exact path of CSPSH.js. But I recommend to copy the source folder to your work folder because CSPSH.js will automatically adds the css files once it is loaded.**
 
 - In HTML define a class name with ``CSPSH`` inorder to make CSPSH.js realise the code that is written in that element(I personally prefer div tag for that) and theme attribute to either ``monokai`` or ``drakula`` or default theme ``cspsh`` to choose the theme scheme and lang is the language of the code that is written inside the tag. see the example below for better understanding.
@@ -34,7 +34,7 @@
 
 ```html
 <!--Example-1-->
-<div class="CSPSH dark" lang = 'js' name="fileName" theme="monokai">
+<div class="CSPSH" lang = 'js' name="fileName" theme="monokai">
     const toggler = new Toggler;
     toggler.toggleClass('myId', 'fromClass', 'toClass');
 </div>
@@ -47,9 +47,10 @@
 # Minor Version info:
 
 - Created CSPSH class. visit [docs](https://the-atelier.ml/Pages/CSPSH/cspsh.html) for more info. 
-- Removed light mode and mode attribute so now cspsh only has dark mode(please comment if light theme is needed).
 - Themes will be applied to their respective blocks.
 - Added monokai and drakula themes. 
+- Added lineCount (Not responsive for now will make it responsive soon).
+- Improved CSS, Copy to clipboard system.
 
 # Major Version info:
 

@@ -19,21 +19,21 @@ body {
     padding: 1%;
     float: left;
     height: 40%;
-    width: 40%;
+    width: 60vw;
     margin: 1%;
     text-justify: left;
     text-align: left;
 }
 
 /*Styling the topBar*/
-.copyHolder-CSPSH {
+.copyHolder-CSPSH{
     background-color: rgba(59, 59, 59, 0.61);
     color: rgb(202, 202, 202);
     backdrop-filter: blur(18px);
     font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
-    height: 30px;
+    height: 6vh;
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
     width: inherit;
@@ -41,6 +41,26 @@ body {
     text-align: center;
     text-justify: center;
     position: absolute;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.lineCount-CSPSH{
+    width: 20px;
+    height:auto;
+    margin-top:3vh;
+    position: absolute;
+    display: grid;
+    line-height: 2.5vh;
+    color:rgb(131, 130, 130);
+    padding:3px;
+    padding-top: 0px;
+}
+
+.code{
+    margin-left: 3vw;
 }
 
 .copyVector {

@@ -13,7 +13,7 @@
     padding: 1%;
     float: left;
     height: 40%;
-    width: 80vw;
+    width: 60vw;
     margin: 1%;
     text-justify: left;
     text-align: left;
@@ -32,7 +32,7 @@
     font-family: 'Roboto', sans-serif;
     padding: 1%;
     margin: -1%;
-    height: 30px;
+    height: 6vh;
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
     width: inherit;
@@ -40,6 +40,26 @@
     text-align: center;
     text-justify: center;
     position: absolute;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.lineCount-DRAKULA {
+    width: 20px;
+    height: auto;
+    margin-top: 3vh;
+    position: absolute;
+    display: grid;
+    line-height: 2.5vh;
+    color: #8890bd;
+    padding: 3px;
+    padding-top: 0px;
+}
+
+.code {
+    margin-left: 3vw;
 }
 
 .copyVector {
