@@ -18,15 +18,16 @@ body {
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 40%;
-    width: 60vw;
+    height: auto;
+    width: 80vw;
     margin: 1%;
+    line-height: 2.5vh;
     text-justify: left;
     text-align: left;
 }
 
 /*Styling the topBar*/
-.copyHolder-CSPSH{
+.copyHolder-CSPSH {
     background-color: rgba(59, 59, 59, 0.61);
     color: rgb(202, 202, 202);
     backdrop-filter: blur(18px);
@@ -47,19 +48,19 @@ body {
     align-items: center;
 }
 
-.lineCount-CSPSH{
+.lineCount-CSPSH {
     width: 20px;
-    height:auto;
-    margin-top:3vh;
+    height: auto;
+    margin-top: 2.5vh;
     position: absolute;
     display: grid;
     line-height: 2.5vh;
-    color:rgb(131, 130, 130);
-    padding:3px;
+    color: rgb(131, 130, 130);
+    padding: 3px;
     padding-top: 0px;
 }
 
-.code{
+.code {
     margin-left: 3vw;
 }
 

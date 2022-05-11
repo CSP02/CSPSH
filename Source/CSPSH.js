@@ -182,15 +182,15 @@ function HighLight(codeHolder, codeContent, lang, theme) {
     function SyntaxHighlight(tokens) {
         //Creating the TopBar section where we can see the file name, copy to clipboard etc
         codeHolder.innerHTML += `
-        <div class="copyHolder-${theme}">
+        <div class="copyHolder-${theme.toUpperCase()}">
         File Name: ${fileName}.${codeHolder.lang}
         </div><button class="copyVector">${CopySvg}</button><br><br><br>
-        <div class="lineCount-${theme}"></div><div class="code"></div>`
+        <div class="lineCount-${theme.toUpperCase()}"></div><div class="code"></div>`
         let lang = codeHolder.lang
         let code = codeHolder.getElementsByClassName('code')[0]
         let isMultiLnComment = false
         let isSingleLnComment = false
-        lineCountHolder = code.parentElement.getElementsByClassName(`lineCount-${theme}`)[0]
+        lineCountHolder = code.parentElement.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]
         //looping through each token for highlighting
         for (let i = 0; i <= tokens.length; i++) {
             let token = tokens[i]

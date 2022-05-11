@@ -12,9 +12,10 @@
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: 40%;
-    width: 60vw;
+    height: auto;
+    width: 80vw;
     margin: 1%;
+    line-height: 2.5vh;
     text-justify: left;
     text-align: left;
 }
@@ -49,7 +50,7 @@
 .lineCount-MONOKAI {
     width: 20px;
     height: auto;
-    margin-top: 3vh;
+    margin-top: 2.5vh;
     position: absolute;
     display: grid;
     line-height: 2.5vh;
