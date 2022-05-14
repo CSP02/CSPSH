@@ -21,6 +21,7 @@ let tempStr = []
 let copySvg
 let lineCountHolder
 let lineCount = 0
+let code
 let links = [...document.head.getElementsByTagName('link')]
 //the following block will move the user's css to the down
 for (let h = 0; h < links.length; h++) {
@@ -68,35 +69,45 @@ export class CSPSH {
                     lang = new JSTOKENS()
                     lineCount = 0
                     HighLight(codeHolder, codeContent, lang, theme)
-                    DisplayLineCount(lineCountHolder, lineCount)
+                    if (codeHolder.getAttribute('linecount'))
+                        DisplayLineCount(lineCountHolder, lineCount)
+                    ReplaceDIvWithCode(codeHolder, code)
                     lang = null
                     break
                 case 'cpp':
                     lang = new CPPTOKENS()
                     lineCount = 0
                     HighLight(codeHolder, codeContent, lang, theme)
-                    DisplayLineCount(lineCountHolder, lineCount)
+                    if (codeHolder.getAttribute('linecount'))
+                        DisplayLineCount(lineCountHolder, lineCount)
+                    ReplaceDIvWithCode(codeHolder, code)
                     lang = null
                     break
                 case 'c':
                     lang = new CTOKENS()
                     lineCount = 0
                     HighLight(codeHolder, codeContent, lang, theme)
-                    DisplayLineCount(lineCountHolder, lineCount)
+                    if (codeHolder.getAttribute('linecount'))
+                        DisplayLineCount(lineCountHolder, lineCount)
+                    ReplaceDIvWithCode(codeHolder, code)
                     lang = null
                     break
                 case 'java':
                     lang = new JAVATOKENS()
                     lineCount = 0
                     HighLight(codeHolder, codeContent, lang, theme)
-                    DisplayLineCount(lineCountHolder, lineCount)
+                    if (codeHolder.getAttribute('linecount'))
+                        DisplayLineCount(lineCountHolder, lineCount)
+                    ReplaceDIvWithCode(codeHolder, code)
                     lang = null
                     break
                 case 'sts':
                     lang = new SSTOKENS()
                     lineCount = 0
                     HighLight(codeHolder, codeContent, lang, theme)
-                    DisplayLineCount(lineCountHolder, lineCount)
+                    if (codeHolder.getAttribute('linecount'))
+                        DisplayLineCount(lineCountHolder, lineCount)
+                    ReplaceDIvWithCode(codeHolder, code)
                     lang = null
                     break
             }
@@ -129,10 +140,18 @@ export class CSPSH {
 }
 
 function DisplayLineCount(lineCountHolder, lineCount) {
-    for (var line = 1; line < lineCount; line++){
+    for (var line = 1; line < lineCount; line++) {
         lineCountHolder.innerHTML += `&nbsp;${line} <br/>`
     }
     return
+}
+function ReplaceDIvWithCode(codeHolder, code) {
+    codeHolder.innerHTML += `<code>${code.innerHTML}</code>`
+    code.innerHTML = ''
+    const codes = [...document.getElementsByClassName('code')]
+    codes.forEach(code => {
+        code.remove()
+    })
 }
 //main method which is splitted into sub methods with different fucntions or tasks
 function HighLight(codeHolder, codeContent, lang, theme) {
@@ -187,7 +206,7 @@ function HighLight(codeHolder, codeContent, lang, theme) {
         </div><button class="copyVector">${CopySvg}</button><br><br><br>
         <div class="lineCount-${theme.toUpperCase()}"></div><div class="code"></div>`
         let lang = codeHolder.lang
-        let code = codeHolder.getElementsByClassName('code')[0]
+        code = codeHolder.getElementsByClassName('code')[0]
         let isMultiLnComment = false
         let isSingleLnComment = false
         lineCountHolder = code.parentElement.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]

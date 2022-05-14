@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-2.4.5-green)
+ ![version](https://img.shields.io/badge/Version-2.5.5-green)
 
 # Steps to use:
 
@@ -49,6 +49,8 @@
 - Themes will be applied to their respective blocks.
 - Added monokai and drakula themes. 
 - Added lineCount (Not responsive for now will make it responsive soon).
+- Now user can decided if their code should show the line count or not just by defining an attribute ``linecount = true`` to make them visible and not mentioning the attribute for hiding the line count.
+- Now the code will be change into code.
 - Improved CSS, Copy to clipboard system.
 
 # Major Version info:

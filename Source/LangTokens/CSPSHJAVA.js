@@ -16,7 +16,7 @@ class JAVATOKENS {
         this.unaryOperators = []
         this.ternaryOperators = ['!=', '<=', '>=', '==', '++', '--']
         this.types = [
-            'int', 'float', 'char', 'long', 'double', 'byte', 'enum', 'null', 'short', 'class'
+            'const', 'transient', 'int', 'float', 'char', 'long', 'double', 'byte', 'enum', 'null', 'short', 'class'
         ]
         this.func = ['(', ')']
         this.index = ['[', ']']
