@@ -128,58 +128,58 @@ code {
 
 /*End of the top bar css*/
 /* css for types */
-.sh-CSPSH-js-types, .sh-CSPSH-c-types, .sh-CSPSH-cpp-types, .sh-CSPSH-java-types, .sh-CSPSH-py-types, .sh-CSPSH-sts-types {
+.sh-CSPSH-types{
     color: rgb(0, 140, 255);
 }
 
 /* css for keywords */
-.sh-CSPSH-js-keyword, .sh-CSPSH-c-keyword, .sh-CSPSH-cpp-keyword, .sh-CSPSH-py-keyword, .sh-CSPSH-java-keyword, .sh-CSPSH-sts-keyword {
+.sh-CSPSH-keyword{
     color: rgb(235, 132, 255);
 }
 
 /* css for variables */
-.sh-CSPSH-js-variable, .sh-CSPSH-c-variable, .sh-CSPSH-cpp-variable, .sh-CSPSH-py-variable, .sh-CSPSH-java-variable, .sh-CSPSH-sts-variable {
+.sh-CSPSH-variable{
     color: rgb(255, 193, 77);
 }
 
 /* css for class */
-.sh-CSPSH-js-class, .sh-CSPSH-c-class, .sh-CSPSH-cpp-class, .sh-CSPSH-java-class, .sh-CSPSH-py-class, .sh-CSPSH-sts-class {
+.sh-CSPSH-class{
     color: rgb(42, 185, 42);
 }
 
 /* css for operators */
-.sh-CSPSH-js-operator, .sh-CSPSH-c-operator, .sh-CSPSH-cpp-operator, .sh-CSPSH-java-operator, .sh-CSPSH-py-operator, .sh-CSPSH-sts-operator {
+.sh-CSPSH-operator{
     color: rgb(167, 167, 167);
 }
 
 /* css for strings and characters */
-.sh-CSPSH-js-string, .sh-CSPSH-c-string, .sh-CSPSH-cpp-string, .sh-CSPSH-java-string, .sh-CSPSH-py-string, .sh-CSPSH-sts-string {
+.sh-CSPSH-string {
     color: rgb(241, 97, 72);
 }
 
 /* css for numerals */
-.sh-CSPSH-js-numerals, .sh-CSPSH-c-numerals, .sh-CSPSH-cpp-numerals, .sh-CSPSH-java-numerals, .sh-CSPSH-py-numerals, .sh-CSPSH-sts-numerals {
+.sh-CSPSH-numerals{
     color: rgb(136, 255, 0);
 }
 
 /* css for functions */
-.sh-CSPSH-js-Func, .sh-CSPSH-c-Func, .sh-CSPSH-cpp-Func, .sh-CSPSH-java-Func, .sh-CSPSH-py-Func, .sh-CSPSH-sts-Func {
+.sh-CSPSH-Func{
     color: #FBF46D;
 }
 
 /* css for comments */
-.sh-CSPSH-js-comments, .sh-CSPSH-c-comments, .sh-CSPSH-cpp-comments, .sh-CSPSH-java-comments, .sh-CSPSH-py-comments, .sh-CSPSH-sts-comments {
+.sh-CSPSH-comments{
     color: grey;
     font-style: italic;
 }
 
 /* css for inbuilt fucntions */
-.sh-CSPSH-js-inBuilt, .sh-CSPSH-c-inBuilt, .sh-CSPSH-cpp-inBuilt, .sh-CSPSH-java-inBuilt, .sh-CSPSH-py-inBuilt, .sh-CSPSH-sts-inBuilt {
+.sh-CSPSH-inBuilt{
     color: rgb(46, 199, 46);
     font-style: italic;
 }
 
-.sh-CSPSH-c-preprocess, .sh-CSPSH-cpp-preprocess {
+.sh-CSPSH-preprocess {
     color: rgb(184, 184, 184);
     background-color: rgb(83, 83, 83);
     padding: 2px;

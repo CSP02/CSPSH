@@ -127,58 +127,58 @@ code {
 
 /*End of the top bar css*/
 /* css for types */
-.sh-DRAKULA-js-types, .sh-DRAKULA-c-types, .sh-DRAKULA-cpp-types, .sh-DRAKULA-java-types, .sh-DRAKULA-py-types, .sh-DRAKULA-sts-types {
+.sh-DRAKULA-types{
     color: #ff79c6;
 }
 
 /* css for keywords */
-.sh-DRAKULA-js-keyword, .sh-DRAKULA-c-keyword, .sh-DRAKULA-cpp-keyword, .sh-DRAKULA-py-keyword, .sh-DRAKULA-java-keyword, .sh-DRAKULA-sts-keyword {
+.sh-DRAKULA-keyword{
     color: #bd93f9;
 }
 
 /* css for variables */
-.sh-DRAKULA-js-variable, .sh-DRAKULA-c-variable, .sh-DRAKULA-cpp-variable, .sh-DRAKULA-py-variable, .sh-DRAKULA-java-variable, .sh-DRAKULA-sts-variable {
+.sh-DRAKULA-variable{
     color: #ffb86c;
     font-style: italic;
 }
 
 /* css for class */
-.sh-DRAKULA-js-class, .sh-DRAKULA-c-class, .sh-DRAKULA-cpp-class, .sh-DRAKULA-java-class, .sh-DRAKULA-py-class, .sh-DRAKULA-sts-class {
+.sh-DRAKULA-class {
     color: #8be9fd;
 }
 
 /* css for operators */
-.sh-DRAKULA-js-operator, .sh-DRAKULA-c-operator, .sh-DRAKULA-cpp-operator, .sh-DRAKULA-java-operator, .sh-DRAKULA-py-operator, .sh-DRAKULA-sts-operator {
+.sh-DRAKULA-operator {
     color: rgb(167, 167, 167);
 }
 
 /* css for strings and characters */
-.sh-DRAKULA-js-string, .sh-DRAKULA-c-string, .sh-DRAKULA-cpp-string, .sh-DRAKULA-java-string, .sh-DRAKULA-py-string, .sh-DRAKULA-sts-string {
+.sh-DRAKULA-string{
     color: #f1fa8c;
 }
 
 /* css for numerals */
-.sh-DRAKULA-js-numerals, .sh-DRAKULA-c-numerals, .sh-DRAKULA-cpp-numerals, .sh-DRAKULA-java-numerals, .sh-DRAKULA-py-numerals, .sh-DRAKULA-sts-numerals {
+.sh-DRAKULA-numerals {
     color: #bd93f9;
 }
 
 /* css for functions */
-.sh-DRAKULA-js-Func, .sh-DRAKULA-c-Func, .sh-DRAKULA-cpp-Func, .sh-DRAKULA-java-Func, .sh-DRAKULA-py-Func, .sh-DRAKULA-sts-Func {
+.sh-DRAKULA-Func{
     color: #50fa7b;
 }
 
 /* css for comments */
-.sh-DRAKULA-js-comments, .sh-DRAKULA-c-comments, .sh-DRAKULA-cpp-comments, .sh-DRAKULA-java-comments, .sh-DRAKULA-py-comments, .sh-DRAKULA-sts-comments {
+.sh-DRAKULA-comments{
     color: #6272a4;
 }
 
 /* css for inbuilt fucntions */
-.sh-DRAKULA-js-inBuilt, .sh-DRAKULA-c-inBuilt, .sh-DRAKULA-cpp-inBuilt, .sh-DRAKULA-java-inBuilt, .sh-DRAKULA-py-inBuilt, .sh-DRAKULA-sts-inBuilt {
+.sh-DRAKULA-inBuilt{
     color: #ff5555;
     font-style: italic;
 }
 
-.sh-DRAKULA-c-preprocess, .sh-DRAKULA-cpp-preprocess {
+.sh-DRAKULA-preprocess {
     color: #ff79c6;
     padding: 2px;
 }

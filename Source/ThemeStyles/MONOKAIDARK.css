@@ -131,59 +131,59 @@ code {
 
 /*End of the top bar css*/
 /* css for types */
-.sh-MONOKAI-js-types, .sh-MONOKAI-c-types, .sh-MONOKAI-cpp-types, .sh-MONOKAI-java-types, .sh-MONOKAI-py-types, .sh-MONOKAI-sts-types {
+.sh-MONOKAI-types{
     color: #66D9EF;
 }
 
 /* css for keywords */
-.sh-MONOKAI-js-keyword, .sh-MONOKAI-c-keyword, .sh-MONOKAI-cpp-keyword, .sh-MONOKAI-py-keyword, .sh-MONOKAI-java-keyword, .sh-MONOKAI-sts-keyword {
+.sh-MONOKAI-keyword{
     color: #F92672;
 }
 
 /* css for variables */
-.sh-MONOKAI-js-variable, .sh-MONOKAI-c-variable, .sh-MONOKAI-cpp-variable, .sh-MONOKAI-py-variable, .sh-MONOKAI-java-variable, .sh-MONOKAI-sts-variable {
+.sh-MONOKAI-variable{
     color: #FD971F;
     font-style: italic;
 }
 
 /* css for class */
-.sh-MONOKAI-js-class, .sh-MONOKAI-c-class, .sh-MONOKAI-cpp-class, .sh-MONOKAI-java-class, .sh-MONOKAI-py-class, .sh-MONOKAI-sts-class {
+.sh-MONOKAI-class{
     color: #A6E22E;
 }
 
 /* css for operators */
-.sh-MONOKAI-js-operator, .sh-MONOKAI-c-operator, .sh-MONOKAI-cpp-operator, .sh-MONOKAI-java-operator, .sh-MONOKAI-py-operator, .sh-MONOKAI-sts-operator {
+.sh-MONOKAI-operator{
     color: rgb(167, 167, 167);
 }
 
 /* css for strings and characters */
-.sh-MONOKAI-js-string, .sh-MONOKAI-c-string, .sh-MONOKAI-cpp-string, .sh-MONOKAI-java-string, .sh-MONOKAI-py-string, .sh-MONOKAI-sts-string {
+.sh-MONOKAI-string{
     color: #E6DB74;
 }
 
 /* css for numerals */
-.sh-MONOKAI-js-numerals, .sh-MONOKAI-c-numerals, .sh-MONOKAI-cpp-numerals, .sh-MONOKAI-java-numerals, .sh-MONOKAI-py-numerals, .sh-MONOKAI-sts-numerals {
+.sh-MONOKAI-numerals{
     color: #AE81FF;
 }
 
 /* css for functions */
-.sh-MONOKAI-js-Func, .sh-MONOKAI-c-Func, .sh-MONOKAI-cpp-Func, .sh-MONOKAI-java-Func, .sh-MONOKAI-py-Func, .sh-MONOKAI-sts-Func {
+.sh-MONOKAI-Func{
     color: #FBF46D;
 }
 
 /* css for comments */
-.sh-MONOKAI-js-comments, .sh-MONOKAI-c-comments, .sh-MONOKAI-cpp-comments, .sh-MONOKAI-java-comments, .sh-MONOKAI-py-comments, .sh-MONOKAI-sts-comments {
+.sh-MONOKAI-comments{
     color: #75715E;
     font-style: italic;
 }
 
 /* css for inbuilt fucntions */
-.sh-MONOKAI-js-inBuilt, .sh-MONOKAI-c-inBuilt, .sh-MONOKAI-cpp-inBuilt, .sh-MONOKAI-java-inBuilt, .sh-MONOKAI-py-inBuilt, .sh-MONOKAI-sts-inBuilt {
+.sh-MONOKAI-inBuilt{
     color: #66D9EF;
     font-style: italic;
 }
 
-.sh-MONOKAI-c-preprocess, .sh-MONOKAI-cpp-preprocess {
+.sh-MONOKAI-preprocess {
     color: #F92672;
     padding: 2px;
 }
