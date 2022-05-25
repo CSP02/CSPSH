@@ -1,4 +1,4 @@
-# SyntaxHylighlighter
+# CSPSH
 
 ![CSPSH-SyntaxHighlighter](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/CSPSH.png)
  A syantax highlighting library (or) package for highlight your codes in webpages.
@@ -106,5 +106,7 @@ window.onload = function(){
 - This will automatically highlightes the code which has CSPSH as class name for more info visit [docs](https://the-atelier.ml/Pages/CSPSH/cspsh.html).
 **Link for story script(extention is sts)**
 - StoryScript is created and developed by @lines-of-codes using python. [Learn more](https://github.com/StoryScriptorg/StoryScript/tree/main/storyscript).
+
+- Join our discord server for any queries [the-atelier](https://discord.gg/6Mcy5NpSpH)
 
 **NOTE: It is recommended that not to format the code in your html with the tab spaces its not necessary. But you must use new line(enter or a semicolon) to make it identify the new lines.**
