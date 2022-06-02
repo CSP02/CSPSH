@@ -20,11 +20,12 @@ function SyntaxHighlight(tokens, params, lang) {
     let forCount = params.forCount
     let codeHolder = params.codeHolder
     let code = params.code
-    //Creating the TopBar section where we can see the file name, 
+    //Creating the TopBar section where we can see the file name,
     //copy to clipboard etc
+    //adding the copy to clipboard button and svg 
     codeHolder.innerHTML += `
         <div class="copyHolder-${theme.toUpperCase()}">
-        File Name: ${fileName}.${codeHolder.lang}
+        <div>File Name: ${fileName}.${codeHolder.lang}</div><div class="themeUsing${theme}">Theme: ${theme}</div>
         </div><button class="copyVector">${copySvg}</button><br><br><br>
         <div class="lineCount-${theme.toUpperCase()}"></div><div class="code"></div>`
     let codeLang = codeHolder.lang
@@ -44,7 +45,7 @@ function SyntaxHighlight(tokens, params, lang) {
             if (token == 'for') {
                 forCount++
                 isEOLINFOR = true
-            } if (token.includes('#') && (codeLang == 'c' || codeLang == 'cpp')) {
+            } if (token.includes('#') && (codeLang == 'c' || codeLang == 'cpp')) {//checking for include statements in c and cpp
                 for (i; i <= tokens.length; i++) {
                     token = tokens[i]
                     code.innerHTML += `<span class="sh-${theme.toUpperCase()}-preprocess">${token}</span>`
@@ -56,7 +57,7 @@ function SyntaxHighlight(tokens, params, lang) {
                 }
                 continue
             }
-            if (token.includes('//') || isSingleLnComment) {
+            if (token.includes('//') || isSingleLnComment) {//checking for inline comments
                 code.innerHTML += `<span class="sh-${theme.toUpperCase()}-comments">${token} </span>`
                 isSingleLnComment = true
                 if (token.includes('\n')) {
@@ -79,12 +80,10 @@ function SyntaxHighlight(tokens, params, lang) {
                 }
                 continue
             }
-
             //ending of comments section
             //Highlighting starts here based on the splitted token
             switch (token) {
                 case TYPES[TYPES.indexOf(token)]:
-                    //adding the copy to clipboard button and svg 
                     code.innerHTML += `<span class="sh-${theme.toUpperCase()}-types">${token} </span>`
                     break
                 case KEYWORDS[KEYWORDS.indexOf(token)]:

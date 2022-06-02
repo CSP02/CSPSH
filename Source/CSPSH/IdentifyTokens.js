@@ -59,7 +59,7 @@ function IdentifyTokens(tokens, lang, trimmedToken) {
                 }
                 continue
             }
-
+            //detecting the tokens and operators to split.
             for (let n = 0; n <= token.length; n++) {
                 if (token[n] != undefined) {
                     if (OPERATORS.includes(token[n])) {

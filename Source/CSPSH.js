@@ -6,7 +6,7 @@ import { JAVATOKENS } from './LangTokens/CSPSHJAVA.js'
 import { SSTOKENS } from './LangTokens/CSPSHSS.js'
 
 //importing other files that required cspsh
-import {HighLight} from './CSPSH/HighLight.js'
+import { HighLight } from './CSPSH/HighLight.js'
 
 //Initializing all the required variables and constants.
 let clipboardText
@@ -26,6 +26,7 @@ let lineCount = 0
 let code
 let params
 let links = [...document.head.getElementsByTagName('link')]
+let settings
 //the following block will move the user's css to the down
 for (let h = 0; h < links.length; h++) {
     let link = links[h]
@@ -47,7 +48,7 @@ window.onload = function () {
 
 export class CSPSH {
     //Runs right after the page is loaded
-    highlight() {
+    highlight(options) {
         let codes = document.getElementsByClassName('CSPSH');
         //Reads the required attributes and links the required stylesheets based on selected theme
         for (let i = 0; i < codes.length; i++) {
@@ -63,8 +64,10 @@ export class CSPSH {
             if (!fileName) {
                 fileName = `file`//sets default file name to file
             }
+            //push all the code content.
             content.push(codeHolder.innerHTML)
             let codeContent = codeHolder.innerHTML
+            //Detect the language and start highlighting
             switch (codeHolder.lang) {
                 case 'js' || 'ts':
                     lang = new JSTOKENS()
@@ -155,7 +158,7 @@ function ReplaceDIvWithCode(codeHolder, code) {
     })
 }
 
-function  SetParams(params, codeHolder, codeContent){
+function SetParams(params, codeHolder, codeContent) {
     params = {
         codeHolder: codeHolder,
         codeContent: codeContent,

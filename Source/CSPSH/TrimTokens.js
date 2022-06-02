@@ -2,7 +2,7 @@
 import { PushToken } from './PushTokens.js'
 
 //function that trims the tokens when the token 
-//contains a symbol and pushes to trimmedToken
+//contains a symbol, and pushes to trimmedToken
 function TrimTokens(token, symbol, lang, trimmedToken) {
     let splitted = token.split(symbol)
     for (let m = 0; m < (splitted.length + 1); m++) {
