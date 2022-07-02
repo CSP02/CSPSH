@@ -48,7 +48,7 @@ window.onload = function () {
 
 export class CSPSH {
     //Runs right after the page is loaded
-    highlight(options) {
+    highlight() {
         let codes = document.getElementsByClassName('CSPSH');
         //Reads the required attributes and links the required stylesheets based on selected theme
         for (let i = 0; i < codes.length; i++) {
