@@ -26,7 +26,8 @@ let lineCount = 0
 let code
 let params
 let links = [...document.head.getElementsByTagName('link')]
-let settings
+let codeAndLineCount
+let className
 //the following block will move the user's css to the down
 for (let h = 0; h < links.length; h++) {
     let link = links[h]
@@ -72,47 +73,83 @@ export class CSPSH {
                 case 'js' || 'ts':
                     lang = new JSTOKENS()
                     lineCount = 0
-                    code = HighLight(SetParams(params, codeHolder, codeContent))
-                    if (codeHolder.getAttribute('linecount'))
+                    codeAndLineCount = HighLight(SetParams(params, codeHolder, codeContent))
+                    code = codeAndLineCount.code;
+                    lineCount = codeAndLineCount.lineCount
+                    lineCountHolder = document.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]
+                    className = lineCountHolder.className
+                    lineCountHolder.className = `lineCount-${theme.toUpperCase()}-done`;
+                    if (codeHolder.getAttribute('linecount') == 'true')
                         DisplayLineCount(lineCountHolder, lineCount)
-                    ReplaceDIvWithCode(codeHolder, code)
+                    ReplaceDIVWithCode(codeHolder, code)
+                    code = null
+                    lineCount = null
                     lang = null
                     break
                 case 'cpp':
                     lang = new CPPTOKENS()
                     lineCount = 0
-                    code = HighLight(SetParams(params, codeHolder, codeContent))
-                    if (codeHolder.getAttribute('linecount'))
+                    codeAndLineCount = HighLight(SetParams(params, codeHolder, codeContent))
+                    code = codeAndLineCount.code;
+                    lineCount = codeAndLineCount.lineCount
+                    lineCountHolder = document.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]
+                    className = lineCountHolder.className
+                    lineCountHolder.className = `lineCount-${theme.toUpperCase()}-done`;
+                    if (codeHolder.getAttribute('linecount') == 'true')
                         DisplayLineCount(lineCountHolder, lineCount)
-                    ReplaceDIvWithCode(codeHolder, code)
+                    ReplaceDIVWithCode(codeHolder, code)
                     lang = null
+                    code = null
+                    lineCount = null
                     break
                 case 'c':
                     lang = new CTOKENS()
                     lineCount = 0
-                    code = HighLight(SetParams(params, codeHolder, codeContent))
-                    if (codeHolder.getAttribute('linecount'))
+                    codeAndLineCount = HighLight(SetParams(params, codeHolder, codeContent))
+                    code = codeAndLineCount.code;
+                    lineCount = codeAndLineCount.lineCount
+                    lineCountHolder = document.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]
+                    className = lineCountHolder.className
+                    lineCountHolder.className = `lineCount-${theme.toUpperCase()}-done`;
+                    if (codeHolder.getAttribute('linecount') == 'true')
                         DisplayLineCount(lineCountHolder, lineCount)
-                    ReplaceDIvWithCode(codeHolder, code)
+                    ReplaceDIVWithCode(codeHolder, code)
                     lang = null
+                    code = null
+                    lineCount = null
                     break
                 case 'java' || 'c#':
                     lang = new JAVATOKENS()
                     lineCount = 0
-                    code = HighLight(SetParams(params, codeHolder, codeContent))
-                    if (codeHolder.getAttribute('linecount'))
+                    codeAndLineCount = HighLight(SetParams(params, codeHolder, codeContent))
+                    code = codeAndLineCount.code;
+                    lineCount = codeAndLineCount.lineCount
+                    lineCountHolder = document.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]
+                    className = lineCountHolder.className
+
+                    lineCountHolder.className = `lineCount-${theme.toUpperCase()}-done`;
+                    if (codeHolder.getAttribute('linecount') == 'true')
                         DisplayLineCount(lineCountHolder, lineCount)
-                    ReplaceDIvWithCode(codeHolder, code)
+                    ReplaceDIVWithCode(codeHolder, code)
                     lang = null
+                    code = null
+                    lineCount = null
                     break
                 case 'sts':
                     lang = new SSTOKENS()
                     lineCount = 0
-                    code = HighLight(SetParams(params, codeHolder, codeContent))
-                    if (codeHolder.getAttribute('linecount'))
+                    codeAndLineCount = HighLight(SetParams(params, codeHolder, codeContent))
+                    code = codeAndLineCount.code;
+                    lineCount = codeAndLineCount.lineCount
+                    lineCountHolder = document.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]
+                    className = lineCountHolder.className
+                    lineCountHolder.className = `lineCount-${theme.toUpperCase()}-done`;
+                    if (codeHolder.getAttribute('linecount') == 'true')
                         DisplayLineCount(lineCountHolder, lineCount)
-                    ReplaceDIvWithCode(codeHolder, code)
+                    ReplaceDIVWithCode(codeHolder, code)
                     lang = null
+                    code = null
+                    lineCount = null
                     break
             }
         }
@@ -140,17 +177,40 @@ export class CSPSH {
                 }, 2000)
             })
         }
+        //End of copy to clipboard functionality
+        //start of theme changing
+        const themeChangers = [...document.getElementsByClassName('themeChangers')];
+        themeChangers.forEach(themeChanger => {
+            themeChanger.addEventListener('click', click => {
+                click.path[1].className = `themeusing${click.srcElement.id}`;
+                click.path[2].className = `copyHolder-${click.srcElement.id}`;
+                click.path[3].className = `CSPSH ${click.srcElement.id.toUpperCase()}`;
+                const theme = click.srcElement.parentElement.parentElement.parentElement.getAttribute('theme');
+                const spans = [...click.srcElement.parentElement.parentElement.parentElement.getElementsByTagName('span')]
+                const divs = [...click.srcElement.parentElement.parentElement.parentElement.getElementsByTagName('div')]
+                divs.forEach(div => {
+                    div.className = div.className.replaceAll(`${theme.toUpperCase()}`, `${click.srcElement.id.toUpperCase()}`);
+                })
+                spans.forEach(span => {
+                    span.className = span.className.replaceAll(`${theme.toUpperCase()}`, `${click.srcElement.id.toUpperCase()}`);
+                })
+                const mainHolder = click.path[3]
+                mainHolder.setAttribute('theme', click.srcElement.id);
+                document.getElementById('themeUsing').innerText = 'Current Theme: ' + click.srcElement.id.toUpperCase()
+            })
+        })
+        //end of theme changing
     }
 }
 
 function DisplayLineCount(lineCountHolder, lineCount) {
     for (var line = 1; line < lineCount; line++) {
-        lineCountHolder.innerHTML += `&nbsp;${line} <br/>`
+        lineCountHolder.innerHTML += `<span>&nbsp;${line} </br></span>`
     }
     return
 }
-function ReplaceDIvWithCode(codeHolder, code) {
-    codeHolder.innerHTML += `<code>${code.innerHTML}</code>`
+function ReplaceDIVWithCode(codeHolder, code) {
+    codeHolder.innerHTML += `<div id="code"><code>${code.innerHTML}</code></div>`
     code.innerHTML = ''
     const codes = [...document.getElementsByClassName('code')]
     codes.forEach(code => {

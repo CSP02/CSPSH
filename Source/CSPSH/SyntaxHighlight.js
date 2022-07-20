@@ -25,7 +25,11 @@ function SyntaxHighlight(tokens, params, lang) {
     //adding the copy to clipboard button and svg 
     codeHolder.innerHTML += `
         <div class="copyHolder-${theme.toUpperCase()}">
-        <div>File Name: ${fileName}.${codeHolder.lang}</div><div class="themeUsing${theme}">Theme: ${theme}</div>
+        <div class="fileName">File Name: ${fileName}.${codeHolder.lang}</div><div class="changeTheme">
+        Change Theme: <button id="drakula" class="themeChangers">Drakula</button>
+        <button id="cspsh" class="themeChangers">CSPSH</button>
+        <button id="monokai" class="themeChangers">Monokai</button>
+        </div><div id="themeUsing">Current Theme: ${theme.toUpperCase()}</div>
         </div><button class="copyVector">${copySvg}</button><br><br><br>
         <div class="lineCount-${theme.toUpperCase()}"></div><div class="code"></div>`
     let codeLang = codeHolder.lang
@@ -213,8 +217,12 @@ function SyntaxHighlight(tokens, params, lang) {
         }
     }
 
+    const codeAndLineCount = {
+        code: code,
+        lineCount: lineCount
+    }
     //return the updated code element
-    return code
+    return codeAndLineCount
 } // end of the main js highlighting function
 
 //exorting SyntaxHighlight method

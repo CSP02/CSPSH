@@ -24,6 +24,7 @@ body {
     line-height: 2.5vh;
     text-justify: left;
     text-align: left;
+    transition: 0.4s ease-in-out;
 }
 
 /*Styling the topBar*/
@@ -44,24 +45,29 @@ body {
     position: absolute;
     display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    transition: 0.4s ease-in-out;
 }
 
-.lineCount-CSPSH {
-    width: 20px;
-    height: auto;
-    margin-top: 2.5vh;
+.lineCount-CSPSH-done {
+    width: auto;
+    margin-top: 2.4vh;
     position: absolute;
     display: grid;
-    line-height: 2.5vh;
+    line-height: 2.55vh;
     color: rgb(131, 130, 130);
-    padding: 3px;
-    padding-top: 0px;
+    border-right: 1px solid rgb(131, 130, 130);
+    padding-right: 5px;
 }
 
-code {
+#code {
     margin-left: 3vw;
+}
+
+#code span {
+    line-height: 2.5vh;
+    transition: 0.4s ease-in-out;
 }
 
 .copyVector {
@@ -126,9 +132,23 @@ code {
     border-left: 1px solid grey;
 }
 
-.themeUsingcspsh {
-    margin-left: 10vw;
-    color: rgb(255, 196, 196);
+.changeTheme {
+    margin: 5vw;
+    color: #dddddd;
+}
+
+.themeChangers {
+    background-color: rgb(39, 39, 39);
+    padding: 0.5rem;
+    border: none;
+    border-radius: 6px;
+    color: rgb(253, 187, 81);
+    transition: 0.2s ease-in-out;
+}
+
+.themeChangers:hover {
+    cursor: pointer;
+    background-color: rgb(55, 55, 55);
 }
 
 /*End of the top bar css*/

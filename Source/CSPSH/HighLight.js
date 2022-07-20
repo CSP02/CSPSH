@@ -11,6 +11,7 @@ function HighLight(params) {
     let code = params.code
     let codeContent = params.codeContent
     let codeHolder = params.codeHolder
+    let lineCount = params.lineCount
 
     //splitting the content to seperate each word and symbol
     codeContent.split(' ').forEach(token => {
@@ -33,9 +34,11 @@ function HighLight(params) {
             IdentifyTokens(trimmedTok)
         }
     })
-    code = SyntaxHighlight(trimmedTokens, params, lang);
+    let codeAndLineCount = SyntaxHighlight(trimmedTokens, params, lang);
+    code = codeAndLineCount.code
+    lineCount = codeAndLineCount.lineCount
     tokens = []
-    return code
+    return codeAndLineCount
 }
 
 //export HighLight() function

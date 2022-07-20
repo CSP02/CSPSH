@@ -18,6 +18,7 @@
     text-justify: left;
     line-height: 2.5vh;
     text-align: left;
+    transition: 0.4s ease-in-out;
 }
 
 .DRAKULA {
@@ -43,24 +44,29 @@
     position: absolute;
     display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    transition: 0.4s ease-in-out;
 }
 
-.lineCount-DRAKULA {
-    width: 20px;
-    height: auto;
-    margin-top: 2.5vh;
+.lineCount-DRAKULA-done {
+    width: auto;
+    margin-top: 2.4vh;
     position: absolute;
     display: grid;
-    line-height: 2.5vh;
+    line-height: 2.55vh;
     color: #8890bd;
-    padding: 3px;
-    padding-top: 0px;
+    padding-right: 5px;
+    border-right: 1px solid #8890bd;
 }
 
-code {
+#code {
     margin-left: 3vw;
+}
+
+#code span {
+    line-height: 2.5vh;
+    transition: 0.4s ease-in-out;
 }
 
 .copyVector {
@@ -125,9 +131,23 @@ code {
     border-left: 1px solid grey;
 }
 
-.themeUsingdrakula {
-    margin-left: 10vw;
-    color: #9db6ff;
+.changeTheme {
+    margin: 5vw;
+    color: #dddddd;
+}
+
+.themeChangers {
+    background-color: rgb(39, 39, 39);
+    padding: 0.5rem;
+    border: none;
+    border-radius: 6px;
+    color: rgb(253, 187, 81);
+}
+
+.themeChangers:hover {
+    cursor: pointer;
+    color: rgb(225, 154, 42);
+    background-color: rgb(55, 55, 55);
 }
 
 /*End of the top bar css*/
