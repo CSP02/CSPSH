@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-3.5.7-green)
+ ![version](https://img.shields.io/badge/Version-3.5.8-green)
 
 # Steps to use:
 
@@ -41,8 +41,7 @@
 ```
 
 # Hotfix info:
-- Fixed some css.
-- Organized code.
+- Bug fixes and improvements.
 
 # Minor Version info:
 

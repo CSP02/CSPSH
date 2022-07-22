@@ -196,7 +196,7 @@ export class CSPSH {
                 })
                 const mainHolder = click.path[3]
                 mainHolder.setAttribute('theme', click.srcElement.id);
-                document.getElementById('themeUsing').innerText = 'Current Theme: ' + click.srcElement.id.toUpperCase()
+                click.srcElement.parentElement.nextSibling.innerText = 'Current Theme: ' + click.srcElement.id.toUpperCase()
             })
         })
         //end of theme changing
