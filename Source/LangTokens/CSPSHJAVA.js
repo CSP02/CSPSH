@@ -4,7 +4,7 @@ class JAVATOKENS {
     constructor() {
         this.keywords = ['for', 'while',
             'break', 'goto', 'if',
-            'continue', 'switch',
+            'continue', 'switch', 'case',
             'else', 'return',
             'do', 'abstract', 'assert', 'catch', 'try', 'extends', 'finally',
             'implements', 'import', 'instanceof', 'interface', 'native', 'new',
@@ -22,7 +22,7 @@ class JAVATOKENS {
         this.index = ['[', ']']
         this.curlyBraces = ['{', '}']
         this.string = ['"', "'"]
-        this.inBuilt = ['System', 'String']
+        this.inBuilt = ['System', 'String', 'Scanner']
     }
 }
 export { JAVATOKENS }

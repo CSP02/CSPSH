@@ -1,16 +1,10 @@
-/*Setting everything to 0*/
-* {
-    margin: 0px;
-    padding: 0px;
-}
-
-body {
-    background-color: rgb(32, 32, 32);
+div.cspsh {
+    display: inline-block;
 }
 
 /*CSPSH class the whole code block*/
 .CSPSH {
-    background-color: rgb(59, 59, 59);
+    background-color: rgb(38, 38, 38);
     color: rgb(95, 95, 95);
     overflow: hidden;
     font-size: 16px;
@@ -18,18 +12,19 @@ body {
     border-radius: 6px;
     padding: 1%;
     float: left;
-    height: auto;
+    height: 50vh;
     width: 80vw;
     margin: 1%;
     line-height: 2.5vh;
     text-justify: left;
     text-align: left;
     transition: 0.4s ease-in-out;
+    z-index: 6;
 }
 
 /*Styling the topBar*/
 .copyHolder-CSPSH {
-    background-color: rgba(59, 59, 59, 0.61);
+    background-color: rgba(39, 39, 39, 0.61);
     color: rgb(202, 202, 202);
     backdrop-filter: blur(18px);
     font-family: 'Roboto', sans-serif;
@@ -39,9 +34,6 @@ body {
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
     width: inherit;
-    align-items: right;
-    text-align: center;
-    text-justify: center;
     position: absolute;
     display: flex;
     align-content: center;
@@ -51,23 +43,36 @@ body {
 }
 
 .lineCount-CSPSH-done {
-    width: auto;
-    margin-top: 2.4vh;
+    overflow: hidden;
+    height: 44vh;
+    width: max-content;
     position: absolute;
-    display: grid;
-    line-height: 2.55vh;
+    line-height: 2.5vh;
     color: rgb(131, 130, 130);
-    border-right: 1px solid rgb(131, 130, 130);
+    border-right: 4px solid rgb(89, 89, 89);
     padding-right: 5px;
 }
 
+.sh-CSPSH-lineHighlight {
+    border-top: 1px solid rgb(216, 216, 111);
+    border-bottom: 1px solid rgb(216, 216, 111);
+    background-color: rgba(255, 255, 118, 0.188);
+}
+
 #code {
+    height: 44vh;
+    white-space: nowrap;
+    width: 77vw;
+    overflow: hidden;
     margin-left: 3vw;
 }
 
 #code span {
-    line-height: 2.5vh;
     transition: 0.4s ease-in-out;
+}
+
+#code:hover {
+    overflow: scroll;
 }
 
 .copyVector {
@@ -99,33 +104,21 @@ body {
     transition: 0.4s;
 }
 
-::-webkit-scrollbar {
-    background-color: rgba(59, 59, 59, 0.8);
+#code::-webkit-scrollbar {
+    background-color: transparent;
     border-radius: 0px 6px 6px 0px;
-    width: 8px;
+    width: 0.08rem;
+    height: 0.5rem;
 }
 
-::-webkit-scrollbar-button {
-    visibility: hidden;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: white;
-    width: 1px;
+#code::-webkit-scrollbar-thumb {
+    background-color: rgb(146, 143, 143);
+    width: 0.1rem;
     border-radius: 6px 6px 6px 6px;
 }
 
-::-webkit-scrollbar-button {
-    width: 3px;
-    color: white;
-}
-
-.CSPSH:hover {
-    overflow-y: scroll;
-}
-
-.CSPSH:hover>.copyVector {
-    visibility: visible;
+#code::-webkit-scrollbar-button {
+    display: none;
 }
 
 .cspsh-indentationGuidelines {
@@ -149,6 +142,75 @@ body {
 .themeChangers:hover {
     cursor: pointer;
     background-color: rgb(55, 55, 55);
+}
+
+.cspshBuildTabs .CSPSH {
+    position: absolute;
+    margin-top: 2rem;
+}
+
+.cspshBuildTabs {
+    height: 60vh;
+    position: relative;
+    display: block;
+}
+
+.tabChangersWrapper {
+    width: 80vw;
+    margin-left: 1rem;
+    position: absolute;
+    display: flex;
+    overflow-x: scroll;
+}
+
+.cspshChangeTab {
+    padding: 0.5rem;
+    background-color: rgba(114, 114, 114, 0.61);
+    color: rgb(184, 184, 184);
+    border: none;
+    border-radius: 6px;
+    backdrop-filter: blur(24px);
+    margin: 0.2rem;
+    font-size: 14px;
+    font-family: monospace;
+}
+
+.cspshChangeTab:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(53, 53, 53);
+    cursor: pointer;
+}
+
+.inactiveTab {
+    color: rgb(184, 184, 184);
+    background-color: rgb(114, 114, 114, 0.61);
+    border: none;
+}
+
+.activeTab {
+    background-color: rgba(70, 70, 70, 0.61);
+    border: 1px solid orange;
+}
+
+#CSPSH-errorMessage {
+    height: 50vh;
+    width: 80vh;
+    position: relative;
+    margin-top: -76vh;
+    background-color: rgba(39, 39, 39, 0.61);
+    backdrop-filter: blur(8px);
+    z-index: 20;
+    color: rgb(255, 146, 146);
+    line-height: 3.5vh;
+}
+
+.cspsh a {
+    color: rgb(118, 164, 221);
+    text-decoration: none;
+}
+
+.cspsh a:hover {
+    text-decoration: underline;
 }
 
 /*End of the top bar css*/
@@ -179,7 +241,7 @@ body {
 
 /* css for strings and characters */
 .sh-CSPSH-string {
-    color: rgb(241, 97, 72);
+    color: rgb(247, 132, 94);
 }
 
 /* css for numerals */
@@ -208,4 +270,14 @@ body {
     color: rgb(184, 184, 184);
     background-color: rgb(83, 83, 83);
     padding: 2px;
+}
+
+.sh-CSPSH-classSelector {
+    color: greenyellow;
+}
+
+@media screen and (max-width: 320px){
+    #code{
+        font-size: 100px;
+    }
 }

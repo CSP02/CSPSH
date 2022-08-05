@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-3.5.8-green)
+ ![version](https://img.shields.io/badge/Version-4.0.0-green)
 
 # Steps to use:
 
@@ -28,9 +28,6 @@
 ```
 
 - Start typing your code inside this tag.
-- In the previous version you have to seperate each word by spaces which is no longer required.
-- Another impovement, the strings. Yes, now it can detect all kind of strings with spaces, without spaces... it just highlights(if you found any issue you can create a issue).
-- It has basic formatting too.
 
 ```html
 <!--Example-1-->
@@ -40,29 +37,27 @@
 </div>
 ```
 
-# Hotfix info:
-- Bug fixes and improvements.
-
-# Minor Version info:
-
-- Created CSPSH class. visit [docs](https://the-atelier.ml/Pages/CSPSH/cspsh.html) for more info.  
-- Added lineCount (Not responsive for now will make it responsive soon).
-- Now user can decided if their code should show the line count or not just by defining an attribute ``linecount = true`` to make them visible and not mentioning the attribute for hiding the line count.
-- Now the code will get changed into code tag.
-- Improved CSS, Copy to clipboard system.
+- After typing your code go to your JS file and create a ``window.onload`` event and inside ``window.onload`` create an object for ``CSPSH`` class. In previous versions this is not required becasue this package don't take any user options from the JS file but as two new features were added options are compulsory.
+- For more information about the options please visit the [CSPSH documentation](https://theatelier.ga/Pages/CSPSH/cspshDocs.html).
+- Now run the highlight method inside CSPSH object using the ``.highlight(options)`` method where options can be user defined as shown in docs.
 
 # Major Version info:
 
-- Added linecount again
-- Added theme switching mechanism
-- Added transitions
-- Cleared most of the bugs
+# Major features:
+1. Added tabs system:
+    Now user can create tabs and switch between them for more info about tabs visit [CSPSH documentation](https://theatelier.ga/Pages/CSPSH/cspshDocs.html).
+2. Added line highlighting:
+    Now users can highlight a single line of code by passing which line to highlight in options.
 
+# Optimizations:
+- Accurate copy to clipboard functionality
+- Accurate line count functionality
+- Improved scrolling and fixed a bug where the scroll bar of whole document changes. Now the scrollbar changes only for CSPSH code.
 
 **Planned improvements**
 - Add some more themes.
-- (optional) Add light mode if requested by any.
-- Add tabs system.
+- Add more language support.
+- Actually tried to add css and html language support but it's a bit hard so I will release it as a minor update.
 
 **Example**
 
@@ -87,16 +82,20 @@
 </div>
 ```
 **Note:**
-- When user uses ``window.onload`` event in their scripts they might face some problems in functionality. To avoid that problem use the code shown below in ``window.onload`` in user's script:
+- User must define the window.onload event in the JS file and create an object for CSPSH and run ``highlight(options)`` method. If user doesn't define the window.onload event in the JS file then the code will not get highlighted.
 > script.js
 ```js
 window.onload = function(){
     //code that user wants to perform
     const cspsh = new CSPSH
-    cspsh.highlight()
+    const options = {
+        file: 'file.extension',
+        highlightLine: 12
+    }
+    cspsh.highlight(options)
 }
 ```
-- This will automatically highlight the code which has CSPSH as class name for more info visit [docs](https://theatelier.ga/Pages/CSPSH/cspsh.html).
+- This will automatically highlight the code which has CSPSH as class name for more info visit [docs](https://theatelier.ga/Pages/CSPSH/cspshDocs.html).
 **Link for story script(extention is sts)**
 - StoryScript is created and developed by @lines-of-codes using python. [Learn more](https://github.com/StoryScriptorg/StoryScript/tree/main/storyscript).
 

@@ -1,7 +1,11 @@
 body{
-    background-color: black;
-    color: white;
+    background-color: rgb(28, 28, 28);
+    color: rgb(206, 206, 206);
 }
 p{
     font-size: 32px;
+}
+
+.CSPSH{
+    transition: 0s ease-in-out;
 }

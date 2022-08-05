@@ -3,11 +3,12 @@ import { SyntaxHighlight } from './SyntaxHighlight.js'
 import { IdentifyTokens } from './IdentifyTokens.js'
 
 //main method which is splitted into sub methods with different fucntions or tasks
-function HighLight(params) {
+function HighLight(params, options) {
+    const lang = params.lang
+    
     let tokens = []
     let trimmedToken = []
     let trimmedTokens = []
-    let lang = params.lang
     let code = params.code
     let codeContent = params.codeContent
     let codeHolder = params.codeHolder
@@ -34,7 +35,7 @@ function HighLight(params) {
             IdentifyTokens(trimmedTok)
         }
     })
-    let codeAndLineCount = SyntaxHighlight(trimmedTokens, params, lang);
+    let codeAndLineCount = SyntaxHighlight(trimmedTokens, params, lang, options);
     code = codeAndLineCount.code
     lineCount = codeAndLineCount.lineCount
     tokens = []
