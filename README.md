@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-4.0.0-green)
+ ![version](https://img.shields.io/badge/Version-4.0.1-green)
 
 # Steps to use:
 
@@ -53,6 +53,10 @@
 - Accurate copy to clipboard functionality
 - Accurate line count functionality
 - Improved scrolling and fixed a bug where the scroll bar of whole document changes. Now the scrollbar changes only for CSPSH code.
+
+# Minor features:
+- Improvements and bug fixes,
+- Changed the tag from span to cspsh custom tag.
 
 **Planned improvements**
 - Add some more themes.

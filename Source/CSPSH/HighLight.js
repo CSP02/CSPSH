@@ -25,14 +25,14 @@ function HighLight(params, options) {
     codeHolder.innerHTML = ''
 
     //Identifies the tokens by detecting the type of the token
-    IdentifyTokens(tokens, lang, trimmedToken)
+    IdentifyTokens(tokens, lang, trimmedToken, codeHolder)
 
     //another main instruction which will check if there are further tokens or symbols etc and seperates them
     trimmedToken.forEach(trimmedTok => {
         if (!Array.isArray(trimmedTok)) {
             trimmedTokens.push(trimmedTok)
         } else if (Array.isArray(trimmedTok)) {
-            IdentifyTokens(trimmedTok)
+            IdentifyTokens(trimmedTok, codeHolder)
         }
     })
     let codeAndLineCount = SyntaxHighlight(trimmedTokens, params, lang, options);

@@ -71,9 +71,9 @@ export class CSPSH {
                     else
                         theme = codeHolder.getAttribute('theme')
                     themesList.push(theme)
-                    document.head.innerHTML += `<link rel="stylesheet" href="/Source/ThemeStyles/CSPSHDARK.css">`
-                    document.head.innerHTML += `<link rel="stylesheet" href="/Source/ThemeStyles/DRAKULADARK.css">`
-                    document.head.innerHTML += `<link rel="stylesheet" href="/Source/ThemeStyles/MONOKAIDARK.css">`
+                    document.head.innerHTML += `<link rel="stylesheet" href="./Source/ThemeStyles/CSPSHDARK.css">`
+                    document.head.innerHTML += `<link rel="stylesheet" href="./Source/ThemeStyles/DRAKULADARK.css">`
+                    document.head.innerHTML += `<link rel="stylesheet" href="./Source/ThemeStyles/MONOKAIDARK.css">`
                 } else
                     theme = codeHolder.getAttribute('theme')
                 if (!fileName) {
@@ -103,6 +103,10 @@ export class CSPSH {
                     case 'css':
                         lang = new CSSTOKENS();
                         lineCount = 0
+                        break
+                    case 'html':
+                        lang = new HTMLTOKENS();
+                        lineCount = 0;
                         break
                 }
                 Start(options)
@@ -141,13 +145,13 @@ export class CSPSH {
                     click.path[2].className = `copyHolder-${click.target.id}`;
                     click.path[3].className = `CSPSH ${click.target.id.toUpperCase()}`;
                     const theme = click.target.parentElement.parentElement.parentElement.getAttribute('theme');
-                    const spans = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('span')]
+                    const spans = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('cspsh')]
                     const divs = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('div')]
                     divs.forEach(div => {
                         div.className = div.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
                     })
-                    spans.forEach(span => {
-                        span.className = span.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
+                    spans.forEach(cspsh => {
+                        cspsh.className = cspsh.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
                     })
                     const mainHolder = click.path[3]
                     mainHolder.setAttribute('theme', click.target.id);
@@ -200,7 +204,7 @@ function Start(options) {
 function DisplayLineCount(lineCountHolder, lineCount, options) {
     lineCountHolder.innerHTML += '<br>'
     for (var line = 1; line < lineCount; line++) {
-            lineCountHolder.innerHTML += `<span>${line}.</br></span>`
+        lineCountHolder.innerHTML += `<cspsh>${line}.</br></cspsh>`
     }
     lineCountHolder.innerHTML += '<br>'
     return

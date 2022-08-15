@@ -2,7 +2,7 @@
 import { TrimTokens } from './TrimTokens.js'
 
 //fucntion that identifies the tokens furthur to detect the other operators like arthematic operators etc.
-function IdentifyTokens(tokens, lang, trimmedToken) {
+function IdentifyTokens(tokens, lang, trimmedToken, codeHolder) {
     //assigning language tokens
     const OPERATORS = lang.operators
     const EOL = lang.EOL
@@ -49,7 +49,7 @@ function IdentifyTokens(tokens, lang, trimmedToken) {
                 trimmedToken.push(token)
                 continue
             }
-            if (token.includes('#')) {
+            if (token.includes('#') && codeHolder.lang != 'css') {
                 for (k; k <= tokens.length; k++) {
                     token = tokens[k]
                     trimmedToken.push(token.replaceAll('<', '&lt;'))

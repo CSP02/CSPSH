@@ -29,7 +29,7 @@ class CSSTOKENS {
         this.EOL = [';', '\n']
         this.unaryOperators = []
         this.ternaryOperators = []
-        this.types = ['input']
+        this.types = ['input', 'body', 'span', 'div']
         this.func = ['(', ')']
         this.index = ['[', ']']
         this.curlyBraces = ['{', '}']
@@ -55,11 +55,10 @@ class CSSTOKENS {
             'font', 'font-family', 'font-size', 'font-style', 'font-weight',
             'font-variant', 'font-stretch', 'font-size-adjust',
             'font-kerning', 'font-smoothing', 'font-feature-settings',
-            'font-variant-caps', 'font-variant-numeric',
+            'font-variant-caps', 'font-variant-numeric', 'red', 'blue', 'green',
         ]
         this.values = [
-            'red', 'blue', 'green',
-            'flex', 'grid', 'screen'
+            'flex', 'grid', 'screen', 'solid'
         ]
     }
 }

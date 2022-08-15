@@ -67,7 +67,7 @@ div.cspsh {
     margin-left: 3vw;
 }
 
-#code span {
+#code cspsh {
     transition: 0.4s ease-in-out;
 }
 
@@ -272,12 +272,10 @@ div.cspsh {
     padding: 2px;
 }
 
-.sh-CSPSH-classSelector {
+.sh-CSPSH-classSelector, .sh-CSPSH-idSelector {
     color: greenyellow;
 }
 
-@media screen and (max-width: 320px){
-    #code{
-        font-size: 100px;
-    }
+.sh-CSPSH-property {
+    color: cyan;
 }

@@ -101,6 +101,14 @@
     padding: 2px;
 }
 
-.sh-DRAKULA-classSelector {
+.sh-DRAKULA-classSelector, .sh-DRAKULA-idSelector {
     color: greenyellow;
+}
+
+.sh-DRAKULA-property {
+    color: cyan;
+}
+
+.sh-DRAKULA-value {
+    color: rgb(163, 100, 208);
 }
