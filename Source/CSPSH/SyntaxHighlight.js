@@ -1,6 +1,5 @@
 //main fucntion that highlightes the js code
 function SyntaxHighlight(tokens, params, lang, options) {
-    console.log(tokens)
     const KEYWORDS = lang.keywords
     const EOL = lang.EOL
     const UNARYOPERATORS = []
@@ -63,7 +62,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
             if (token.includes('#') && (codeLang == 'c' || codeLang == 'cpp')) {//checking for include statements in c and cpp
                 for (i; i <= tokens.length; i++) {
                     token = tokens[i]
-                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-preprocess sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                     } else
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-preprocess">${token}</cspsh>`
@@ -82,12 +81,12 @@ function SyntaxHighlight(tokens, params, lang, options) {
             }
             if (token.includes('//') || isSingleLnComment) {//checking for inline comments
                 if (!(/[a-zA-Z]/).test(token) || !(/[a-zA-Z]/).test(tokens[tokens.indexOf(token) + 1]))
-                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-comments sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                     } else
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-comments">${token}</cspsh>`
                 else
-                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-comments sh-linehighlight">${token} </cspsh>`
                     } else
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-comments">${token} </cspsh>`
@@ -114,7 +113,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
                 continue
             }
             if (token.includes('/*') || isMultiLnComment) {
-                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-comments sh-linehighlight">${token} </cspsh>`
                 } else
                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-comments">${token} </cspsh>`
@@ -132,13 +131,13 @@ function SyntaxHighlight(tokens, params, lang, options) {
             //Highlighting starts here based on the splitted token
             switch (token) {
                 case TYPES[TYPES.indexOf(token)]:
-                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-types sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                     } else
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-types">${token} </cspsh>`
                     break
                 case KEYWORDS[KEYWORDS.indexOf(token)]:
-                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                         if (codeLang != 'html')
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-keyword sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                         else code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-keyword sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
@@ -148,25 +147,25 @@ function SyntaxHighlight(tokens, params, lang, options) {
                         else code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-keyword">${token}</cspsh>`
                     break
                 case TERNARYOPERATORS[TERNARYOPERATORS.indexOf(token)]:
-                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight"> ${token} </cspsh>`
                     } else
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator"> ${token} </cspsh>`
                     break
                 case UNARYOPERATORS[UNARYOPERATORS.indexOf(token)]:
-                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight"> ${token} </cspsh>`
                     } else
                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator"> ${token} </cspsh>`
                     break
                 case INBUILT[INBUILT.indexOf(token)]:
                     if (!(/[a-zA-Z]/).test(tokens[i + 1].charAt(0)))
-                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-inBuilt sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                         } else
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-inBuilt"> ${token}</cspsh>`
                     else
-                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                             if (codeLang != 'html') code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-inBuilt sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                             else code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-inBuilt sh-${theme.toUpperCase()}-lineHighlight"> ${token} </cspsh>`
                         } else
@@ -179,14 +178,14 @@ function SyntaxHighlight(tokens, params, lang, options) {
                     }
                     if (!isEOLINFOR || forCount == 0)//checking if the EOL is in a for loop if yes we don't make a new line or else we use <br> to make a new line
                     {
-                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh><br>`
                         } else
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh><br>`
                         lineCount++;
                     }
                     else {
-                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                         } else
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token} </cspsh>`
@@ -198,12 +197,12 @@ function SyntaxHighlight(tokens, params, lang, options) {
                             if (openBraceCount <= 0)
                                 openBraceCount = 0
                             //adding indentation guidelines the one you can see in many editors.
-                            if (lineCount == options.highlightLine) {
+                            if (options.highlightLine.includes(lineCount)) {
                                 code.innerHTML += ('<i class="cspsh-indentationGuidelines sh-${theme.toUpperCase()}-lineHighlight" style="">&emsp;&emsp;&emsp;</i>').repeat(openBraceCount)
                             } else
                                 code.innerHTML += ('<i class="cspsh-indentationGuidelines" style="">&emsp;&emsp;&emsp;</i>').repeat(openBraceCount)
                         } else if (openBraceCount >= 0 && !tokens[i + 1].includes('}')) {
-                            if (lineCount == options.highlightLine) {
+                            if (options.highlightLine.includes(lineCount)) {
                                 code.innerHTML += ('<i class="cspsh-indentationGuidelines sh-${theme.toUpperCase()}-lineHighlight" style="">&emsp;&emsp;&emsp;</i>').repeat(openBraceCount)
                             } else
                                 code.innerHTML += ('<i class="cspsh-indentationGuidelines" style="">&emsp;&emsp;&emsp;</i>').repeat(openBraceCount)
@@ -212,14 +211,14 @@ function SyntaxHighlight(tokens, params, lang, options) {
                     break
                 default:
                     if (!isNaN(token))//checking if the token is a number
-                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-numerals sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                         } else
                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-numerals">${token}</cspsh>`
                     //starting of string highlighting stuff
                     else if (token.includes('"') || token.includes("'") || token.includes('`')) {
                         if (STRINGS.includes(token.charAt(0)) && STRINGS.includes(token.charAt(token.length - 1)) && token.length != 1) {
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-string sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-string">${token}</cspsh>`
@@ -241,13 +240,13 @@ function SyntaxHighlight(tokens, params, lang, options) {
                             str += ` ${tempstr}`
                         })
                         if (/[!@#$%^&*()_+\-=\[\]{};\\|,.<>\/?~]/.test(str)) {
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-string sh-${theme.toUpperCase()}-lineHighlight">${str.replace('undefined', '').replaceAll(' ', '')} </cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-string">${str.replace('undefined', '').replaceAll(' ', '')} </cspsh>`
                         } else {
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
-                                code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-string">${str.replace('undefined', '')} </cspsh>`
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
+                                code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-string sh-${theme.toUpperCase()}-lineHighlight">${str.replace('undefined', '')} </cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-string">${str.replace('undefined', '')} </cspsh>`
                         }
@@ -265,17 +264,17 @@ function SyntaxHighlight(tokens, params, lang, options) {
                     //Ending of String highlighting stuff
                     else if (!/[a-z]/.test(token.charAt(0)) && /[A-Z]/.test(token.charAt(0)))
                         if (tokens[i - 1] == 'new' || tokens[i - 1] == 'class' || INBUILT[INBUILT.indexOf(token)])
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-class sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-class">${token}</cspsh>`
                         else if (token.charAt(tokens[i + 1]) == '(')
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-Func sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-Func">${token}</cspsh>`
                         else {
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-Variable sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-Variable">${token}</cspsh>`
@@ -284,12 +283,12 @@ function SyntaxHighlight(tokens, params, lang, options) {
                         if (token.includes('{')) {
                             openBraceCount++
                             forCount = 0
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
                         } else if (token.includes('}')) {
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
@@ -298,7 +297,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
                     else if (!/[a-z]/.test(token) && !/[A-Z]/.test(token)) {
                         if (token.includes('(') || token.includes(')') || token.includes('.') || token.includes(','))
                             if (token.includes('.') && codeLang.includes('css')) {
-                                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-classSelector sh-${theme.toUpperCase()}-lineHighlight">${tokens[tokens.indexOf(token) + 1]} </cspsh>`
                                 } else {
@@ -308,12 +307,12 @@ function SyntaxHighlight(tokens, params, lang, options) {
                                 i++
                             }
                             else if (!token.includes(','))
-                                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                 } else
                                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
                             else
-                                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                                 } else
                                     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token} </cspsh>`
@@ -321,24 +320,24 @@ function SyntaxHighlight(tokens, params, lang, options) {
                             if (!isEOLINFOR)
                                 if (INDEX[INDEX.indexOf(token)]) {
                                     if (token != ']' || !(/[a-zA-Z]/).test(tokens[i + 1].charAt(0)))
-                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                         } else
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
                                     else
-                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                                         } else
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token} </cspsh>`
                                 }
                                 else if (codeLang != 'css')
-                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight"> ${token} </cspsh>`
                                     } else
                                         if (codeLang != 'html') code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator"> ${token} </cspsh>`
                                         else code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
                                 else
-                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                                     } else
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token} </cspsh>`
@@ -346,12 +345,12 @@ function SyntaxHighlight(tokens, params, lang, options) {
                     }
                     else {
                         if (token.includes('(') || tokens[i + 1] == '(' || tokens[i + 1].includes('(') || tokens[i + 2] == '(' || tokens[i + 2].includes('('))
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-Func sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-Func">${token}</cspsh>`
                         else if (codeLang !== 'css')
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-variable sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else
                                 if (codeLang != 'html') code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-variable"> ${token}</cspsh>`
@@ -359,25 +358,25 @@ function SyntaxHighlight(tokens, params, lang, options) {
                         else if (codeLang === 'css' && tokens[i + 1] != ':') {
                             switch (token) {
                                 case properties[properties.indexOf(token)]:
-                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-property sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                     } else
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-property">${token}</cspsh>`
                                     break;
                                 case values[values.indexOf(token)]:
                                     if (tokens[i + 1] != ';')
-                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value sh-${theme.toUpperCase()}-lineHighlight"> ${token} </cspsh>`
                                         } else
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value"> ${token} </cspsh>`
                                     else
-                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                         } else
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value">${token}</cspsh>`
                                     break;
                                 default:
-                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-variable sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                     } else
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-variable">${token}</cspsh>`
@@ -387,25 +386,25 @@ function SyntaxHighlight(tokens, params, lang, options) {
                         else if (codeLang == 'css') {
                             switch (token) {
                                 case properties[properties.indexOf(token)]:
-                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-property sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                     } else
                                         code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-property">${token}</cspsh>`
                                     break;
                                 case values[values.indexOf(token)]:
                                     if (tokens[i + 1] != ';')
-                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value sh-${theme.toUpperCase()}-lineHighlight">${token} </cspsh>`
                                         } else
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value">${token} </cspsh>`
                                     else
-                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                        if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                         } else
                                             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-value">${token}</cspsh>`
                                     break;
                                 default:
-                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                                    if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                         if (codeLang != 'html') code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-variable sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                         else code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-text sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                     } else
@@ -415,7 +414,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
                             }
                         }
                         else
-                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (lineCount == options.highlightLine)) {
+                            if ((`${codeHolder.getAttribute('name')}.${codeHolder.getAttribute('lang')}` == options.file) && (options.highlightLine.includes(lineCount))) {
                                 if (codeLang != 'html') code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-variable sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                                 else code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-text sh-${theme.toUpperCase()}-lineHighlight">${token}</cspsh>`
                             } else

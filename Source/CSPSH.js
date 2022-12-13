@@ -46,15 +46,6 @@ const copySvg = `
         stroke-width="5" stroke-linejoin="round" id="greyLine"/>
 </svg>`
 
-// window.onload = function () {
-//     const options = {
-//         file: null,
-//         highlightLine: null
-//     }
-//     const cspsh = new CSPSH()
-//     cspsh.highlight(options)
-// }
-
 export class CSPSH {
     //Runs right after the page is loaded
     highlight(options) {
@@ -163,6 +154,8 @@ export class CSPSH {
             BuildTabs();
             //auto-scroll the linecount according to the scroll position of the code
             AutoScroll();
+            //add titles so when user hovers on the tokens it shows the token name
+            AddTitles();
         } catch (e) {
             codeHolder.children[6].children[0].innerHTML += `
             <div id="CSPSH-errorMessage">!unable to highlight code due to some issue.
@@ -233,6 +226,14 @@ function AutoScroll() {
             //set the scroll position of linecount to the same as the scroll position of the code
             lineCount.scrollTop = codeHolder.children[6].scrollTop;
         })
+    }
+}
+
+function AddTitles() {
+    const cspshTags = document.getElementsByTagName('cspsh');
+    for (var i = 0; i < cspshTags.length; i++) { 
+        const cspshTag = cspshTags[i];
+        cspshTag.title = cspshTag.className.split('-')[2];
     }
 }
 

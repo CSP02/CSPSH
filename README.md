@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-4.0.1-green)
+ ![version](https://img.shields.io/badge/Version-4.1.1-green)
 
 # Steps to use:
 
@@ -43,20 +43,20 @@
 
 # Major Version info:
 
-# Major features:
+# Minor features:
 1. Added tabs system:
     Now user can create tabs and switch between them for more info about tabs visit [CSPSH documentation](https://theatelier.ga/Pages/CSPSH/cspshDocs.html).
 2. Added line highlighting:
     Now users can highlight a single line of code by passing which line to highlight in options.
+3. Added multiple line highlight and changed the ``highlightLine`` option to array:
+    Now users can highlight multiple lines of code by passing which lines to highlight in options.
+4. Added titles for all the tokens:
+    Now users can hover over the tokens and see the title of the token.
 
 # Optimizations:
 - Accurate copy to clipboard functionality
 - Accurate line count functionality
 - Improved scrolling and fixed a bug where the scroll bar of whole document changes. Now the scrollbar changes only for CSPSH code.
-
-# Minor features:
-- Improvements and bug fixes,
-- Changed the tag from span to cspsh custom tag.
 
 **Planned improvements**
 - Add some more themes.
@@ -94,7 +94,7 @@ window.onload = function(){
     const cspsh = new CSPSH
     const options = {
         file: 'file.extension',
-        highlightLine: 12
+        highlightLine: [12, 20, 22]
     }
     cspsh.highlight(options)
 }
