@@ -16,8 +16,10 @@
     </h1>
     <div class="cspshBuildTabs">
         <code class="cspsh" lang="html" name="index" theme="drakula" linecount = 'true'>
-            &lt;div class="example"><!--help-->
+            &lt;div class="example">
+                &lt;span class="test">
                 this is an example of html code.
+                &lt;/span>
             &lt;/div>
         </code>
         <div class="CSPSH" lang="java" name="javaCode" theme="cspsh" linecount = 'true'>
@@ -38,7 +40,7 @@
             let c = a + b
         </div>
         <div class="CSPSH" lang="c" name="example" theme="drakula" linecount = 'true'>
-            #include <stdio.h>
+            #include &lt;stdio.h&gt;
             
             void main(){
                 int a = 10;
@@ -47,7 +49,7 @@
             }
         </div>
         <div class="CSPSH" lang="cpp" name="example" theme="cspsh" linecount = 'true'>
-            #include <iostream>
+            #include &lt;iostream&gt;
             using namespace std;
             
             int main(){
@@ -68,8 +70,12 @@
         </div>
         <div class="CSPSH" lang="js" name="ex" theme="monokai" linecount = 'true'>
             str = "hello world";
-            str2 = "image/help.png", "/Images/help2.png";
+            str2 = "image/help.png";
             str3 = `${help}`;
+
+            for(let i=0;i &lt; 10; i++){
+                console.log(i);
+            }
         </div>
     </div>
     <h1>
@@ -115,7 +121,7 @@
             let c = a + b
         </div>
         <div class="CSPSH" lang="c" name="example" theme="drakula" linecount = 'true'>
-            #include <stdio.h>
+            #include &lt;stdio.h&gt;
             
             void main(){
                 int a = 10;
@@ -124,7 +130,7 @@
             }
         </div>
         <div class="CSPSH" lang="cpp" name="example" theme="cspsh" linecount = 'true'>
-            #include <iostream>
+            #include &lt;iostream&gt;
             using namespace std;
             
             int main(){
@@ -138,6 +144,7 @@
         </div>
         <div class="CSPSH" lang="sts" name="example" theme="monokai" linecount = 'true'>
             //storyscript is a language developed by lines-of-code. You can search story script in github to know more welp i need to make this comment a bit large to check a feature.
+            
             int a = 10
             int b = 20
 
@@ -146,9 +153,14 @@
         <div class="CSPSH" lang="js" name="ex" theme="monokai" linecount = 'true'>
             var example = true;
 
+            //function
+            
             function foo(arg){
                 console.log("do", arg);
                 arg = example ? true : false;
+                if(10 == 10){
+                    console.log("help");
+                }
                 return arg;
             }
         </div>

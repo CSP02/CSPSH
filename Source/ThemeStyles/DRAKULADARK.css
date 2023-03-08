@@ -23,17 +23,15 @@
     align-content: center;
     justify-content: space-evenly;
     align-items: center;
-    transition: 0.4s ease-in-out;
+    /* transition: 0.4s ease-in-out; */
 }
 
 .lineCount-DRAKULA-done {
-    overflow-y: hidden;
+    overflow: hidden;
     height: 44vh;
-    width: auto;
-    position: absolute;
     line-height: 2.5vh;
     color: #8890bd;
-    padding-right: 5px;
+    padding-right: .5rem;
     border-right: 4px solid #8890bd;
 }
 
@@ -45,7 +43,7 @@
 
 /*End of the top bar css*/
 /* css for types */
-.sh-DRAKULA-types {
+.sh-DRAKULA-type {
     color: #ff79c6;
 }
 
@@ -76,7 +74,7 @@
 }
 
 /* css for numerals */
-.sh-DRAKULA-numerals {
+.sh-DRAKULA-numeral {
     color: #bd93f9;
 }
 
@@ -86,7 +84,7 @@
 }
 
 /* css for comments */
-.sh-DRAKULA-comments {
+.sh-DRAKULA-comment {
     color: #6272a4;
 }
 

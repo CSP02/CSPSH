@@ -18,7 +18,7 @@ div.cspsh {
     line-height: 2.5vh;
     text-justify: left;
     text-align: left;
-    transition: 0.4s ease-in-out;
+    /* transition: 0.4s ease-in-out; */
     z-index: 6;
 }
 
@@ -45,12 +45,10 @@ div.cspsh {
 .lineCount-CSPSH-done {
     overflow: hidden;
     height: 44vh;
-    width: max-content;
-    position: absolute;
     line-height: 2.5vh;
+    padding-right: .5rem;
     color: rgb(131, 130, 130);
     border-right: 4px solid rgb(89, 89, 89);
-    padding-right: 5px;
 }
 
 .sh-CSPSH-lineHighlight {
@@ -64,7 +62,7 @@ div.cspsh {
     white-space: nowrap;
     width: 77vw;
     overflow: hidden;
-    margin-left: 3vw;
+    margin-left: 1rem;
 }
 
 #code cspsh {
@@ -126,7 +124,7 @@ div.cspsh {
 }
 
 .changeTheme {
-    margin: 5vw;
+    margin: 1rem;
     color: #dddddd;
 }
 
@@ -163,6 +161,10 @@ div.cspsh {
     overflow-x: scroll;
 }
 
+#viewer_wrapper{
+    display: flex;
+}
+
 .cspshChangeTab {
     padding: 0.5rem;
     background-color: rgba(114, 114, 114, 0.61);
@@ -196,7 +198,7 @@ div.cspsh {
     height: 50vh;
     width: 80vh;
     position: relative;
-    margin-top: -76vh;
+    overflow-y: auto;
     background-color: rgba(39, 39, 39, 0.61);
     backdrop-filter: blur(8px);
     z-index: 20;
@@ -215,7 +217,7 @@ div.cspsh {
 
 /*End of the top bar css*/
 /* css for types */
-.sh-CSPSH-types {
+.sh-CSPSH-type {
     color: rgb(0, 140, 255);
 }
 
@@ -245,7 +247,7 @@ div.cspsh {
 }
 
 /* css for numerals */
-.sh-CSPSH-numerals {
+.sh-CSPSH-numeral {
     color: rgb(136, 255, 0);
 }
 
@@ -255,7 +257,7 @@ div.cspsh {
 }
 
 /* css for comments */
-.sh-CSPSH-comments {
+.sh-CSPSH-comment {
     color: grey;
     font-style: italic;
 }
@@ -278,4 +280,10 @@ div.cspsh {
 
 .sh-CSPSH-property {
     color: cyan;
+}
+
+@media screen and (max-width: 800px) {
+    .changeTheme, #themeUsing{
+        display: none;
+    }
 }

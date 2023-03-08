@@ -5,7 +5,8 @@ window.onload = function () {
     const cspsh = new CSPSH
     const options = {
         file: 'long code.java',
-        highlightLine: [1, 2, 6, 7, 8, 10]
+        highlightLine: [1, 2, 6, 7, 8, 10],
+        SourcePath: 'default'
     }
     cspsh.highlight(options)
 }

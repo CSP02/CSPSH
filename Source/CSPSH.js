@@ -51,6 +51,13 @@ export class CSPSH {
     highlight(options) {
         try {
             let codes = document.getElementsByClassName('CSPSH');
+            let sourcePath = options.SourcePath;
+            if(options.SourcePath === 'default')
+                sourcePath = '/Source'
+            document.head.innerHTML += `<link rel="stylesheet" href="${sourcePath}/ThemeStyles/CSPSHDARK.css">`
+            document.head.innerHTML += `<link rel="stylesheet" href="${sourcePath}/ThemeStyles/DRAKULADARK.css">`
+            document.head.innerHTML += `<link rel="stylesheet" href="${sourcePath}/ThemeStyles/MONOKAIDARK.css">`
+            
             //Reads the required attributes and links the required stylesheets based on selected theme
             for (let i = 0; i < codes.length; i++) {
                 codeHolder = codes[i]
@@ -62,17 +69,14 @@ export class CSPSH {
                     else
                         theme = codeHolder.getAttribute('theme')
                     themesList.push(theme)
-                    document.head.innerHTML += `<link rel="stylesheet" href="./Source/ThemeStyles/CSPSHDARK.css">`
-                    document.head.innerHTML += `<link rel="stylesheet" href="./Source/ThemeStyles/DRAKULADARK.css">`
-                    document.head.innerHTML += `<link rel="stylesheet" href="./Source/ThemeStyles/MONOKAIDARK.css">`
                 } else
                     theme = codeHolder.getAttribute('theme')
                 if (!fileName) {
                     fileName = `file`//sets default file name to file
                 }
                 //push all the code content.
-                content.push(codeHolder.innerHTML)
-                codeContent = codeHolder.innerHTML
+                content.push(codeHolder.textContent)
+                codeContent = codeHolder.textContent
                 //Detect the language and start highlighting
                 switch (codeHolder.lang) {
                     case 'js' || 'ts':
@@ -100,7 +104,7 @@ export class CSPSH {
                         lineCount = 0;
                         break
                 }
-                Start(options)
+                Start(options);
             }
             //appends the link tags back to head so that user can manipulate the properties of cspsh.
             links.forEach(link => {
@@ -132,19 +136,20 @@ export class CSPSH {
             const themeChangers = [...document.getElementsByClassName('themeChangers')];
             themeChangers.forEach(themeChanger => {
                 themeChanger.addEventListener('click', click => {
-                    click.path[1].className = `themeusing${click.target.id}`;
-                    click.path[2].className = `copyHolder-${click.target.id}`;
-                    click.path[3].className = `CSPSH ${click.target.id.toUpperCase()}`;
+                    click.target.parentElement.nextSibling.className = `themeusing${click.target.id}`;
+                    click.target.parentElement.parentElement.className = `copyHolder-${click.target.id}`;
+                    click.target.parentElement.parentElement.parentElement.className = `CSPSH ${click.target.id.toUpperCase()}`;
                     const theme = click.target.parentElement.parentElement.parentElement.getAttribute('theme');
-                    const spans = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('cspsh')]
+                    const cspshTags = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('cspsh')]
                     const divs = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('div')]
                     divs.forEach(div => {
                         div.className = div.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
                     })
-                    spans.forEach(cspsh => {
-                        cspsh.className = cspsh.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
+                    cspshTags.forEach(cspsh => {
+                        if (cspsh.className.split('-')[0] === 'sh')
+                            cspsh.className = 'sh-' + click.target.id.toUpperCase() + `-${cspsh.className.split('-')[2]}`;
                     })
-                    const mainHolder = click.path[3]
+                    const mainHolder = click.target.parentElement.parentElement.parentElement;
                     mainHolder.setAttribute('theme', click.target.id);
                     click.target.parentElement.nextSibling.innerText = 'Current Theme: ' + click.target.id.toUpperCase()
                 })
@@ -157,13 +162,12 @@ export class CSPSH {
             //add titles so when user hovers on the tokens it shows the token name
             AddTitles();
         } catch (e) {
-            codeHolder.children[6].children[0].innerHTML += `
+            codeHolder.children[5].innerHTML += `
             <div id="CSPSH-errorMessage">!unable to highlight code due to some issue.
             <p style="color:white;">Here is the full details:</p>${e.stack.toString().split('\n').join('<br>')}
             <br>you can report the Error by clicking reporting an issue here:<br>
             <a href="https://github.com/Chandra-sekhar-pilla/CSPSH/issues">Report a bug</a><br>
             <p>Please use the issue template provided while reporting an issue.</div>`
-            codeHolder.children[6].style.overflow = 'hidden'
         }
     }
 
@@ -171,9 +175,20 @@ export class CSPSH {
         const options = {
             file: null,
             highlightLine: null,
+            SourcePath: null,
         }
 
         return options
+    }
+
+    defaultOptions() {
+        const options = {
+            file: '',
+            highlightLine: '',
+            SourcePath: '/Source',
+        }
+
+        return options;
     }
 }
 
@@ -205,7 +220,7 @@ function DisplayLineCount(lineCountHolder, lineCount, options) {
 
 //function to replace the div tag with the code tag.
 function ReplaceDIVWithCode(codeHolder, code) {
-    codeHolder.innerHTML += `<div id="code"><code>${code.innerHTML}</code></div>`
+    codeHolder.children[5].innerHTML += `<div id="code"><code>${code.innerHTML}</code></div>`
     code.innerHTML = ''
     const codes = [...document.getElementsByClassName('code')]
     codes.forEach(code => {
@@ -220,20 +235,24 @@ function AutoScroll() {
     for (var i = 0; i < codes.length; i++) {
         const codeHolder = codes[i];
         //get the linecount holder
-        const lineCount = codeHolder.children[5];
+        const lineCount = codeHolder.children[5].children[0];
         //add scroll event listener to the code holder (for #code)
-        codeHolder.children[6].addEventListener('scroll', scroll => {
+        codeHolder.children[5].children[1].addEventListener('scroll', scroll => {
             //set the scroll position of linecount to the same as the scroll position of the code
-            lineCount.scrollTop = codeHolder.children[6].scrollTop;
+            lineCount.scrollTop = codeHolder.children[5].children[1].scrollTop;
         })
     }
 }
 
 function AddTitles() {
     const cspshTags = document.getElementsByTagName('cspsh');
-    for (var i = 0; i < cspshTags.length; i++) { 
+    for (var i = 0; i < cspshTags.length; i++) {
         const cspshTag = cspshTags[i];
-        cspshTag.title = cspshTag.className.split('-')[2];
+        if (cspshTag.className.split('-')[2])
+            cspshTag.title = cspshTag.className.split('-')[2];
+        else
+            cspshTag.title = cspshTag.className.split('-')[1];
+
     }
 }
 
