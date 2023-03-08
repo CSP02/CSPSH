@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-4.1.1-green)
+ ![version](https://img.shields.io/badge/Version-5.0.0-beta-green)
 
 # Steps to use:
 
@@ -94,7 +94,8 @@ window.onload = function(){
     const cspsh = new CSPSH
     const options = {
         file: 'file.extension',
-        highlightLine: [12, 20, 22]
+        highlightLine: [12, 20, 22],
+        SourcePath: '/Source'
     }
     cspsh.highlight(options)
 }

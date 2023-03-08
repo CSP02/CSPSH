@@ -147,7 +147,7 @@ export class CSPSH {
                     })
                     cspshTags.forEach(cspsh => {
                         if (cspsh.className.split('-')[0] === 'sh')
-                            cspsh.className = 'sh-' + click.target.id.toUpperCase() + `-${cspsh.className.split('-')[2]}`;
+                            cspsh.className = cspsh.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
                     })
                     const mainHolder = click.target.parentElement.parentElement.parentElement;
                     mainHolder.setAttribute('theme', click.target.id);
@@ -202,7 +202,7 @@ function Start(options) {
     lineCountHolder.className = `lineCount-${theme.toUpperCase()}-done`;
     if (codeHolder.getAttribute('linecount') == 'true')
         DisplayLineCount(lineCountHolder, lineCount, options)
-    ReplaceDIVWithCode(codeHolder, code)
+    ReplaceDIVWithCode(codeHolder, code);
     code = null
     lineCount = null
     lang = null
@@ -211,7 +211,7 @@ function Start(options) {
 //function to display line count id enabled
 function DisplayLineCount(lineCountHolder, lineCount, options) {
     lineCountHolder.innerHTML += '<br>'
-    for (var line = 1; line < lineCount; line++) {
+    for (var line = 1; line <= lineCount; line++) {
         lineCountHolder.innerHTML += `<cspsh>${line}.</br></cspsh>`
     }
     lineCountHolder.innerHTML += '<br>'

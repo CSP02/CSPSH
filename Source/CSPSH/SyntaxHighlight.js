@@ -12,6 +12,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
     const copySvg = params.copySvg
     const codeHolder = params.codeHolder
     const fileName = params.fileName
+    const extension = params.codeHolder.lang
 
     let tempStr = params.tempStr
     let lineCountHolder = params.lineCountHolder
@@ -66,101 +67,109 @@ function SyntaxHighlight(tokens, params, lang, options) {
                 openBraceCount--;
             }
         }
-        if (token === '\n') {
+
+        if (EOL.includes(token) && !EOL.includes(tokens[i + 1])) {
+            code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
             code.appendChild(document.createElement('br'));
             code.innerHTML += `<cspsh class="cspsh-indentationGuidelines">${"&nbsp;&nbsp;&nbsp;&nbsp;"}</cspsh>`.repeat(openBraceCount);
             lineCount++;
+            continue;
+        }else if (EOL.includes(token) && !EOL.includes(tokens[i + 1])) {
+            code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
+            code.appendChild(document.createElement('br'));
+            code.innerHTML += `<cspsh class="cspsh-indentationGuidelines">${"&nbsp;&nbsp;&nbsp;&nbsp;"}</cspsh>`.repeat(openBraceCount);
+            lineCount++;
+            i++;
             continue;
         }
         switch (token) {
             case KEYWORDS.includes(token) ? token : undefined:
                 if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, `${token} `, theme, 'keyword');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'keyword');
                 else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'keyword');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'keyword');
                 break;
             case TYPES.includes(token) ? token : undefined:
                 if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, `${token} `, theme, 'type');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'type');
                 else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'keyword');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'keyword');
                 break;
             case INDEX.includes(token) ? token : undefined:
                 if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, `${token} `, theme, 'operator');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'operator');
                 else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'operator');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'operator');
                 break;
             case (token.includes('"') || token.includes("'") || token.includes('`')) ? token : undefined:
                 if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, `${token} `, theme, 'string');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'string');
                 else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'string');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'string');
                 break;
             case INBUILT.includes(token) ? token : undefined:
                 if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, `${token} `, theme, 'inbuilt');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'inbuilt');
                 else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'inbuilt');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'inbuilt');
                 break;
             case UNARYOPERATORS.includes(token) ? token : undefined:
                 if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, `${token} `, theme, 'operator');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'operator');
                 else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'operator');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'operator');
                 break;
             case TERNARYOPERATORS.includes(token) ? token : undefined:
                 if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, ` ${token} `, theme, 'operator');
+                    GenerateCSPSHTag(code, extension, lineCount, ` ${token} `, params, theme, options.highlightLine, options.file, 'operator');
                 else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'operator');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'operator');
                 break;
-            case EOL.includes(token) ? token : undefined:
-                if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                    GenerateCSPSHTag(code, `${token} `, theme, 'operator');
-                else
-                    GenerateCSPSHTag(code, `${token}`, theme, 'operator');
-                lineCount++
-                break;
+            // case EOL.includes(token) ? token : undefined:
+            //     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
+            //     code.appendChild(document.createElement('br'));
+            //     code.innerHTML += `<cspsh class="cspsh-indentationGuidelines">${"&nbsp;&nbsp;&nbsp;&nbsp;"}</cspsh>`.repeat(openBraceCount);
+            //     lineCount++;
+            //     break;
             default:
                 if (codeLang == 'css') {
                     if (properties.includes(token)) {
-                        GenerateCSPSHTag(code, `${token}`, theme, 'property');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'property');
                     } else if (values.includes(token)) {
-                        GenerateCSPSHTag(code, `${token}`, theme, 'value');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'value');
                     }
                 }
                 if (token.startsWith('//') || token.startsWith('/*')) {
-                    GenerateCSPSHTag(code, `${token}`, theme, 'comment');
+                    GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'comment');
                 }
                 else if (!(/[A-Za-z0-9]/).test(token)) {
                     if (token === '</') {
-                        GenerateCSPSHTag(code, `${token}`, theme, 'operator');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'operator');
                         continue;
                     }
                     if (!(/[()\.[\]<>]/).test(token)) {
-                        GenerateCSPSHTag(code, `${token} `, theme, 'operator');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'operator');
                     } else
-                        GenerateCSPSHTag(code, `${token}`, theme, 'operator');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'operator');
                 }
                 else if (token.match(/^[0-9]+$/)) {
                     if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                        GenerateCSPSHTag(code, `${token} `, theme, 'numeral');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'numeral');
                     else
-                        GenerateCSPSHTag(code, `${token}`, theme, 'numeral');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'numeral');
                 }
                 else {
                     if (token.includes('#')) {
-                        GenerateCSPSHTag(code, `${token}`, theme, 'preprocess');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'preprocess');
                         continue;
                     }
                     if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
-                        GenerateCSPSHTag(code, `${token} `, theme, 'variable');
+                        GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'variable');
                     else {
                         if (tokens[i + 1] === '(')
-                            GenerateCSPSHTag(code, `${token}`, theme, 'Func');
+                            GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'Func');
                         else
-                            GenerateCSPSHTag(code, `${token}`, theme, 'variable');
+                            GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'variable');
                     }
                 }
 
@@ -175,9 +184,22 @@ function SyntaxHighlight(tokens, params, lang, options) {
     return codeAndLineCount
 } // end of the main js highlighting function
 
-function GenerateCSPSHTag(code, token, theme, tokenType) {
+function GenerateCSPSHTag(code, extension, lineCount, token, params, theme, highlightLine, file, tokenType) {
     let cspshTag = document.createElement('cspsh');
-    cspshTag.className = `sh-${theme}-${tokenType}`;
+    const fileName = params.fileName
+    if (highlightLine === null || highlightLine === '')
+        cspshTag.className = `sh-${theme}-${tokenType}`;
+    else if (highlightLine !== null) {
+        if (file === `${fileName}.${extension}`) {
+            if (highlightLine.includes(lineCount)) {
+                cspshTag.className += `sh-${theme}-${tokenType} sh-${theme.toUpperCase()}-lineHighlight`
+            } else {
+                cspshTag.className = `sh-${theme}-${tokenType}`;
+            }
+        } else {
+            cspshTag.className = `sh-${theme}-${tokenType}`;
+        }
+    }
     cspshTag.innerText = token;
     code.appendChild(cspshTag);
 }

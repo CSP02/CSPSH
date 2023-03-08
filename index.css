@@ -5,3 +5,7 @@ body{
 p{
     font-size: 32px;
 }
+
+.CSPSH{
+    font-family: 'Fira code', monospace;
+}
