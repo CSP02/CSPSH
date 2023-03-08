@@ -61,7 +61,7 @@ function HighLight(params, options) {
     //resetting the content inside the element with class .CSPSH
     codeHolder.innerHTML = ''
     //filter empty tokens
-    tokens = tokens.filter(token => token !== ' ' && token !== '' && token === '\t');
+    tokens = tokens.filter(token => token !== ' ' && token !== '' && token !== '\t');
     let optimisedTokens = []
     let tempToken = ''
 
@@ -84,28 +84,51 @@ function HighLight(params, options) {
     optimisedTokens = []
     tempToken = ''
     //appending content for prepossor statements
-    for (let i = 0; i < tokens.length; i++) { 
+    for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
-        if(token === '#'){
-            for (i; i < tokens.length; i++){
+        if (token === '#') {
+            for (i; i < tokens.length; i++) {
                 const token = tokens[i];
-                if(tokens[i+1] === '>'){
+                if (tokens[i + 1] === '>') {
+                    tempToken += token + tokens[i + 1];
+                    optimisedTokens.push(tempToken);
+                    tempToken = '';
+                    i++;
+                    break;
+                } else {
+                    tempToken += token;
+                }
+            }
+        } else {
+            optimisedTokens.push(token);
+        }
+    }
+    //replacing < and > with &lt; and &gt; respectively to avoid conflict in browsers
+    tokens = optimisedTokens.filter(token => token.replace('<', '&lt;').replace('>', '&gt;'))
+    optimisedTokens = []
+    tempToken = '';
+
+    for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+        if (token === '/*') {
+            for (i; i < tokens.length; i++) {
+                const token = tokens[i];
+                if(tokens[i+1] === '*/'){
                     tempToken += token + tokens[i+1];
                     optimisedTokens.push(tempToken);
                     tempToken = '';
                     i++;
                     break;
                 }else{
-                    tempToken += token;
+                    tempToken += token + ' ';
                 }
             }
         }else{
             optimisedTokens.push(token);
         }
     }
-    //replacing < and > with &lt; and &gt; respectively to avoid conflict in browsers
-    tokens = optimisedTokens.filter(token => token.replace('<', '&lt;').replace('>', '&gt;'))
-
+    tokens = optimisedTokens
+    
     let codeAndLineCount = SyntaxHighlight(tokens, params, lang, options);
     code = codeAndLineCount.code
     lineCount = codeAndLineCount.lineCount

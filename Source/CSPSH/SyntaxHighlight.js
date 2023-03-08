@@ -130,7 +130,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
                         GenerateCSPSHTag(code, `${token}`, theme, 'value');
                     }
                 }
-                if (token.startsWith('//')) {
+                if (token.startsWith('//') || token.startsWith('/*')) {
                     GenerateCSPSHTag(code, `${token}`, theme, 'comment');
                 }
                 else if (!(/[A-Za-z0-9]/).test(token)) {
