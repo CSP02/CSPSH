@@ -6,6 +6,7 @@ import { JAVATOKENS } from './LangTokens/CSPSHJAVA.js'
 import { SSTOKENS } from './LangTokens/CSPSHSS.js'
 import { HTMLTOKENS } from './LangTokens/CSPSHHTML.js'
 import { CSSTOKENS } from './LangTokens/CSPSHCSS.js'
+import { PYTOKENS } from './LangTokens/CSPSHPY.js'
 
 //importing other files that required cspsh
 import { HighLight } from './CSPSH/HighLight.js'
@@ -18,7 +19,6 @@ let fileName
 let isEOLINFOR
 let forCount
 let lang
-let mode = 'dark'
 let theme = 'cspsh'
 let themesList = []
 let tempStr = []
@@ -52,12 +52,12 @@ export class CSPSH {
         try {
             let codes = document.getElementsByClassName('CSPSH');
             let sourcePath = options.SourcePath;
-            if(options.SourcePath === 'default')
+            if (options.SourcePath === 'default')
                 sourcePath = '/Source'
             document.head.innerHTML += `<link rel="stylesheet" href="${sourcePath}/ThemeStyles/CSPSHDARK.css">`
             document.head.innerHTML += `<link rel="stylesheet" href="${sourcePath}/ThemeStyles/DRAKULADARK.css">`
             document.head.innerHTML += `<link rel="stylesheet" href="${sourcePath}/ThemeStyles/MONOKAIDARK.css">`
-            
+
             //Reads the required attributes and links the required stylesheets based on selected theme
             for (let i = 0; i < codes.length; i++) {
                 codeHolder = codes[i]
@@ -103,6 +103,13 @@ export class CSPSH {
                         lang = new HTMLTOKENS();
                         lineCount = 0;
                         break
+                    case 'py':
+                        lang = new PYTOKENS();
+                        lineCount = 0;
+                        break
+                    default:
+                        lang = new CTOKENS();
+                        lineCount = 0;
                 }
                 Start(options);
             }
@@ -143,12 +150,20 @@ export class CSPSH {
                     const cspshTags = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('cspsh')]
                     const divs = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('div')]
                     divs.forEach(div => {
-                        div.className = div.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
+                        div.className = div.className.replaceAll(`${theme}`, `${click.target.id}`);
                     })
                     cspshTags.forEach(cspsh => {
                         if (cspsh.className.split('-')[0] === 'sh')
-                            cspsh.className = cspsh.className.replaceAll(`${theme.toUpperCase()}`, `${click.target.id.toUpperCase()}`);
+                            cspsh.className = cspsh.className.replaceAll(`${theme}`, `${click.target.id}`);
                     })
+                    const lineHighlights = [...click.target.parentElement.parentElement.parentElement.lastChild.getElementsByClassName(`sh-${theme}-lineHighlight`)];
+                    lineHighlights.forEach(lineHighlight => {
+                        lineHighlight.className = lineHighlight.className.replaceAll(`sh-${theme.toUpperCase()}-lineHighlight`, `sh-${click.target.id.toUpperCase()}-lineHighlight`);
+                    })
+
+                    const lineCountHolder = click.target.parentElement.parentElement.parentElement.lastChild.getElementsByClassName('linecount-holder')[0]
+                    lineCountHolder.classList.remove(`lineCount-${theme.toUpperCase()}-done`)
+                    lineCountHolder.classList.add(`lineCount-${click.target.id.toUpperCase()}-done`)
                     const mainHolder = click.target.parentElement.parentElement.parentElement;
                     mainHolder.setAttribute('theme', click.target.id);
                     click.target.parentElement.nextSibling.innerText = 'Current Theme: ' + click.target.id.toUpperCase()
@@ -199,9 +214,11 @@ function Start(options) {
     lineCount = codeAndLineCount.lineCount
     lineCountHolder = document.getElementsByClassName(`lineCount-${theme.toUpperCase()}`)[0]
     tempClassName = lineCountHolder.className
-    lineCountHolder.className = `lineCount-${theme.toUpperCase()}-done`;
+    lineCountHolder.className = `linecount-holder lineCount-${theme.toUpperCase()}-done`;
     if (codeHolder.getAttribute('linecount') == 'true')
         DisplayLineCount(lineCountHolder, lineCount, options)
+    else
+        lineCountHolder.style.display = 'none'
     ReplaceDIVWithCode(codeHolder, code);
     code = null
     lineCount = null

@@ -49,6 +49,12 @@ function SyntaxHighlight(tokens, params, lang, options) {
     //looping through each token for highlighting
     for (let i = 0; i < tokens.length; i++) {
         let token = tokens[i]
+        if (codeLang === 'py') {
+            if (token.startsWith(' ')) {
+                GenerateCSPSHTag(code, extension, lineCount, token, params, theme, options.highlightLine, options.file, 'indentationGuidelines');
+                continue;
+            }
+        }
         if (token === undefined) continue;
         if (codeLang !== 'html') {
             if (token == '{') {
@@ -74,7 +80,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
             code.innerHTML += `<cspsh class="cspsh-indentationGuidelines">${"&nbsp;&nbsp;&nbsp;&nbsp;"}</cspsh>`.repeat(openBraceCount);
             lineCount++;
             continue;
-        }else if (EOL.includes(token) && !EOL.includes(tokens[i + 1])) {
+        } else if (EOL.includes(token) && !EOL.includes(tokens[i + 1])) {
             code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
             code.appendChild(document.createElement('br'));
             code.innerHTML += `<cspsh class="cspsh-indentationGuidelines">${"&nbsp;&nbsp;&nbsp;&nbsp;"}</cspsh>`.repeat(openBraceCount);
@@ -125,18 +131,14 @@ function SyntaxHighlight(tokens, params, lang, options) {
                 else
                     GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'operator');
                 break;
-            // case EOL.includes(token) ? token : undefined:
-            //     code.innerHTML += `<cspsh class="sh-${theme.toUpperCase()}-operator">${token}</cspsh>`
-            //     code.appendChild(document.createElement('br'));
-            //     code.innerHTML += `<cspsh class="cspsh-indentationGuidelines">${"&nbsp;&nbsp;&nbsp;&nbsp;"}</cspsh>`.repeat(openBraceCount);
-            //     lineCount++;
-            //     break;
             default:
                 if (codeLang == 'css') {
                     if (properties.includes(token)) {
                         GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'property');
+                        continue;
                     } else if (values.includes(token)) {
-                        GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'value');
+                        GenerateCSPSHTag(code, extension, lineCount, ` ${token}`, params, theme, options.highlightLine, options.file, 'value');
+                        continue;
                     }
                 }
                 if (token.startsWith('//') || token.startsWith('/*')) {
@@ -160,16 +162,34 @@ function SyntaxHighlight(tokens, params, lang, options) {
                 }
                 else {
                     if (token.includes('#')) {
+                        if (codeLang === 'css') {
+                            GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'idSelector');
+                            continue;
+                        }
+                        if(codeLang === "py"){
+                            GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'comment');
+                            continue;
+                        }
                         GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'preprocess');
                         continue;
                     }
-                    if (!(/[()\.[\],;<>]/).test(tokens[i + 1]))
+                    if (!(/[()\.[\],;<>]/).test(tokens[i + 1])) {
+                        if (codeLang === "css" && token.includes('.')) {
+                            GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'classSelector');
+                            continue;
+                        }
                         GenerateCSPSHTag(code, extension, lineCount, `${token} `, params, theme, options.highlightLine, options.file, 'variable');
+                    }
                     else {
                         if (tokens[i + 1] === '(')
                             GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'Func');
-                        else
+                        else {
+                            if (tokens[i - 1] === '#') {
+                                GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'cssColor');
+                                continue;
+                            }
                             GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'variable');
+                        }
                     }
                 }
 
@@ -187,6 +207,10 @@ function SyntaxHighlight(tokens, params, lang, options) {
 function GenerateCSPSHTag(code, extension, lineCount, token, params, theme, highlightLine, file, tokenType) {
     let cspshTag = document.createElement('cspsh');
     const fileName = params.fileName
+    const codeLang = params.codeHolder.lang
+    if (codeLang === 'css' && token.trim() !== ':') {
+        token = token.trim();
+    }
     if (highlightLine === null || highlightLine === '')
         cspshTag.className = `sh-${theme}-${tokenType}`;
     else if (highlightLine !== null) {
@@ -200,7 +224,13 @@ function GenerateCSPSHTag(code, extension, lineCount, token, params, theme, high
             cspshTag.className = `sh-${theme}-${tokenType}`;
         }
     }
-    cspshTag.innerText = token;
+    if(codeLang === 'py' && (/[a-zA-Z0-9-\./|?!@#$%^&*()_+={}[\]~`:;"'<,>]/).test(token)){
+        token = token.trim()
+    }
+    if (codeLang === 'py')
+        cspshTag.innerHTML = token.replace(/ /g, '&nbsp;').trim();
+    else
+        cspshTag.innerText = token;
     code.appendChild(cspshTag);
 }
 

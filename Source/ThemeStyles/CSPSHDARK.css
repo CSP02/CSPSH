@@ -1,11 +1,26 @@
+:root{
+    --types:#ff5353;
+    --keywords:#ffa76d;
+    --func:#ffca61;
+    --strings:#baff67;
+    --comments:#646464;
+    --numerals:#5efffc;
+    --operators:#EDEDED;
+    --variables:#6277ff;
+    --class:#fa5cff;
+    --inbuilt:#ff60a5;
+    --preprocessor:#F6F6F6;
+}
+
 div.cspsh {
     display: inline-block;
 }
 
 /*CSPSH class the whole code block*/
 .CSPSH {
-    background-color: rgb(38, 38, 38);
-    color: rgb(95, 95, 95);
+    background-color: #2a252e;
+    /* background-color: rgb(44, 67, 57); */
+    color: #60556a;
     overflow: hidden;
     font-size: 16px;
     font-family: 'Ubuntu Mono', monospace;
@@ -24,7 +39,8 @@ div.cspsh {
 
 /*Styling the topBar*/
 .copyHolder-CSPSH {
-    background-color: rgba(39, 39, 39, 0.61);
+    background-color: rgba(42, 37, 46, 0.577);
+    /* background-color: rgba(39, 39, 39, 0.61); */
     color: rgb(202, 202, 202);
     backdrop-filter: blur(18px);
     font-family: 'Roboto', sans-serif;
@@ -47,14 +63,14 @@ div.cspsh {
     height: 44vh;
     line-height: 2.5vh;
     padding-right: .5rem;
-    color: rgb(131, 130, 130);
-    border-right: 4px solid rgb(89, 89, 89);
+    color: rgb(152, 136, 167);
+    border-right: 4px solid rgb(166, 148, 183);
 }
 
 .sh-CSPSH-lineHighlight {
-    border-top: 1px solid rgb(216, 216, 111);
-    border-bottom: 1px solid rgb(216, 216, 111);
-    background-color: rgba(255, 255, 118, 0.188);
+    border-top: 1px solid rgb(152, 136, 167);
+    border-bottom: 1px solid rgb(152, 136, 167);
+    background-color: rgba(77, 69, 85, 0.414);
 }
 
 #code {
@@ -218,59 +234,62 @@ div.cspsh {
 /*End of the top bar css*/
 /* css for types */
 .sh-CSPSH-type {
-    color: rgb(0, 140, 255);
+    color: #ff5353;
+    /* color: rgb(0, 140, 255); */
 }
 
 /* css for keywords */
 .sh-CSPSH-keyword {
-    color: rgb(235, 132, 255);
+    color: #ffa76d;
+    /* color: rgb(235, 132, 255); */
 }
 
 /* css for variables */
 .sh-CSPSH-variable {
-    color: rgb(255, 193, 77);
+    color: #6277ff;
+    /* color: rgb(255, 193, 77); */
 }
 
 /* css for class */
 .sh-CSPSH-class {
-    color: rgb(42, 185, 42);
+    color: #fa5cff;
 }
 
 /* css for operators */
 .sh-CSPSH-operator {
-    color: rgb(167, 167, 167);
+    color: #EDEDED;
 }
 
 /* css for strings and characters */
 .sh-CSPSH-string {
-    color: rgb(247, 132, 94);
+    color: #baff67;
 }
 
 /* css for numerals */
-.sh-CSPSH-numeral {
-    color: rgb(136, 255, 0);
+.sh-CSPSH-numeral, .sh-CSPSH-cssColor{
+    color: #5efffc;
 }
 
 /* css for functions */
 .sh-CSPSH-Func {
-    color: #FBF46D;
+    color: #ffca61;
 }
 
 /* css for comments */
 .sh-CSPSH-comment {
-    color: grey;
+    color: #646464;
     font-style: italic;
 }
 
 /* css for inbuilt fucntions */
 .sh-CSPSH-inBuilt {
-    color: rgb(46, 199, 46);
+    color: #ff60a5;
     font-style: italic;
 }
 
 .sh-CSPSH-preprocess {
-    color: rgb(184, 184, 184);
-    background-color: rgb(83, 83, 83);
+    color: #F6F6F6;
+    background-color: rgb(66, 59, 72);
     padding: 2px;
 }
 
@@ -279,11 +298,17 @@ div.cspsh {
 }
 
 .sh-CSPSH-property {
-    color: cyan;
+    color: rgb(206, 123, 255);
 }
 
 @media screen and (max-width: 900px) {
     .changeTheme, #themeUsing{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    #themeUsing{
         display: none;
     }
 }

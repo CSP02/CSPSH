@@ -7,17 +7,24 @@
  ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
  ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
  ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-5.0.0-beta-green)
+ ![version](https://img.shields.io/badge/Version-5.0.0-green)
 
 # Steps to use:
 
-- Download the package and include the script using script tag as shown below
+- Download the package and include the script using script tag as shown below or import into your js file
 
 ```html
 <head>
     <script src='./Source/CSPSH.js' type='module'></script>
 </head>
 ```
+
+or
+
+```js
+import {CSPSH} from 'path to the CSPSH.js file'
+```
+
 - It is recommended to place the script tag at the end of your ``body`` tag in html.
 **NOTE: Make sure to place the Source folder of this repo into your directory where your main html file is present (or) paste the exact path of CSPSH.js. But I recommend to copy the source folder to your work folder because CSPSH.js will automatically add all the required css files once the page is loaded.**
 
@@ -42,16 +49,10 @@
 - Now run the highlight method inside CSPSH object using the ``.highlight(options)`` method where options can be user defined as shown in docs.
 
 # Major Version info:
-
-# Minor features:
-1. Added tabs system:
-    Now user can create tabs and switch between them for more info about tabs visit [CSPSH documentation](https://theatelier.ga/Pages/CSPSH/cspshDocs.html).
-2. Added line highlighting:
-    Now users can highlight a single line of code by passing which line to highlight in options.
-3. Added multiple line highlight and changed the ``highlightLine`` option to array:
-    Now users can highlight multiple lines of code by passing which lines to highlight in options.
-4. Added titles for all the tokens:
-    Now users can hover over the tokens and see the title of the token.
+1. Added support for python(but python code cannot be formatted by cspsh itself user have to format but for other languages cspsh can format)
+2. Added support for css.
+3. Fixed some known bugs
+4. Changed the theme palette for cspsh theme
 
 # Optimizations:
 - Accurate copy to clipboard functionality
@@ -106,4 +107,4 @@ window.onload = function(){
 
 - Join our discord server for any queries [the-atelier](https://discord.gg/6Mcy5NpSpH)
 
-**NOTE: It is not recommended to format your HTML Code with tab spaces as its not necessary. But you must use new line(enter or a semicolon) to make it identify the new lines.**
+**NOTE: It is not recommended to format your HTML Code with tab spaces(unless it's python code) as its not necessary. But you must use new line(enter or a semicolon) to make it identify the new lines.**

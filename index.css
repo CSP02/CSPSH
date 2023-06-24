@@ -1,7 +1,9 @@
 body{
     background-color: rgb(28, 28, 28);
     color: rgb(206, 206, 206);
+    font-family: 'Courier New', Courier, monospace;
 }
+
 p{
     font-size: 32px;
 }

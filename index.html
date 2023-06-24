@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYHy</title>
+    <title>CSPSH</title>
     <script src="./Source/CSPSH.js" type="module"></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="/Resources/CSPSH(withGrad).png" type="image/x-icon">
 </head>
 
 <body>
@@ -155,17 +156,47 @@
             
             function foo(arg){
                 console.log("do", arg);
-                arg = example ? true : false;
+                arg == example ? true : false;
                 if(10 == 10){
                     console.log("help");
                 }
                 return arg;
             }
         </div>
+        <div class="CSPSH" lang="css" name="ex" theme="monokai" linecount = 'true'>
+            #example{
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                color: rgb(10, 10, 10);
+            }
 
-        <script src="index.js" type="module"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet"/>
+            .example{
+                width: 100%;
+                height: 100%;
+                background-color: #000;
+                color: rgba(10, 10, 10, 0.5);
+            }
+        </div>
+
+    <div class="CSPSH" lang="py" name="ex" theme="drakula" linecount="false">
+        def compare(a, b):
+            if b > a:
+                print("b is greater than a")
+            elif a == b:
+                print("a and b are equal")
+            else:
+                print("a is greater than b")
+        
+        a = 33
+        b = 33
+        compare(a, b)
+    </div>
+
+    <script src="index.js" type="module"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet" />
 </body>
+
 </html>

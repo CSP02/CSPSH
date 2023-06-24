@@ -71,7 +71,7 @@
 }
 
 /* css for numerals */
-.sh-MONOKAI-numeral {
+.sh-MONOKAI-numeral, .sh-MONOKAI-cssColor {
     color: #AE81FF;
 }
 
@@ -97,7 +97,8 @@
     padding: 2px;
 }
 
-.sh-MONOKAI-classSelector {
+.sh-MONOKAI-classSelector,
+.sh-MONOKAI-idSelector {
     color: greenyellow;
 }
 

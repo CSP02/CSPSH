@@ -1,0 +1,66 @@
+{
+	"Initialize CSPSH": {
+		"scope": "javascript, typescript",
+		"prefix": "cspsh",
+		"body": [
+			"const cspsh = new CSPSH;",
+		],
+		"description": "Initialize CSPSH class"
+	},
+
+	"with user defined variable name":{
+		"scope": "javascript, typescript",
+		"prefix": "cspsh",
+		"body": [
+			"const $1 = new CSPSH;",
+		],
+		"description": "with user defined variable name"
+	},
+
+	"with user defined variable name and default options":{
+		"scope": "javascript, typescript",
+		"prefix": "cspsh",
+		"body": [
+			"const $1 = new CSPSH;",
+			"$1.highlight($1.defaultOitons());"
+		],
+		"description": "with user defined variable name and default options"
+	},
+
+	"with user defined variable name and user defined options":{
+		"scope": "javascript, typescript",
+		"prefix": "cspsh",
+		"body": [
+			"const $1 = new CSPSH;",
+			"$1.highlight({",
+			"   file: $2,",
+			"   highlightLine: [$3],",
+			"   SourcePath: \"$4\"",
+			"});"
+		],
+		"description": "with user defined variable name and default options"
+	},
+
+	"use highlight method with default options":{
+		"scope": "javascript, typescript",
+		"prefix": "cspsh",
+		"body": [
+			"cspsh.highlight(cspsh.deafultOptions());"
+		],
+		"description": ".highlight method with default options"
+	},
+
+	"use highlight method with user defined options":{
+		"scope": "javascript, typescript",
+		"prefix": "cspsh",
+		"body": [
+			"const cspsh = new CSPSH",
+			"cspsh.highlight({",
+			"   file: \"$1\",",
+			"   highlightLine: [$2],",
+			"   SourcePath: \"$3\"",
+			"})",
+		],
+		"description": "with user defined options"
+	},
+}

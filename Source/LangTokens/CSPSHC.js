@@ -1,5 +1,3 @@
-//still in dev
-
 class CTOKENS {
     constructor() {
         this.keywords = ['for', 'while',
@@ -7,7 +5,7 @@ class CTOKENS {
             'continue', 'switch',
             'else', 'return',
             'do']
-        this.operators = ['=', '+', '-', '*', '/', '.', ',', '<', '>', ':', '::']
+        this.operators = ['=', '+', '-', '*', '/', '.', ',', '<', '>']
 
         this.EOL = [';', '\n']
         this.unaryOperators = []

@@ -74,7 +74,7 @@
 }
 
 /* css for numerals */
-.sh-DRAKULA-numeral {
+.sh-DRAKULA-numeral, .sh-DRAKULA-cssColor {
     color: #bd93f9;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .sh-DRAKULA-classSelector, .sh-DRAKULA-idSelector {
-    color: greenyellow;
+    color: #ff5555;
 }
 
 .sh-DRAKULA-property {
