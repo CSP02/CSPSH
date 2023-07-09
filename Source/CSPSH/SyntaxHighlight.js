@@ -34,7 +34,8 @@ function SyntaxHighlight(tokens, params, lang, options) {
         <button id="cspsh" class="themeChangers">CSPSH</button>
         <button id="monokai" class="themeChangers">Monokai</button>
         </div><div id="themeUsing">Current Theme: ${theme.toUpperCase()}</div>
-        </div><button class="copyVector">${copySvg}</button><br><br><br>
+        </div>
+        <div class="copy_vector_holder"><button class="copyVector">${copySvg}</button></div><br><br><br>
         <div id="viewer_wrapper">
         <div class="lineCount-${theme.toUpperCase()}"></div>
         <div class="code"></div>
@@ -166,7 +167,7 @@ function SyntaxHighlight(tokens, params, lang, options) {
                             GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'idSelector');
                             continue;
                         }
-                        if(codeLang === "py"){
+                        if (codeLang === "py") {
                             GenerateCSPSHTag(code, extension, lineCount, `${token}`, params, theme, options.highlightLine, options.file, 'comment');
                             continue;
                         }
@@ -204,27 +205,24 @@ function SyntaxHighlight(tokens, params, lang, options) {
     return codeAndLineCount
 } // end of the main js highlighting function
 
-function GenerateCSPSHTag(code, extension, lineCount, token, params, theme, highlightLine, file, tokenType) {
+function GenerateCSPSHTag(code, extension, lineCount, token, params, theme, highlightLines, files, tokenType) {
     let cspshTag = document.createElement('cspsh');
     const fileName = params.fileName
     const codeLang = params.codeHolder.lang
     if (codeLang === 'css' && token.trim() !== ':') {
         token = token.trim();
     }
-    if (highlightLine === null || highlightLine === '')
+    const FileAndLinehighlight = new Map();
+    [...files].forEach((file, i) => {
+        FileAndLinehighlight.set(file, highlightLines[i])
+    });
+    const lines = FileAndLinehighlight.get(`${fileName}.${extension}`)
+    if(lines && lines.includes(lineCount)){
+        cspshTag.className += `sh-${theme}-${tokenType} sh-${theme.toUpperCase()}-lineHighlight`
+    }else{
         cspshTag.className = `sh-${theme}-${tokenType}`;
-    else if (highlightLine !== null) {
-        if (file === `${fileName}.${extension}`) {
-            if (highlightLine.includes(lineCount)) {
-                cspshTag.className += `sh-${theme}-${tokenType} sh-${theme.toUpperCase()}-lineHighlight`
-            } else {
-                cspshTag.className = `sh-${theme}-${tokenType}`;
-            }
-        } else {
-            cspshTag.className = `sh-${theme}-${tokenType}`;
-        }
     }
-    if(codeLang === 'py' && (/[a-zA-Z0-9-\./|?!@#$%^&*()_+={}[\]~`:;"'<,>]/).test(token)){
+    if (codeLang === 'py' && (/[a-zA-Z0-9-\./|?!@#$%^&*()_+={}[\]~`:;"'<,>]/).test(token)) {
         token = token.trim()
     }
     if (codeLang === 'py')

@@ -15,184 +15,98 @@
     <h1 style="margin: 1rem;">
         Code Tabs:
     </h1>
-    <div id="docsToShow">
-        
-    </div>
-    <div class="cspshBuildTabs">
-        <code class="cspsh" lang="html" name="index" theme="drakula" linecount = 'true'>
-            &lt;div class="example">
-                &lt;span class="test">
-                this is an example of html code.
-                &lt;/span>
-            &lt;/div>
-        </code>
-        <div class="CSPSH" lang="java" name="javaCode" theme="cspsh" linecount = 'true'>
-        public class SumOfNumbers
-        {
-        public static void main(String args[])
-        {
-        int n1 = 225, n2 = 115, sum;
-        sum = n1 + n2;
-        System.out.println("The sum of numbers is: "+sum);
-        }
-        }
+    <div class="cspshBuildTabs" mode="simple">
+        <div class="cspsh" name="home" lang="html" theme="cspsh" linecount="true">
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang="en"&gt;
+            &lt;head&gt;
+            &lt;title&gt;Home&lt;/title&gt;
+            &lt;script src="script.js"&gt;&ZeroWidthSpace;&lt;/script&gt;
+            &lt;link href="style.css" rel="stylesheet"&gt;&ZeroWidthSpace;&lt;/link&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            &lt;h1&gt;Hello World&lt;/h1&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
         </div>
-        <div class="CSPSH" lang="js" name="example" theme="monokai" linecount = 'true' isTab="true">
-            let a = 10
-            let b = 20
+        <div class="cspsh" name="style" lang="css" theme="monokai" linecount="true">
+            body{
+            background-color: black;
+            color: white;
+            }
 
-            let c = a + b
-        </div>
-        <div class="CSPSH" lang="c" name="example" theme="drakula" linecount = 'true'>
-            #include &lt;stdio.h&gt;
-            
-            void main(){
-                int a = 10;
-                int b = 20;
-                printf("%d\n", a + b);
+            h1{
+            font-size: 5rem;
             }
         </div>
-        <div class="CSPSH" lang="cpp" name="example" theme="cspsh" linecount = 'true'>
-            #include &lt;iostream&gt;
-            using namespace std;
-            
-            int main(){
-                int num1, num2, sum;
-                cout << "Enter two numbers";
-                cin >> num1 >> num2;
-                sum = num1 + num2;
-                cout << num1 << " + " << num2 << " = " << sum;
-                return 0;
+        <div class="cspsh" name="script" lang="js" linecount="true" theme="drakula">
+            const a = 10;
+            const b = 20;
+            let c = add(a, b);
+            console.log(c);
+
+            function add(a, b) {
+            return a + b;
             }
         </div>
-        <div class="CSPSH" lang="sts" name="example" theme="monokai" linecount = 'true'>
-            //storyscript is a language developed by lines-of-code. You can search story script in github to know more.
-            int a = 10
-            int b = 20
-
-            print(a + b)
-        </div>
-        <div class="CSPSH" lang="js" name="ex" theme="monokai" linecount = 'true'>
-            str = "hello world";
-            str2 = "image/help.png";
-            str3 = `${help}`;
-            /*multiline comments*/
-        </div>
     </div>
-    <h1>
+    <h1 style="margin: 1rem;">
         Without Code Tabs:
     </h1>
-    <h2>java code</h2>
-        <div class="CSPSH" lang="java" name="long code" theme="cspsh" linecount = 'true' isTab="true">
-        public class SumOfNumbers1{
-        public static void main(String args[]){
-            int n1 = 225, n2 = 115, sum;
-            sum = n1 + n2;
-        System.out.println("The sum of numbers is: "+sum);
-        }
-        }
-        
-        public class SubOfNumbers
-        {
-            int n3 = 500, n4 = 100, sub;
-            sub = n3 - n4;
-            System.out.println("The sub of numbers is: "+sub);
-        }
-
-        public class multiplication
-        {
-            int n5 = 500, n6 = 100, mul;
-            mul = n5 * n6;
-            System.out.println("The multiplication of numbers is: "+mul);
-        }
-
-        public class division
-        {
-            int n7 = 500, n8 = 100, div;
-            div = n7 / n8;
-            System.out.println("The division of numbers is: "+div);
-        }
-        </div>
-        <div class="CSPSH" lang="js" name="example" theme="monokai" linecount = 'true' isTab="true">
-            let a = 10
-            let b = 20
-
-            let c = a + b
-        </div>
-        <div class="CSPSH" lang="c" name="example" theme="drakula" linecount = 'true'>
-            #include &lt;stdio.h&gt;
-            
-            void main(){
-                int a = 10;
-                int b = 20;
-                printf("%d\n", a + b);
-            }
-        </div>
-        <div class="CSPSH" lang="cpp" name="example" theme="cspsh" linecount = 'true'>
-            #include &lt;iostream&gt;
-            using namespace std;
-            
-            int main(){
-                int num1, num2, sum;
-                cout << "Enter two numbers";
-                cin >> num1 >> num2;
-                sum = num1 + num2;
-                cout << num1 << " + " << num2 << " = " << sum;
-                return 0;
-            }
-        </div>
-        <div class="CSPSH" lang="sts" name="example" theme="monokai" linecount = 'true'>
-            //storyscript is a language developed by lines-of-code. You can search story script in github to know more welp i need to make this comment a bit large to check a feature.
-            
-            int a = 10
-            int b = 20
-
-            print(a + b)
-        </div>
-        <div class="CSPSH" lang="js" name="ex" theme="monokai" linecount = 'true'>
-            var example = true;
-
-            //function
-            
-            function foo(arg){
-                console.log("do", arg);
-                arg == example ? true : false;
-                if(10 == 10){
-                    console.log("help");
-                }
-                return arg;
-            }
-        </div>
-        <div class="CSPSH" lang="css" name="ex" theme="monokai" linecount = 'true'>
-            #example{
-                width: 100%;
-                height: 100%;
-                background-color: #000;
-                color: rgb(10, 10, 10);
-            }
-
-            .example{
-                width: 100%;
-                height: 100%;
-                background-color: #000;
-                color: rgba(10, 10, 10, 0.5);
-            }
-        </div>
-
-    <div class="CSPSH" lang="py" name="ex" theme="drakula" linecount="false">
-        def compare(a, b):
-            if b > a:
-                print("b is greater than a")
-            elif a == b:
-                print("a and b are equal")
-            else:
-                print("a is greater than b")
-        
-        a = 33
-        b = 33
-        compare(a, b)
+    <div class="cspsh" name="add" lang="py" theme="drakula" linecount="true">
+        def add(a, b):
+            return a + b
+        a = 10
+        b = 20
+        c = add(a, b)
+        print(c)
     </div>
+    <div class="cspsh" name="add" lang="java" theme="cspsh">
+        public class Main {
+        public static void main(String[] args) {
+        int a = 10;
+        int b = 20;
+        int c = add(a, b);
+        System.out.println(c);
+        }
+        public static int add(int a, int b) {
+        return a + b;
+        }
+        }
+    </div>
+    <div class="cspsh" name="add" lang="sts" theme="drakula">
+        //storyscript is a language developed by lines-of-code. You can search story script in github to know more
 
+        int a = 10
+        int b = 20
+
+        print(a + b)
+    </div>
+    <div class="cspsh" name="add" lang="c" theme="cspsh">
+        #include &lt;stdio.h&gt;
+
+        int main() {
+        int a = 10;
+        int b = 20;
+        int c = add(a, b);
+        printf("%d", c);
+        return 0;
+        }
+
+        int add(int a, int b) {
+        return a + b;
+        }
+    </div>
+    <div class="cspsh" name="simple_mode_add" lang="js" theme="monokai" mode="simple">
+        const a = 10;
+        const b = 20;
+        let c = add(a, b);
+        console.log(c, "simple mode");
+
+        function add(a, b) {
+        return a + b;
+        }
+    </div>
     <script src="index.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

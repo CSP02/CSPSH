@@ -52,6 +52,7 @@ export class CSPSH {
         try {
             let codes = document.getElementsByClassName('CSPSH');
             let sourcePath = options.SourcePath;
+            let mode = options.mode;
             if (options.SourcePath === 'default')
                 sourcePath = '/Source'
             document.head.innerHTML += `<link rel="stylesheet" href="${sourcePath}/ThemeStyles/CSPSHDARK.css">`
@@ -125,7 +126,7 @@ export class CSPSH {
                 const button = buttons[j];
                 button.addEventListener('click', function () {
                     //get the innertext of #code element i.e the code to be copied
-                    const clipboardText = button.parentElement.children[6].innerText
+                    const clipboardText = button.parentElement.parentElement.lastChild.innerText
                     const copiedSvg = button.children[0];
                     //copy the code to clipboard
                     navigator.clipboard.writeText(clipboardText)
@@ -171,13 +172,13 @@ export class CSPSH {
             })
             //end of theme changing
             //Build tabs if there are any
-            BuildTabs();
+            BuildTabs(mode);
             //auto-scroll the linecount according to the scroll position of the code
             AutoScroll();
             //add titles so when user hovers on the tokens it shows the token name
             AddTitles();
         } catch (e) {
-            codeHolder.children[5].innerHTML += `
+            codeHolder.lastChild.innerHTML += `
             <div id="CSPSH-errorMessage">!unable to highlight code due to some issue.
             <p style="color:white;">Here is the full details:</p>${e.stack.toString().split('\n').join('<br>')}
             <br>you can report the Error by clicking reporting an issue here:<br>
@@ -220,6 +221,17 @@ function Start(options) {
     else
         lineCountHolder.style.display = 'none'
     ReplaceDIVWithCode(codeHolder, code);
+    if(codeHolder.getAttribute("mode") === "simple" && codeHolder.parentElement.className !== "cspshBuildTabs"){
+        [...codeHolder.children].filter(child => child.className.includes("copyHolder"))[0].remove();
+        const breakpoints = [...codeHolder.children].filter(child => child.tagName === "BR")
+        breakpoints.forEach(breakPoint => {
+            breakPoint.remove();
+        });
+        codeHolder.classList.add("cspsh_simple_mode")
+        codeHolder.getElementsByClassName("copyVector")[0].classList.add("simple_mode_copyVector")
+        const copyVectorHolder = codeHolder.getElementsByClassName("copy_vector_holder")[0]
+        copyVectorHolder.classList.add("simple_mode_copyVectorHolder")
+    }
     code = null
     lineCount = null
     lang = null
@@ -252,11 +264,11 @@ function AutoScroll() {
     for (var i = 0; i < codes.length; i++) {
         const codeHolder = codes[i];
         //get the linecount holder
-        const lineCount = codeHolder.children[5].children[0];
+        const lineCount = codeHolder.lastChild.children[0];
         //add scroll event listener to the code holder (for #code)
-        codeHolder.children[5].children[1].addEventListener('scroll', scroll => {
+        codeHolder.lastChild.children[1].addEventListener('scroll', scroll => {
             //set the scroll position of linecount to the same as the scroll position of the code
-            lineCount.scrollTop = codeHolder.children[5].children[1].scrollTop;
+            lineCount.scrollTop = codeHolder.lastChild.children[1].scrollTop;
         })
     }
 }

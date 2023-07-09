@@ -1,21 +1,24 @@
 # CSPSH
 
-![CSPSH-SyntaxHighlighter](https://github.com/Chandra-sekhar-pilla/CSPSH/blob/main/Resources/CSPSH.png)
+![CSPSH-SyntaxHighlighter](https://github.com/CSP02/CSPSH/blob/main/Resources/CSPSH.png)
  A syantax highlighting library (or) package for highlighting your codes in webpages.
 
- ![issues](https://img.shields.io/github/issues/Chandra-sekhar-pilla/CSPSH)
- ![forks](https://img.shields.io/github/forks/Chandra-sekhar-pilla/CSPSH)
- ![stars](https://img.shields.io/github/stars/Chandra-sekhar-pilla/CSPSH)
- ![license](https://img.shields.io/github/license/Chandra-sekhar-pilla/CSPSH)
- ![version](https://img.shields.io/badge/Version-5.0.0-green)
+ ![issues](https://img.shields.io/github/issues/CSP02/CSPSH)
+ ![forks](https://img.shields.io/github/forks/CSP02/CSPSH)
+ ![stars](https://img.shields.io/github/stars/CSP02/CSPSH)
+ ![license](https://img.shields.io/github/license/CSP02/CSPSH)
+ ![version](https://img.shields.io/badge/Version-5.1.0-green)
+
+- Yo help me in adding feature. Well simply comment which feature you want I will try to add. Because *cough* I can't get any feature ideas. Thank you 🙏
 
 # Steps to use:
 
-- Download the package and include the script using script tag as shown below or import into your js file
+- Download the library and include the script using script tag as shown below or import into your js file
 
 ```html
 <head>
-    <script src='./Source/CSPSH.js' type='module'></script>
+    <!--you can see the CSPSH.js file in Source folder which you downloaded.-->
+    <script src='path to the CSPSH.js' type='module'></script>
 </head>
 ```
 
@@ -31,7 +34,7 @@ import {CSPSH} from 'path to the CSPSH.js file'
 - In HTML define a class name with ``CSPSH`` in order to make CSPSH.js realise the code that is written in that element(I personally prefer div tag for that) and theme attribute to either ``monokai`` or ``drakula`` or default theme ``cspsh`` to choose the theme scheme and lang is the language of the code that is written inside the tag/element. see the example below for better understanding.
 
 ```html
-<div class="CSPSH" lang = 'js' name="fileName" theme="monokai" linecount = 'true'></div><!--Filename is optional and it will be "file" if the field is empty-->
+<div class="CSPSH" lang = 'js' name="fileName" theme="monokai" linecount = 'true' mode="simple"></div><!--Filename is optional and it will be "file" if the field is empty, mode is also optional but has two values which are simple and default-->
 ```
 
 - Start typing your code inside this tag.
@@ -45,7 +48,7 @@ import {CSPSH} from 'path to the CSPSH.js file'
 ```
 
 - After typing your code go to your JS file and create a ``window.onload`` event and inside ``window.onload`` create an object for ``CSPSH`` class. In previous versions this is not required becasue this package don't take any user options from the JS file but as two new features were added options are compulsory.
-- For more information about the options please visit the [CSPSH documentation](https://theatelier.ga/Pages/CSPSH/cspshDocs.html).
+- For more information about the options please visit the [CSPSH documentation](https://csp02/The-Atelier/Pages/CSPSH/cspshDocs.html).
 - Now run the highlight method inside CSPSH object using the ``.highlight(options)`` method where options can be user defined as shown in docs.
 
 # Major Version info:
@@ -54,6 +57,11 @@ import {CSPSH} from 'path to the CSPSH.js file'
 3. Fixed some known bugs
 4. Changed the theme palette for cspsh theme
 
+# Minor version info
+1. Added simple mode which will *yeet* i mean remove all the fancy stuff and shows code in simple way.
+2. Added multiple file multiple linehighlight...sounds confusing yes well lemme elaborate. In the previous versions users can't highlight specific lines for multiple files. But it is no more in this update I added this new feature.
+3. Optimized some code.
+
 # Optimizations:
 - Accurate copy to clipboard functionality
 - Accurate line count functionality
@@ -61,8 +69,7 @@ import {CSPSH} from 'path to the CSPSH.js file'
 
 **Planned improvements**
 - Add some more themes.
-- Add more language support.
-- Actually tried to add css and html language support but it's a bit hard so I will release it as a minor update.
+- Add more language support. well done by giving c lang highlighting for any other langs.
 
 **Example**
 
@@ -94,14 +101,14 @@ window.onload = function(){
     //code that user wants to perform
     const cspsh = new CSPSH
     const options = {
-        file: 'file.extension',
-        highlightLine: [12, 20, 22],
+        file: ['file.extension'],
+        highlightLine: [[12, 20, 22]],
         SourcePath: '/Source'
     }
     cspsh.highlight(options)
 }
 ```
-- This will automatically highlight the code which has CSPSH as class name for more info visit [docs](https://theatelier.ga/Pages/CSPSH/cspshDocs.html).
+- This will automatically highlight the code which has CSPSH as class name for more info visit [docs](https://csp02/The-Atelier/Pages/CSPSH/cspshDocs.html).
 **Link for story script(extention is sts)**
 - StoryScript is created and developed by @lines-of-codes using python. [Learn more](https://github.com/StoryScriptorg/StoryScript/tree/main/storyscript).
 
