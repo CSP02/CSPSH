@@ -7,7 +7,7 @@
  ![forks](https://img.shields.io/github/forks/CSP02/CSPSH)
  ![stars](https://img.shields.io/github/stars/CSP02/CSPSH)
  ![license](https://img.shields.io/github/license/CSP02/CSPSH)
- ![version](https://img.shields.io/badge/Version-5.1.0-green)
+ ![version](https://img.shields.io/badge/Version-5.1.1-green)
 
 - Yo help me in adding feature. Well simply comment which feature you want I will try to add. Because *cough* I can't get any feature ideas. Thank you 🙏
 

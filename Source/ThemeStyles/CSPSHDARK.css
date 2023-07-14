@@ -307,6 +307,12 @@ div.cspsh {
     .changeTheme, #themeUsing{
         display: none;
     }
+
+    .cspsh_simple_mode, .cspsh_simple_mode #code{
+        width: auto;
+        max-width: 100%;
+        overflow-x: auto;
+    }
 }
 
 @media screen and (max-width: 990px) {
