@@ -72,7 +72,8 @@ div.cspsh {
     overflow: scroll;
 }
 
-.cspsh_simple_mode, .cspsh_simple_mode #code{
+.cspsh_simple_mode,
+.cspsh_simple_mode #code {
     width: auto;
     height: auto;
     margin-left: 0;
@@ -90,22 +91,23 @@ div.cspsh {
     position: absolute;
 }
 
-.simple_mode_copyVectorHolder{
+.simple_mode_copyVectorHolder {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: flex-end;
 }
 
-.simple_mode_copyVector{
+.simple_mode_copyVector {
     opacity: .3;
 }
 
-.simple_mode_copyVector:hover{
+.simple_mode_copyVector:hover {
     opacity: 1;
 }
 
-#blackLine, #greyLine {
+#blackLine,
+#greyLine {
     transition: 0.4s;
 }
 
@@ -149,18 +151,73 @@ div.cspsh {
     color: #dddddd;
 }
 
-.themeChangers {
-    background-color: rgb(39, 39, 39);
-    padding: 0.5rem;
+.changeTheme select {
+    background-color: inherit;
+    padding: .5rem;
+    color: #d6d6d6;
     border: none;
-    border-radius: 6px;
-    color: rgb(253, 187, 81);
-    transition: 0.2s ease-in-out;
+    border-radius: .5rem;
+    font-size: 12pt;
 }
 
-.themeChangers:hover {
+.changeTheme select option {
+    background-color: #2a252e;
+}
+
+.changeTheme select:hover {
     cursor: pointer;
-    background-color: rgb(55, 55, 55);
+}
+
+.retro {
+    filter: blur(0.5px) brightness(1.5) contrast(1.2);
+    text-shadow: 0 0 2px #fff;
+
+}
+
+.retro::before {
+    content: "";
+    position: absolute;
+    margin: -1%;
+    border-radius: inherit;
+    padding: 1%;
+    width: inherit;
+    height: inherit;
+    background: repeating-linear-gradient(rgba(0, 0, 0, 0.351),
+            rgba(0, 0, 0, 0.315) 2px,
+            transparent 2px,
+            transparent 3px);
+}
+
+.retro_effect{
+    opacity: 0;
+}
+
+.customCheckbox {
+    height: 1.2rem;
+    width: 3rem;
+    border-radius: 5rem;
+    display: block;
+    background-color: #dcdcdc;
+    border: .1rem solid #dcdcdc;
+    transition: .2s ease-in-out;
+}
+
+.customCheckbox{
+    transition: .2s ease-in-out;
+}
+
+#circle {
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: block;
+    transition: .2s ease-in-out;
+}
+
+.retro::selection {
+    background: #0080FF;
+    text-shadow: none;
 }
 
 .cspshBuildTabs .CSPSH {
@@ -182,7 +239,7 @@ div.cspsh {
     overflow-x: scroll;
 }
 
-#viewer_wrapper{
+#viewer_wrapper {
     display: flex;
 }
 
@@ -268,7 +325,8 @@ div.cspsh {
 }
 
 /* css for numerals */
-.sh-CSPSH-numeral, .sh-CSPSH-cssColor{
+.sh-CSPSH-numeral,
+.sh-CSPSH-cssColor {
     color: #5efffc;
 }
 
@@ -295,7 +353,8 @@ div.cspsh {
     padding: 2px;
 }
 
-.sh-CSPSH-classSelector, .sh-CSPSH-idSelector {
+.sh-CSPSH-classSelector,
+.sh-CSPSH-idSelector {
     color: greenyellow;
 }
 
@@ -303,20 +362,19 @@ div.cspsh {
     color: rgb(206, 123, 255);
 }
 
+.cspsh[lang="html"] .sh-CSPSH-variable {
+    color: #d6d6d6;
+}
+
 @media screen and (max-width: 900px) {
-    .changeTheme, #themeUsing{
+    .changeTheme {
         display: none;
     }
 
-    .cspsh_simple_mode, .cspsh_simple_mode #code{
+    .cspsh_simple_mode,
+    .cspsh_simple_mode #code {
         width: auto;
         max-width: 100%;
         overflow-x: auto;
-    }
-}
-
-@media screen and (max-width: 990px) {
-    #themeUsing{
-        display: none;
     }
 }

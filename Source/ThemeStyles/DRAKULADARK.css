@@ -109,3 +109,8 @@
 .sh-DRAKULA-value {
     color: rgb(163, 100, 208);
 }
+
+.cspsh[lang="html"] .sh-DRAKULA-variable{
+    color: #d6d6d6;
+    font-style: normal;
+}

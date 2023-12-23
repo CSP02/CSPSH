@@ -108,3 +108,8 @@
 .sh-MONOKAI-value {
     color: #AE81FF;
 }
+
+.cspsh[lang="html"] .sh-MONOKAI-variable{
+    color: #d6d6d6;
+    font-style: normal;
+}

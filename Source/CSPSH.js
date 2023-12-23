@@ -140,34 +140,58 @@ export class CSPSH {
                 })
             }
             //End of copy to clipboard functionality
+            const retroEffects = document.getElementsByClassName('retro_effect');
+            [...retroEffects].forEach(retroEffect => {
+                retroEffect.addEventListener('input', function () {
+                    const cspshHolder = retroEffect.parentElement.parentElement.parentElement.parentElement;
+                    cspshHolder.classList.toggle('retro')
+                    const retroInputSib = retroEffect.nextSibling
+                    const retroCircle = retroInputSib.firstChild
+                    if(retroEffect.checked){
+                        retroInputSib.style.backgroundColor = "green"
+                        retroCircle.style.marginLeft = "1.8rem"
+                    }else{
+                        retroInputSib.style.backgroundColor = "#dcdcdc"
+                        retroCircle.style.marginLeft = "0"
+                    }
+                })
+            })
             //start of theme changing
-            const themeChangers = [...document.getElementsByClassName('themeChangers')];
-            themeChangers.forEach(themeChanger => {
-                themeChanger.addEventListener('click', click => {
-                    click.target.parentElement.nextSibling.className = `themeusing${click.target.id}`;
-                    click.target.parentElement.parentElement.className = `copyHolder-${click.target.id}`;
-                    click.target.parentElement.parentElement.parentElement.className = `CSPSH ${click.target.id.toUpperCase()}`;
-                    const theme = click.target.parentElement.parentElement.parentElement.getAttribute('theme');
-                    const cspshTags = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('cspsh')]
-                    const divs = [...click.target.parentElement.parentElement.parentElement.getElementsByTagName('div')]
+            const themeSelectors = document.getElementsByClassName("theme_selectors");
+            [...themeSelectors].forEach(themeSelector => {
+                const theme = themeSelector.parentElement.parentElement.parentElement.getAttribute('theme');
+                [...themeSelector.options].forEach(option => {
+                    theme === option.value ? option.setAttribute('selected', 'true') : option.removeAttribute('selected');
+                });
+                themeSelector.addEventListener("change", changeData => {
+                    const theme = themeSelector.parentElement.parentElement.parentElement.getAttribute('theme');
+                    [...themeSelector.options].forEach(option => {
+                        theme === option.value ? option.setAttribute('selected', 'true') : option.removeAttribute('selected');
+                    })
+                    themeSelector.parentElement.nextSibling.className = `themeusing${themeSelector.value}`;
+                    themeSelector.parentElement.parentElement.className = `copyHolder-${themeSelector.value}`;
+                    themeSelector.parentElement.parentElement.parentElement.classList.remove(theme.toUpperCase());
+                    themeSelector.parentElement.parentElement.parentElement.classList.add(themeSelector.value.toUpperCase());
+                    const cspshTags = [...themeSelector.parentElement.parentElement.parentElement.getElementsByTagName('cspsh')]
+                    const divs = [...themeSelector.parentElement.parentElement.parentElement.getElementsByTagName('div')]
                     divs.forEach(div => {
-                        div.className = div.className.replaceAll(`${theme}`, `${click.target.id}`);
+                        div.className = div.className.replaceAll(`${theme}`, `${themeSelector.value}`);
                     })
                     cspshTags.forEach(cspsh => {
                         if (cspsh.className.split('-')[0] === 'sh')
-                            cspsh.className = cspsh.className.replaceAll(`${theme}`, `${click.target.id}`);
+                            cspsh.className = cspsh.className.replaceAll(`${theme}`, `${themeSelector.value}`);
                     })
-                    const lineHighlights = [...click.target.parentElement.parentElement.parentElement.lastChild.getElementsByClassName(`sh-${theme}-lineHighlight`)];
+                    const lineHighlights = [...themeSelector.parentElement.parentElement.parentElement.lastChild.getElementsByClassName(`sh-${theme}-lineHighlight`)];
                     lineHighlights.forEach(lineHighlight => {
-                        lineHighlight.className = lineHighlight.className.replaceAll(`sh-${theme.toUpperCase()}-lineHighlight`, `sh-${click.target.id.toUpperCase()}-lineHighlight`);
+                        lineHighlight.className = lineHighlight.className.replaceAll(`sh-${theme.toUpperCase()}-lineHighlight`, `sh-${themeSelector.value.toUpperCase()}-lineHighlight`);
                     })
 
-                    const lineCountHolder = click.target.parentElement.parentElement.parentElement.lastChild.getElementsByClassName('linecount-holder')[0]
+                    const lineCountHolder = themeSelector.parentElement.parentElement.parentElement.lastChild.getElementsByClassName('linecount-holder')[0]
                     lineCountHolder.classList.remove(`lineCount-${theme.toUpperCase()}-done`)
-                    lineCountHolder.classList.add(`lineCount-${click.target.id.toUpperCase()}-done`)
-                    const mainHolder = click.target.parentElement.parentElement.parentElement;
-                    mainHolder.setAttribute('theme', click.target.id);
-                    click.target.parentElement.nextSibling.innerText = 'Current Theme: ' + click.target.id.toUpperCase()
+                    lineCountHolder.classList.add(`lineCount-${themeSelector.value.toUpperCase()}-done`)
+                    const mainHolder = themeSelector.parentElement.parentElement.parentElement;
+                    mainHolder.setAttribute('theme', themeSelector.value);
+                    themeSelector.parentElement.nextSibling.innerText = 'Current Theme: ' + themeSelector.value.toUpperCase()
                 })
             })
             //end of theme changing
@@ -221,7 +245,7 @@ function Start(options) {
     else
         lineCountHolder.style.display = 'none'
     ReplaceDIVWithCode(codeHolder, code);
-    if(codeHolder.getAttribute("mode") === "simple" && codeHolder.parentElement.className !== "cspshBuildTabs"){
+    if (codeHolder.getAttribute("mode") === "simple" && codeHolder.parentElement.className !== "cspshBuildTabs") {
         [...codeHolder.children].filter(child => child.className.includes("copyHolder"))[0].remove();
         const breakpoints = [...codeHolder.children].filter(child => child.tagName === "BR")
         breakpoints.forEach(breakPoint => {

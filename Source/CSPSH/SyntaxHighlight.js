@@ -29,17 +29,27 @@ function SyntaxHighlight(tokens, params, lang, options) {
     //adding the copy to clipboard button and svg 
     codeHolder.innerHTML += `
         <div class="copyHolder-${theme.toUpperCase()}">
-        <div class="fileName">File Name: ${fileName}.${codeHolder.lang}</div><div class="changeTheme">
-        Change Theme: <button id="drakula" class="themeChangers">Drakula</button>
-        <button id="cspsh" class="themeChangers">CSPSH</button>
-        <button id="monokai" class="themeChangers">Monokai</button>
-        </div><div id="themeUsing">Current Theme: ${theme.toUpperCase()}</div>
+            <div class="fileName">File Name: ${fileName}.${codeHolder.lang}</div>
+            <div class="changeTheme">
+                Theme:
+                <select class="theme_selectors">
+                    <option value="drakula">Drakula</option>
+                    <option value="cspsh">CSPSH</option>
+                    <option value="monokai">Monokai</option>
+                </select>
+            </div>
+            <div>
+                <label for="retro_${codeHolder.getAttribute("name")}_${codeHolder.lang}" style="display: flex;align-items: center;">Retro effect
+                    <input type="checkbox" class="retro_effect" name="retro_in" id="retro_${codeHolder.getAttribute("name")}_${codeHolder.lang}"/><span class="customCheckbox"><div id="circle"></div></span>
+                </label>
+            </div>
         </div>
         <div class="copy_vector_holder"><button class="copyVector">${copySvg}</button></div><br><br><br>
         <div id="viewer_wrapper">
-        <div class="lineCount-${theme.toUpperCase()}"></div>
-        <div class="code"></div>
+            <div class="lineCount-${theme.toUpperCase()}"></div>
+            <div class="code"></div>
         </div>`
+
     let codeLang = codeHolder.lang
     if (codeLang == 'css') {
         properties = lang.properties
